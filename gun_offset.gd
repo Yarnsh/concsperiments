@@ -8,6 +8,7 @@ extends Node3D
 @onready var recoil_offset = $Offset/ClamberOffset/WalkOffset/StrafeOffset/RecoilOffset
 
 @onready var muzzle_flash_anim = $Offset/ClamberOffset/WalkOffset/StrafeOffset/RecoilOffset/GunFinal/gun/Flash/AnimationPlayer
+@onready var heat_haze_effect = $Offset/ClamberOffset/WalkOffset/StrafeOffset/RecoilOffset/GunFinal/gun/HeatHaze
 
 var last_cam_move = Vector2.ZERO
 var cam_move_offset = Vector2.ZERO
@@ -16,6 +17,8 @@ var cam_move_recovery = 0.1
 var strafe_pos = Vector3.ZERO
 var recoil = 0.0
 var clamber_target = 0.0
+
+var gun_heat = 0.0
 
 func set_camera_movement(cam_move):
 	last_cam_move = cam_move * cam_move_sensitivity
@@ -54,8 +57,13 @@ func _process(delta: float) -> void:
 	recoil_offset.rotation.x = recoil * 0.5
 	recoil_offset.rotation.y = recoil * -0.1
 	recoil = move_toward(recoil, 0.0, ((recoil * 5.0) + 1.0) * delta)
+	
+	# heat haze visual
+	heat_haze_effect.gun_heat = gun_heat
+	gun_heat = move_toward(gun_heat, 0.0, 0.05 * delta)
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("Fire"):
 		muzzle_flash_anim.play("flash")
 		recoil += 1.0
+		gun_heat += 0.05

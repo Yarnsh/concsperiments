@@ -36,6 +36,7 @@ func try_exit_air_state():
 			camera.translate_object_local(Vector3.DOWN * y_move)
 			walk_shape.disabled = false
 			jump_shape.disabled = true
+			velocity.y = -1.0
 
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
