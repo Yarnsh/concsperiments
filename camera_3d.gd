@@ -10,8 +10,14 @@ var cam_dist_max = 8.0
 var cam_dist_min = 0.25
 var cam_distance = 4.0
 
+var start_position = Vector3.ZERO
+
+func _ready() -> void:
+	start_position = position
+
 func _process(delta: float) -> void:
 	_update_mouselook()
+	position = position.move_toward(start_position, (start_position - position).length() * 3.0 * delta)
 
 func _update_mouselook():
 	# Only rotates mouse if the mouse is captured

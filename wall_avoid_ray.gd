@@ -1,7 +1,7 @@
 extends RayCast3D
 
-@onready var gun_target = $"../CameraRotator/Gun/Offset/WalkOffset/StrafeOffset/RecoilOffset/GunFinal" # TODO: change this to be more automiatic
-@onready var gun = $"../CameraRotator/Gun/Offset/WalkOffset/StrafeOffset/RecoilOffset/GunFinal/gun"
+@onready var gun_target = $"../CameraRotator/Gun/Offset/ClamberOffset/WalkOffset/StrafeOffset/RecoilOffset/GunFinal" # TODO: change this to be more automiatic
+@onready var gun = $"../CameraRotator/Gun/Offset/ClamberOffset/WalkOffset/StrafeOffset/RecoilOffset/GunFinal/gun"
 
 func _process(delta: float) -> void:
 	call_deferred("gun_wall_avoid")

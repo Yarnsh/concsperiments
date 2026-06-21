@@ -2,11 +2,12 @@ extends Node3D
 
 @onready var character = $"../.."
 @onready var walk_offset_anim = $WalkOffset
-@onready var walk_offset_real = $Offset/WalkOffset
-@onready var strafe_offset = $Offset/WalkOffset/StrafeOffset
-@onready var recoil_offset = $Offset/WalkOffset/StrafeOffset/RecoilOffset
+@onready var walk_offset_real = $Offset/ClamberOffset/WalkOffset
+@onready var clamber_offset = $Offset/ClamberOffset
+@onready var strafe_offset = $Offset/ClamberOffset/WalkOffset/StrafeOffset
+@onready var recoil_offset = $Offset/ClamberOffset/WalkOffset/StrafeOffset/RecoilOffset
 
-@onready var muzzle_flash_anim = $Offset/WalkOffset/StrafeOffset/RecoilOffset/GunFinal/gun/Flash/AnimationPlayer
+@onready var muzzle_flash_anim = $Offset/ClamberOffset/WalkOffset/StrafeOffset/RecoilOffset/GunFinal/gun/Flash/AnimationPlayer
 
 var last_cam_move = Vector2.ZERO
 var cam_move_offset = Vector2.ZERO
@@ -14,12 +15,21 @@ var cam_move_sensitivity = 3.0
 var cam_move_recovery = 0.1
 var strafe_pos = Vector3.ZERO
 var recoil = 0.0
+var clamber_target = 0.0
 
 func set_camera_movement(cam_move):
 	last_cam_move = cam_move * cam_move_sensitivity
 
+func trigger_clamber(clamb_amount):
+	clamber_target = max(clamber_target, clamb_amount)
+
 func _process(delta: float) -> void:
 	rotation = Vector3.ZERO
+	
+	# clamber offset
+	clamber_offset.position = clamber_offset.position.move_toward(clamber_target * Vector3.DOWN * 1.5, (clamber_offset.position - (clamber_target * Vector3.DOWN * 1.0)).length() * 3.0 * delta)
+	clamber_offset.rotation = clamber_offset.rotation.move_toward(clamber_target * Vector3(0.0, 2.0, 2.0), (clamber_offset.rotation - (clamber_target * Vector3(0.0, 2.0, 2.0))).length() * 5.0 * delta)
+	clamber_target = move_toward(clamber_target, 0.0, 1.5 * delta)
 	
 	# camera movement offset
 	cam_move_offset = cam_move_offset.move_toward(last_cam_move, (cam_move_offset - last_cam_move).length() * cam_move_recovery * delta * 60.0)
