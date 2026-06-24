@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://brkry51jsh0by"]
+
+[ext_resource type="Texture2D" uid="uid://bmeyo42p27vhu" path="res://conc_grass_6014.jpg.jpg" id="1_pgipg"]
+
+[resource]
+resource_name = "plant"
+cull_mode = 2
+albedo_texture = ExtResource("1_pgipg")

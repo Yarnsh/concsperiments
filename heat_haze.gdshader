@@ -22,5 +22,6 @@ void vertex() {
 
 void fragment() {
 	vec2 offset = (UV - vec2(0.5, 0.5));
-	ALBEDO = texture(screen_texture, SCREEN_UV + (vec2(0.01, 0.01) * offset)).rgb;
+	//ALBEDO = texture(screen_texture, SCREEN_UV + vec2(0.002, 0.0)).rgb;
+	ALBEDO = texture(screen_texture, SCREEN_UV + (vec2(0.01, 0.00) * offset)).rgb;
 }

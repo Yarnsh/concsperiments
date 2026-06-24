@@ -66,3 +66,7 @@ Fire={
 [physics]
 
 3d/physics_engine="Jolt Physics"
+
+[rendering]
+
+gl_compatibility/fallback_to_gles=false
