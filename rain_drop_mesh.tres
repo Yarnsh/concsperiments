@@ -1,0 +1,40 @@
+[gd_resource type="ArrayMesh" load_steps=5 format=4 uid="uid://dphibhgdu4xi0"]
+
+[ext_resource type="Shader" uid="uid://bcbj0aotp2a4q" path="res://rain.gdshader" id="1_2xy70"]
+[ext_resource type="Texture2D" uid="uid://bxdn2kwimm7h2" path="res://raindrop.png" id="2_tlpoj"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_alt7y"]
+render_priority = 0
+shader = ExtResource("1_2xy70")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/albedo_tex = ExtResource("2_tlpoj")
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_2m8sy"]
+_surfaces = [{
+"aabb": AABB(-0.8660254, -1, -1, 1.7320508, 2, 1.5),
+"format": 34896613377,
+"index_count": 18,
+"index_data": PackedByteArray("AAABAAIAAgABAAMAAAAEAAEAAgADAAUABQAEAAAABQADAAQA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 6,
+"vertex_data": PackedByteArray("AAAAAP//AAD/f///AAAAAP9/AAAAAAAA////////AAAAAP////8AAP//AAD//wAA")
+}]
+blend_shape_mode = 0
+
+[resource]
+resource_name = "rain_drop_Cone"
+_surfaces = [{
+"aabb": AABB(-0.8660254, -1, -1, 1.7320508, 2, 1.5),
+"attribute_data": PackedByteArray("AAD///7/AAD+//7/AAAAAAAA///+/wAA/v/+/wAAAAAAAP///v8AAP7//v8AAAAA"),
+"format": 34896613399,
+"index_count": 18,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkA"),
+"material": SubResource("ShaderMaterial_alt7y"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 12,
+"vertex_data": PackedByteArray("AAAAAP//qar/f///AACpqv9/AAAAAKmqAAD/////qar//wAA/////wAA////////AAAAAP////////////////9/AAAAAKmq////////qar//wAA//+pqv9///8AAKmq/38AAP9/AAD/fwAA/38AAP9/////f////3////9/////f////3////9/////f///")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_2m8sy")

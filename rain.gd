@@ -1,4 +1,4 @@
-extends GPUParticles3D
+extends Node3D
 
 @onready var camera = $SubViewport/Node3D/Camera3D
 @export var spin = 1.0
@@ -6,7 +6,8 @@ extends GPUParticles3D
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	camera.rotate_y(spin)
+	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	rotate_y(spin)
+	rotate(basis.y.normalized(),spin)

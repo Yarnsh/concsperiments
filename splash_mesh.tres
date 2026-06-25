@@ -1,0 +1,40 @@
+[gd_resource type="ArrayMesh" load_steps=5 format=4 uid="uid://fmjvkqv04duh"]
+
+[ext_resource type="Shader" uid="uid://bcbj0aotp2a4q" path="res://rain.gdshader" id="1_yja1a"]
+[ext_resource type="Texture2D" uid="uid://b2faqvjtnjamq" path="res://rain_splash.png" id="2_eq0nk"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5ckur"]
+render_priority = 0
+shader = ExtResource("1_yja1a")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/albedo_tex = ExtResource("2_eq0nk")
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_dvwin"]
+_surfaces = [{
+"aabb": AABB(-1, 0, -1, 2, 0.40605775, 2),
+"format": 34896613377,
+"index_count": 12,
+"index_data": PackedByteArray("AAABAAIAAQADAAIAAQAAAAQAAwABAAQA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 5,
+"vertex_data": PackedByteArray("AAD/////AAD/fwAA/38AAP///////wAA/////wAAAAAAAP//AAAAAA==")
+}]
+blend_shape_mode = 0
+
+[resource]
+resource_name = "splash_mesh_Plane"
+_surfaces = [{
+"aabb": AABB(-1, 0, -1, 2, 0.40605775, 2),
+"attribute_data": PackedByteArray("cHKEdje5/////4R2cHKEdje5/////4R2N7n//3ByhHb//4R2N7n//3ByhHb//4R2"),
+"format": 34896613399,
+"index_count": 12,
+"index_data": PackedByteArray("AAABAAIAAwAEAAUABgAHAAgACQAKAAsA"),
+"material": SubResource("ShaderMaterial_5ckur"),
+"primitive": 3,
+"uv_scale": Vector4(2.2369723, 1.44, 0, 0),
+"vertex_count": 12,
+"vertex_data": PackedByteArray("AAD/////SDD/fwAA/39IMP///////0gw/////wAAAAD/fwAA/38AAAAA//8AAAAA/38AAP9/68wAAP/////rzAAA//8AAOvM/38AAP9/68z/////AADrzP///////+vM////f////3////9//39/s/9/f7P/f3+zcsm5JHLJuSRyybkkuaSLtrmki7a5pIu2")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_dvwin")
