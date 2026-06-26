@@ -250,16 +250,16 @@ alpha_curve = SubResource("CurveTexture_vxd74")
 viewport_path = NodePath("CharacterBody3D/RainSystem/SubViewport")
 
 [sub_resource type="Curve" id="Curve_i0g27"]
-_data = [Vector2(0, 0.10112369), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0.056179762), 0.0, 0.0, 0, 0]
 point_count = 1
 
 [sub_resource type="Curve" id="Curve_vxd74"]
 _limits = [0.0, 5.0, 0.0, 1.0]
-_data = [Vector2(0, 1.3483148), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 1.6292138), 0.0, 0.0, 0, 0]
 point_count = 1
 
 [sub_resource type="Curve" id="Curve_dhlwf"]
-_data = [Vector2(0, 0.10112369), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0.056179762), 0.0, 0.0, 0, 0]
 point_count = 1
 
 [sub_resource type="CurveXYZTexture" id="CurveXYZTexture_5t8nk"]
@@ -279,6 +279,8 @@ spread = 0.0
 initial_velocity_min = 100.0
 initial_velocity_max = 100.0
 gravity = Vector3(0, 0, 0)
+scale_min = 0.19999999
+scale_max = 1.5
 scale_curve = SubResource("CurveXYZTexture_5t8nk")
 sub_emitter_mode = 2
 sub_emitter_amount_at_end = 1
@@ -413,7 +415,7 @@ draw_pass_1 = SubResource("QuadMesh_3v7ru")
 script = ExtResource("12_cdqbm")
 
 [node name="RainSystem" type="Node3D" parent="CharacterBody3D"]
-transform = Transform3D(0.9322941, -0.07943409, -0.3528707, 0.08489522, 0.99638975, 0, 0.35159674, -0.029957037, 0.9356721, 0, -2.479733, 0)
+transform = Transform3D(0.75123733, -0.27594012, -0.5995825, 0.34479028, 0.93867946, 0, 0.5628158, -0.20673022, 0.80031294, 0, -2.479733, 0)
 script = ExtResource("14_jsnrv")
 
 [node name="Splash" type="GPUParticles3D" parent="CharacterBody3D/RainSystem"]
@@ -431,6 +433,8 @@ extra_cull_margin = 4053.77
 amount = 2400
 sub_emitter = NodePath("../Splash")
 lifetime = 0.2
+fixed_fps = 60
+interpolate = false
 fract_delta = false
 process_material = SubResource("ParticleProcessMaterial_i0g27")
 draw_pass_1 = ExtResource("15_i0g27")
