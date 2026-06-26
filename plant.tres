@@ -6,3 +6,4 @@
 resource_name = "plant"
 cull_mode = 2
 albedo_texture = ExtResource("1_pgipg")
+metallic_specular = 0.0

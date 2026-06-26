@@ -6,7 +6,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_alt7y"]
 render_priority = 0
 shader = ExtResource("1_2xy70")
-shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/albedo = Color(1, 1, 1, 0.47058824)
 shader_parameter/albedo_tex = ExtResource("2_tlpoj")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_2m8sy"]
