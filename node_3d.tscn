@@ -306,7 +306,7 @@ sky = SubResource("Sky_ealrb")
 ambient_light_source = 2
 fog_enabled = true
 fog_mode = 1
-fog_light_color = Color(0.31634638, 0.3468389, 0.39257738, 1)
+fog_light_color = Color(0, 0, 0, 1)
 fog_density = 1.0
 fog_sky_affect = 0.0
 fog_depth_begin = 0.0
@@ -462,6 +462,9 @@ far = 50.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_jsnrv")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="WorldEnvironment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.716007, 1.1098495, -15.92025)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5480366, 0)

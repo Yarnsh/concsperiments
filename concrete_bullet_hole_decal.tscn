@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://cisha2fhbuhyn"]
+
+[ext_resource type="Texture2D" uid="uid://oljvnkpm6mal" path="res://hole_concrete.png" id="2_o46mj"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Decal" type="Decal" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+size = Vector3(0.25, 0.25, 0.25)
+texture_albedo = ExtResource("2_o46mj")
