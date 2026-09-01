@@ -13,12 +13,12 @@
 [ext_resource type="Script" uid="uid://cvhw5dl4grdc5" path="res://hit_ray.gd" id="11_cdqbm"]
 [ext_resource type="Script" uid="uid://cpl3x6ultkgc1" path="res://gun_heat_haze.gd" id="12_cdqbm"]
 [ext_resource type="Shader" uid="uid://dpe8xr3hvnpfr" path="res://heat_haze.gdshader" id="12_imku0"]
-[ext_resource type="Shader" uid="uid://cwp3yr2frc1a" path="res://rain_depth.gdshader" id="14_3v7ru"]
 [ext_resource type="ArrayMesh" uid="uid://fmjvkqv04duh" path="res://splash_mesh.tres" id="14_ealrb"]
 [ext_resource type="Script" uid="uid://r7pult4xo1wv" path="res://rain.gd" id="14_jsnrv"]
 [ext_resource type="Script" uid="uid://c3q5p47tg2bmi" path="res://follow_other_node.gd" id="14_tcnuu"]
 [ext_resource type="Texture2D" uid="uid://c1sy7p5vt4kw4" path="res://dramatic-sunset-2089-30k-hdri-panoramas_7932_max-x1920.jpg" id="14_wlxy5"]
 [ext_resource type="ArrayMesh" uid="uid://dphibhgdu4xi0" path="res://rain_drop_mesh.tres" id="15_i0g27"]
+[ext_resource type="Shader" uid="uid://cwp3yr2frc1a" path="res://rain_depth.gdshader" id="18_ealrb"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_tereu"]
 height = 1.8
@@ -206,7 +206,7 @@ initial_velocity_max = 0.25
 gravity = Vector3(0, 0, 0)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_imku0"]
-render_priority = 0
+render_priority = -2
 shader = ExtResource("12_imku0")
 
 [sub_resource type="QuadMesh" id="QuadMesh_3v7ru"]
@@ -285,12 +285,12 @@ scale_curve = SubResource("CurveXYZTexture_5t8nk")
 sub_emitter_mode = 2
 sub_emitter_amount_at_end = 1
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_tcnuu"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jsnrv"]
 render_priority = 0
-shader = ExtResource("14_3v7ru")
+shader = ExtResource("18_ealrb")
 
 [sub_resource type="Environment" id="Environment_tuemg"]
-material_override = SubResource("ShaderMaterial_tcnuu")
+material_override = SubResource("ShaderMaterial_jsnrv")
 background_mode = 1
 background_color = Color(1, 1, 1, 1)
 
@@ -462,9 +462,6 @@ far = 50.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_jsnrv")
-
-[node name="OmniLight3D" type="OmniLight3D" parent="WorldEnvironment"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.716007, 1.1098495, -15.92025)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5480366, 0)

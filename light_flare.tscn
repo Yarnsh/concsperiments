@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://dhglskmiod75a"]
+
+[ext_resource type="Shader" uid="uid://dbfyx8uok54uj" path="res://shaders/point_light_flare.gdshader" id="1_4yhcf"]
+[ext_resource type="Texture2D" uid="uid://ybpei46de0dt" path="res://sprites/bright.png" id="2_4yhcf"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4yhcf"]
+resource_local_to_scene = true
+render_priority = -1
+shader = ExtResource("1_4yhcf")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/texture_albedo = ExtResource("2_4yhcf")
+shader_parameter/thing_size = 1.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_0cpr0"]
+resource_local_to_scene = true
+material = SubResource("ShaderMaterial_4yhcf")
+size = Vector2(0, 0)
+
+[node name="LightFlare" type="MeshInstance3D"]
+mesh = SubResource("QuadMesh_0cpr0")

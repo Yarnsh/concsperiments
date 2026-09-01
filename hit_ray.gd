@@ -12,7 +12,7 @@ func fire():
 		get_tree().root.add_child(decal)
 		hit.global_position = get_collision_point()
 		decal.global_position = get_collision_point()
-		if get_collision_normal() == Vector3.UP:
+		if abs(get_collision_normal().dot(Vector3.UP)) == 1.0:
 			hit.rotation_degrees.x = 90.0
 			decal.rotation_degrees.x = 90.0
 		else:
