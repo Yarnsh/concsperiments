@@ -12,12 +12,18 @@ var cam_distance = 4.0
 
 var start_position = Vector3.ZERO
 
+var spring_strength = 3.0
+var up_strength = 10.0
+
 func _ready() -> void:
 	start_position = position
 
 func _process(delta: float) -> void:
 	_update_mouselook()
-	position = position.move_toward(start_position, (start_position - position).length() * 3.0 * delta)
+	if position.y < start_position.y:
+		position = position.move_toward(start_position, (start_position - position).length() * spring_strength * delta)
+	else:
+		position = position.move_toward(start_position, (start_position - position).length() * up_strength * delta)
 
 func _update_mouselook():
 	# Only rotates mouse if the mouse is captured
