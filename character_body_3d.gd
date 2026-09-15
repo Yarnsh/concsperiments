@@ -39,7 +39,7 @@ func try_enter_air_state():
 
 func stick_to_ground():
 	#if walk_shape.disabled:
-		if jump_recovery_cast.is_colliding():
+		if jump_recovery_cast.is_colliding() and (Vector3.UP.angle_to(jump_recovery_cast.get_collision_normal(0))) < 0.3:
 			# TODO: check if we have room to "stand up"
 			var y_move
 			if !walk_shape.disabled:

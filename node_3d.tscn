@@ -5,11 +5,11 @@
 [ext_resource type="Script" uid="uid://bldoy4v3svuwb" path="res://character_body_3d.gd" id="2_a0tk4"]
 [ext_resource type="Script" uid="uid://d1oldice8j1qh" path="res://camera_3d.gd" id="3_a0tk4"]
 [ext_resource type="Script" uid="uid://bexex0b4g7wrc" path="res://gun_offset.gd" id="5_i5arm"]
-[ext_resource type="PackedScene" uid="uid://dxop58sak1srn" path="res://gun.blend" id="5_jka67"]
 [ext_resource type="Script" uid="uid://b3ynq4xq1au8l" path="res://walk_offset_animator.gd" id="6_4arys"]
 [ext_resource type="Script" uid="uid://b6ygv3lkyiuod" path="res://wall_avoid_ray.gd" id="7_6iypd"]
 [ext_resource type="Script" uid="uid://3yudokjb4c68" path="res://laser_cast.gd" id="7_jsk3o"]
 [ext_resource type="PackedScene" uid="uid://cfu8qxb86xyo8" path="res://laser.blend" id="8_4arys"]
+[ext_resource type="PackedScene" uid="uid://cqdvsku2px540" path="res://SnW39-2.blend" id="9_jsnrv"]
 [ext_resource type="Script" uid="uid://cvhw5dl4grdc5" path="res://hit_ray.gd" id="11_cdqbm"]
 [ext_resource type="Script" uid="uid://cpl3x6ultkgc1" path="res://gun_heat_haze.gd" id="12_cdqbm"]
 [ext_resource type="Shader" uid="uid://dpe8xr3hvnpfr" path="res://heat_haze.gdshader" id="12_imku0"]
@@ -378,11 +378,26 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.082, -0.18241286, -0.581333
 
 [node name="GunFinal" type="Node3D" parent="CharacterBody3D/CameraRotator/Gun/Offset/ClamberOffset/WalkOffset/StrafeOffset/RecoilOffset"]
 
-[node name="gun" parent="CharacterBody3D/CameraRotator/Gun/Offset/ClamberOffset/WalkOffset/StrafeOffset/RecoilOffset/GunFinal" instance=ExtResource("5_jka67")]
-transform = Transform3D(0.9848077, -0.17364818, 0, 0.17364818, 0.9848077, 0, 0, 0, 1, 0, 0, 0)
+[node name="gun" type="Node3D" parent="CharacterBody3D/CameraRotator/Gun/Offset/ClamberOffset/WalkOffset/StrafeOffset/RecoilOffset/GunFinal"]
+transform = Transform3D(0.9848077, -0.17364818, 0, 0.17364818, 0.9848077, 0, 0, 0, 1, 0, 0, -0.12759334)
 
-[node name="Cube" parent="CharacterBody3D/CameraRotator/Gun/Offset/ClamberOffset/WalkOffset/StrafeOffset/RecoilOffset/GunFinal/gun" index="0"]
+[node name="SnW39-2" parent="CharacterBody3D/CameraRotator/Gun/Offset/ClamberOffset/WalkOffset/StrafeOffset/RecoilOffset/GunFinal/gun" instance=ExtResource("9_jsnrv")]
+transform = Transform3D(0.050000016, -2.7939677e-09, 0, 2.7939677e-09, 0.050000016, 0, 0, 0, 0.05, -0.00085181, -0.05713892, 0.24330282)
+
+[node name="Cube" parent="CharacterBody3D/CameraRotator/Gun/Offset/ClamberOffset/WalkOffset/StrafeOffset/RecoilOffset/GunFinal/gun/SnW39-2" index="0"]
 layers = 3
+
+[node name="Plane" parent="CharacterBody3D/CameraRotator/Gun/Offset/ClamberOffset/WalkOffset/StrafeOffset/RecoilOffset/GunFinal/gun/SnW39-2" index="1"]
+visible = false
+
+[node name="Plane_001" parent="CharacterBody3D/CameraRotator/Gun/Offset/ClamberOffset/WalkOffset/StrafeOffset/RecoilOffset/GunFinal/gun/SnW39-2" index="2"]
+visible = false
+
+[node name="Plane_002" parent="CharacterBody3D/CameraRotator/Gun/Offset/ClamberOffset/WalkOffset/StrafeOffset/RecoilOffset/GunFinal/gun/SnW39-2" index="3"]
+visible = false
+
+[node name="Plane_003" parent="CharacterBody3D/CameraRotator/Gun/Offset/ClamberOffset/WalkOffset/StrafeOffset/RecoilOffset/GunFinal/gun/SnW39-2" index="4"]
+visible = false
 
 [node name="LaserCast" type="RayCast3D" parent="CharacterBody3D/CameraRotator/Gun/Offset/ClamberOffset/WalkOffset/StrafeOffset/RecoilOffset/GunFinal/gun"]
 target_position = Vector3(0, 0, -100)
@@ -469,5 +484,5 @@ environment = SubResource("Environment_jsnrv")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5480366, 0)
 mesh = SubResource("PlaneMesh_tcnuu")
 
-[editable path="CharacterBody3D/CameraRotator/Gun/Offset/ClamberOffset/WalkOffset/StrafeOffset/RecoilOffset/GunFinal/gun"]
+[editable path="CharacterBody3D/CameraRotator/Gun/Offset/ClamberOffset/WalkOffset/StrafeOffset/RecoilOffset/GunFinal/gun/SnW39-2"]
 [editable path="CharacterBody3D/CameraRotator/Gun/Offset/ClamberOffset/WalkOffset/StrafeOffset/RecoilOffset/GunFinal/gun/LaserCast/laser"]
