@@ -1,8 +1,9 @@
 extends Node3D
 
-@onready var character = $"../../.."
+@onready var character = $"../../../.."
 @onready var anim = $AnimationPlayer
-var amplitude = 0.0
+var transform_amplitude = 0.0
+var rotation_amplitude = 0.0
 var target_amp = 0.0
 var speed = 1.0
 var target_speed = 1.0
@@ -34,6 +35,7 @@ func _process(delta: float) -> void:
 		anim.stop()
 		walk_stop_time = -1
 	
-	amplitude = move_toward(amplitude, target_amp, 3.0 * delta)
+	transform_amplitude = move_toward(transform_amplitude, target_amp, 3.0 * delta)
+	rotation_amplitude = transform_amplitude
 	speed = move_toward(speed, target_speed, 5.0 * delta)
 	anim.speed_scale = speed
