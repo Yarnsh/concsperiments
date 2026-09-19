@@ -24,7 +24,7 @@
 [ext_resource type="Shader" uid="uid://cwp3yr2frc1a" path="res://rain_depth.gdshader" id="18_ealrb"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_tereu"]
-height = 1.4966797
+height = 1.4322021
 radius = 0.3
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_cdqbm"]
@@ -328,12 +328,12 @@ script = ExtResource("1_r3fl7")
 [node name="conc" parent="." instance=ExtResource("1_noarx")]
 
 [node name="CharacterBody3D" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.479733, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.778948, 1.2751937, -10.783923)
 collision_layer = 2
 script = ExtResource("2_a0tk4")
 
 [node name="WalkShape" type="CollisionShape3D" parent="CharacterBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1516602, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.18389893, 0)
 shape = SubResource("CylinderShape3D_tereu")
 
 [node name="JumpShape" type="CollisionShape3D" parent="CharacterBody3D"]
@@ -345,6 +345,10 @@ debug_color = Color(0.9706611, 0, 0.45641863, 0.41960785)
 [node name="JumpRecoveryCast" type="ShapeCast3D" parent="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("CylinderShape3D_imku0")
+target_position = Vector3(0, -1.75, 0)
+
+[node name="FloorCastCenter" type="RayCast3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 target_position = Vector3(0, -1.75, 0)
 
 [node name="WallAvoidRay" type="RayCast3D" parent="CharacterBody3D"]

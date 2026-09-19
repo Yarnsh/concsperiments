@@ -6,6 +6,7 @@ extends CharacterBody3D
 @onready var walk_shape = $WalkShape
 @onready var jump_shape = $JumpShape
 @onready var jump_recovery_cast = $JumpRecoveryCast
+@onready var floor_cast_center = $FloorCastCenter
 
 const SPEED = 6.0
 const CREEP_SPEED = 3.0
@@ -15,6 +16,8 @@ const FOOT_HEIGHT = 0.3
 var foot_cast_ratio = 0.1
 const CAST_WALKING = -1.75
 const CAST_JUMPING = -1.45
+
+const MAX_FLOOR_ANGLE = 0.3
 
 var walking = false
 var running = false
@@ -28,29 +31,41 @@ func _ready() -> void:
 	foot_cast_ratio = FOOT_HEIGHT / (-jump_recovery_cast.target_position.y)
 
 func on_floor():
-	return jump_recovery_cast.is_colliding()
+	return (floor_cast_center.is_colliding() and (Vector3.UP.angle_to(floor_cast_center.get_collision_normal())) < MAX_FLOOR_ANGLE) \
+		or (jump_recovery_cast.is_colliding() and (Vector3.UP.angle_to(jump_recovery_cast.get_collision_normal(0))) < MAX_FLOOR_ANGLE)
+
+func to_floor_fraction():
+	var center = 0.0
+	if floor_cast_center.is_colliding():
+		center = (floor_cast_center.global_position - floor_cast_center.get_collision_point()).length() / floor_cast_center.target_position.length()
+	return max(jump_recovery_cast.get_closest_collision_unsafe_fraction(), center)
 
 func try_enter_air_state():
 	if jump_shape.disabled: # quick check if we are already in the state
 		walk_shape.disabled = true
 		jump_shape.disabled = false
+		floor_cast_center.target_position.y = CAST_JUMPING
 		jump_recovery_cast.target_position.y = CAST_JUMPING
 		foot_cast_ratio = FOOT_HEIGHT / (-jump_recovery_cast.target_position.y)
 
 func stick_to_ground():
 	#if walk_shape.disabled:
-		if jump_recovery_cast.is_colliding() and (Vector3.UP.angle_to(jump_recovery_cast.get_collision_normal(0))) < 0.3:
+		if on_floor():
 			# TODO: check if we have room to "stand up"
+			var largest_fraction = to_floor_fraction()
+			print(largest_fraction)
+			
 			var y_move
 			if !walk_shape.disabled:
-				y_move = ((1.0 - jump_recovery_cast.get_closest_collision_unsafe_fraction()) * -jump_recovery_cast.target_position.y) - FOOT_HEIGHT
+				y_move = ((1.0 - largest_fraction) * -jump_recovery_cast.target_position.y) - FOOT_HEIGHT
 			else:
-				y_move = ((1.0 - jump_recovery_cast.get_closest_collision_unsafe_fraction()) * -jump_recovery_cast.target_position.y)
+				y_move = ((1.0 - largest_fraction) * -jump_recovery_cast.target_position.y)
 			translate_object_local(Vector3.UP * y_move)
-			gun.trigger_clamber(max(1.0 - (jump_recovery_cast.get_closest_collision_unsafe_fraction() + foot_cast_ratio), abs(velocity.y * 0.05)))
+			gun.trigger_clamber(max(1.0 - (largest_fraction + foot_cast_ratio), abs(velocity.y * 0.05)))
 			camera.translate_object_local(Vector3.DOWN * y_move)
 			walk_shape.disabled = false
 			jump_shape.disabled = true
+			floor_cast_center.target_position.y = CAST_WALKING
 			jump_recovery_cast.target_position.y = CAST_WALKING
 			foot_cast_ratio = FOOT_HEIGHT / (-jump_recovery_cast.target_position.y)
 			velocity.y = -0.01
