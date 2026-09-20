@@ -100,7 +100,7 @@ func _physics_process(delta: float) -> void:
 	
 	clamber_strength = move_toward(clamber_strength, 0.0, 1.5 * delta)
 	
-	if not on_floor():
+	if walk_shape.disabled or not on_floor():
 		velocity += get_gravity() * delta
 		try_enter_air_state()
 	else:
