@@ -27,6 +27,8 @@ var input_dir = Vector2.ZERO
 var flat_vel = Vector2.ZERO
 var flat_dir = Vector2.ZERO
 
+var walk_intersect_query = PhysicsShapeQueryParameters3D.new()
+
 func _ready() -> void:
 	foot_cast_ratio = FOOT_HEIGHT / (-jump_recovery_cast.target_position.y)
 
@@ -48,12 +50,18 @@ func try_enter_air_state():
 		jump_recovery_cast.target_position.y = CAST_JUMPING
 		foot_cast_ratio = FOOT_HEIGHT / (-jump_recovery_cast.target_position.y)
 
+func will_walk_shape_collide():
+	walk_intersect_query.shape = walk_shape.shape
+	walk_intersect_query.collision_mask = collision_mask
+	walk_intersect_query.transform = walk_shape.global_transform
+	var result = get_world_3d().direct_space_state.intersect_shape(walk_intersect_query, 1)
+	return result.size() > 0
+
 func stick_to_ground():
 	#if walk_shape.disabled:
 		if on_floor():
 			# TODO: check if we have room to "stand up"
 			var largest_fraction = to_floor_fraction()
-			print(largest_fraction)
 			
 			var y_move
 			if !walk_shape.disabled:
@@ -63,11 +71,12 @@ func stick_to_ground():
 			translate_object_local(Vector3.UP * y_move)
 			gun.trigger_clamber(max(1.0 - (largest_fraction + foot_cast_ratio), abs(velocity.y * 0.05)))
 			camera.translate_object_local(Vector3.DOWN * y_move)
-			walk_shape.disabled = false
-			jump_shape.disabled = true
-			floor_cast_center.target_position.y = CAST_WALKING
-			jump_recovery_cast.target_position.y = CAST_WALKING
-			foot_cast_ratio = FOOT_HEIGHT / (-jump_recovery_cast.target_position.y)
+			if !will_walk_shape_collide():
+				walk_shape.disabled = false
+				jump_shape.disabled = true
+				floor_cast_center.target_position.y = CAST_WALKING
+				jump_recovery_cast.target_position.y = CAST_WALKING
+				foot_cast_ratio = FOOT_HEIGHT / (-jump_recovery_cast.target_position.y)
 			velocity.y = -0.01
 
 func _physics_process(delta: float) -> void:
