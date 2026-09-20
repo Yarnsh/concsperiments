@@ -13,13 +13,17 @@ var cam_distance = 4.0
 var start_position = Vector3.ZERO
 
 var spring_strength = 3.0
-var up_strength = 10.0
+var up_strength = 5.0
 
 func _ready() -> void:
 	start_position = position
 
 func _process(delta: float) -> void:
 	_update_mouselook()
+	
+	# hard checks to avoid moving way too far
+	position.y = clamp(position.y, start_position.y-0.5, start_position.y+0.5)
+	
 	if position.y < start_position.y:
 		position = position.move_toward(start_position, (start_position - position).length() * spring_strength * delta)
 	else:

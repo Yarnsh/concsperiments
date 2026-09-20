@@ -7,6 +7,7 @@ extends CharacterBody3D
 @onready var jump_shape = $JumpShape
 @onready var jump_recovery_cast = $JumpRecoveryCast
 @onready var floor_cast_center = $FloorCastCenter
+@onready var ceiling_avoid_cast = $CeilingAvoidCast
 
 const SPEED = 6.0
 const CREEP_SPEED = 3.0
@@ -16,8 +17,9 @@ const FOOT_HEIGHT = 0.3
 var foot_cast_ratio = 0.1
 const CAST_WALKING = -1.75
 const CAST_JUMPING = -1.45
+var LANDING_FRICTION = 20.0 # TODO: get this from ground material
 
-const MAX_FLOOR_ANGLE = 0.3
+var MAX_FLOOR_ANGLE = 0.3 # TODO: get this from ground material
 
 var walking = false
 var running = false
@@ -26,10 +28,14 @@ var creeping = false
 var input_dir = Vector2.ZERO
 var flat_vel = Vector2.ZERO
 var flat_dir = Vector2.ZERO
+var after_landing_vel = Vector2.ZERO # TODO: add some gun/camera offset based on this
+var prev_pos = Vector3.ZERO
+var clamber_strength = 0.0
 
 var walk_intersect_query = PhysicsShapeQueryParameters3D.new()
 
 func _ready() -> void:
+	MAX_FLOOR_ANGLE = floor_max_angle #TODO: get this from ground material
 	foot_cast_ratio = FOOT_HEIGHT / (-jump_recovery_cast.target_position.y)
 
 func on_floor():
@@ -57,34 +63,48 @@ func will_walk_shape_collide():
 	var result = get_world_3d().direct_space_state.intersect_shape(walk_intersect_query, 1)
 	return result.size() > 0
 
-func stick_to_ground():
-	#if walk_shape.disabled:
-		if on_floor():
-			# TODO: check if we have room to "stand up"
-			var largest_fraction = to_floor_fraction()
-			
-			var y_move
-			if !walk_shape.disabled:
-				y_move = ((1.0 - largest_fraction) * -jump_recovery_cast.target_position.y) - FOOT_HEIGHT
-			else:
-				y_move = ((1.0 - largest_fraction) * -jump_recovery_cast.target_position.y)
-			translate_object_local(Vector3.UP * y_move)
-			gun.trigger_clamber(max(1.0 - (largest_fraction + foot_cast_ratio), abs(velocity.y * 0.05)))
-			camera.translate_object_local(Vector3.DOWN * y_move)
-			if !will_walk_shape_collide():
-				walk_shape.disabled = false
-				jump_shape.disabled = true
-				floor_cast_center.target_position.y = CAST_WALKING
-				jump_recovery_cast.target_position.y = CAST_WALKING
-				foot_cast_ratio = FOOT_HEIGHT / (-jump_recovery_cast.target_position.y)
-			velocity.y = -0.01
+func trigger_clamber(clamb):
+	gun.trigger_clamber(clamb)
+	if clamb > clamber_strength:
+		clamber_strength = clamb
+
+func stick_to_ground(delta):
+	if velocity.y <= 0.0 and on_floor():
+		var largest_fraction = to_floor_fraction()
+		
+		var y_move
+		if !walk_shape.disabled:
+			y_move = ((1.0 - largest_fraction) * -jump_recovery_cast.target_position.y) - FOOT_HEIGHT
+		else:
+			y_move = ((1.0 - largest_fraction) * -jump_recovery_cast.target_position.y)
+		
+		if ceiling_avoid_cast.is_colliding(): # This avoids us dipping down when under a sloped ceiling
+			y_move -= min(y_move, ceiling_avoid_cast.get_closest_collision_safe_fraction()) # length is one so this is fine
+		
+		translate_object_local(Vector3.UP * y_move)
+		trigger_clamber(max(1.0 - (largest_fraction + foot_cast_ratio), abs(velocity.y * 0.05)))
+		camera.translate_object_local(Vector3.DOWN * y_move)
+		if !will_walk_shape_collide():
+			if walk_shape.disabled:
+				after_landing_vel.x = (global_position.x - prev_pos.x) / delta
+				after_landing_vel.y = (global_position.z - prev_pos.z) / delta
+			walk_shape.disabled = false
+			jump_shape.disabled = true
+			floor_cast_center.target_position.y = CAST_WALKING
+			jump_recovery_cast.target_position.y = CAST_WALKING
+			foot_cast_ratio = FOOT_HEIGHT / (-jump_recovery_cast.target_position.y)
+		velocity.y = -0.01
 
 func _physics_process(delta: float) -> void:
-	stick_to_ground()
+	stick_to_ground(delta)
+	
+	clamber_strength = move_toward(clamber_strength, 0.0, 1.5 * delta)
 	
 	if not on_floor():
 		velocity += get_gravity() * delta
 		try_enter_air_state()
+	else:
+		velocity.y = -0.01
 	
 	if Input.is_action_just_pressed("Jump") and on_floor():
 		velocity.y = JUMP_VELOCITY
@@ -105,6 +125,8 @@ func _physics_process(delta: float) -> void:
 	var flat_vel_target = flat_dir
 	
 	if on_floor():
+		after_landing_vel = after_landing_vel.move_toward(Vector2.ZERO, LANDING_FRICTION * delta)
+		
 		if direction:
 			if creeping:
 				flat_vel_target = flat_vel_target * CREEP_SPEED
@@ -114,7 +136,17 @@ func _physics_process(delta: float) -> void:
 				flat_vel_target = flat_vel_target * SPEED
 		else:
 			flat_vel_target = flat_vel_target * 0
+			
+		flat_vel_target = flat_vel_target.normalized() * max(0.05, flat_vel_target.length() - (clamber_strength * SPEED * 3.0))
 		flat_vel = flat_vel.move_toward(flat_vel_target, (flat_vel - flat_vel_target).length() * 30.0 * delta)
+		if after_landing_vel.length_squared() < 0.001:
+			flat_vel += after_landing_vel
+		else:
+			var f = flat_vel.project(after_landing_vel)
+			flat_vel -= f
+			if f.length_squared() < after_landing_vel.length_squared():
+				f = after_landing_vel
+			flat_vel += f
 	else:
 		flat_vel += flat_dir * 4.0 * delta
 		if flat_vel.length() > SPEED or not flat_vel:
@@ -123,4 +155,5 @@ func _physics_process(delta: float) -> void:
 	velocity.x = flat_vel.x
 	velocity.z = flat_vel.y
 	
+	prev_pos = global_position
 	move_and_slide()

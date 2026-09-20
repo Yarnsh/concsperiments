@@ -328,8 +328,10 @@ script = ExtResource("1_r3fl7")
 [node name="conc" parent="." instance=ExtResource("1_noarx")]
 
 [node name="CharacterBody3D" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.778948, 1.2751937, -10.783923)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.539818, 1.2751937, -10.783923)
 collision_layer = 2
+floor_max_angle = 0.4537856
+floor_snap_length = 0.0
 script = ExtResource("2_a0tk4")
 
 [node name="WalkShape" type="CollisionShape3D" parent="CharacterBody3D"]
@@ -347,11 +349,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("CylinderShape3D_imku0")
 target_position = Vector3(0, -1.75, 0)
 
+[node name="CeilingAvoidCast" type="ShapeCast3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("CylinderShape3D_imku0")
+target_position = Vector3(0, 1, 0)
+
 [node name="FloorCastCenter" type="RayCast3D" parent="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 target_position = Vector3(0, -1.75, 0)
 
 [node name="WallAvoidRay" type="RayCast3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5981902, 0)
 hit_back_faces = false
 script = ExtResource("7_6iypd")
 
@@ -390,7 +398,7 @@ script = ExtResource("10_s0gvp")
 transform = Transform3D(0.9848077, -0.17364818, 0, 0.17364818, 0.9848077, 0, 0, 0, 1, 0, 0.0617764, -0.24157721)
 
 [node name="SnW39-2" parent="CharacterBody3D/CameraRotator/Gun/Offset/GunFinal/gun" instance=ExtResource("9_jsnrv")]
-transform = Transform3D(0.050000016, -2.7939677e-09, 0, 2.7939677e-09, 0.050000016, 0, 0, 0, 0.05, -0.00085181, -0.05713892, 0.24330282)
+transform = Transform3D(0.04000001, -3.7252903e-09, 0, 3.7252903e-09, 0.04000001, 0, 0, 0, 0.04, -0.0030546188, -0.04339415, 0.20309639)
 
 [node name="Cube" parent="CharacterBody3D/CameraRotator/Gun/Offset/GunFinal/gun/SnW39-2" index="0"]
 layers = 3

@@ -27,9 +27,7 @@ func iterate(node, scene):
 			flare.position = Vector3.ZERO
 			flare.name += "-nm-nc"
 			flare.get_active_material(0).set_shader_parameter("albedo", node.light_color)
-			flare.get_active_material(0).set_shader_parameter("thing_size", node.light_energy * 0.1)
-			
-			print(flare.get_active_material(0).get_shader_parameter("thing_size"))
+			flare.get_active_material(0).set_shader_parameter("thing_size", node.light_energy * 0.02)
 		
 		for child in node.get_children():
 			iterate(child, scene)
