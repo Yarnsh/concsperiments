@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://xmfmc3f2t2tq"]
+[gd_scene load_steps=58 format=3 uid="uid://xmfmc3f2t2tq"]
 
 [ext_resource type="PackedScene" uid="uid://tx5oa36f5n0k" path="res://conc.blend" id="1_noarx"]
 [ext_resource type="Script" uid="uid://c3ylqjlw424qr" path="res://main.gd" id="1_r3fl7"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" uid="uid://bttc6rxnnu1vd" path="res://strafe_offset.gd" id="9_s0gvp"]
 [ext_resource type="Script" uid="uid://dhn7eoa7vvs82" path="res://recoil_offset.gd" id="10_s0gvp"]
 [ext_resource type="Script" uid="uid://cvhw5dl4grdc5" path="res://hit_ray.gd" id="11_cdqbm"]
+[ext_resource type="Script" uid="uid://qt463s8n1ukf" path="res://slide_offset.gd" id="11_vxd74"]
 [ext_resource type="Script" uid="uid://cpl3x6ultkgc1" path="res://gun_heat_haze.gd" id="12_cdqbm"]
 [ext_resource type="Shader" uid="uid://dpe8xr3hvnpfr" path="res://heat_haze.gdshader" id="12_imku0"]
 [ext_resource type="ArrayMesh" uid="uid://fmjvkqv04duh" path="res://splash_mesh.tres" id="14_ealrb"]
@@ -389,13 +390,16 @@ script = ExtResource("8_lggff")
 [node name="StrafeOffset" type="Node3D" parent="CharacterBody3D/CameraRotator/Gun/Offset"]
 script = ExtResource("9_s0gvp")
 
-[node name="RecoilOffset" type="Node3D" parent="CharacterBody3D/CameraRotator/Gun/Offset"]
+[node name="SlideOffset" type="Node3D" parent="CharacterBody3D/CameraRotator/Gun/Offset"]
+script = ExtResource("11_vxd74")
+
+[node name="RecoilOffsetLate" type="Node3D" parent="CharacterBody3D/CameraRotator/Gun/Offset"]
 script = ExtResource("10_s0gvp")
 
 [node name="GunFinal" type="Node3D" parent="CharacterBody3D/CameraRotator/Gun/Offset"]
 
 [node name="gun" type="Node3D" parent="CharacterBody3D/CameraRotator/Gun/Offset/GunFinal"]
-transform = Transform3D(0.9848077, -0.17364818, 0, 0.17364818, 0.9848077, 0, 0, 0, 1, 0, 0.0617764, -0.24157721)
+transform = Transform3D(0.9848077, -0.17364818, 0, 0.17364818, 0.9848077, 0, 0, 0, 1, 0, 0.018097878, -0.24929333)
 
 [node name="SnW39-2" parent="CharacterBody3D/CameraRotator/Gun/Offset/GunFinal/gun" instance=ExtResource("9_jsnrv")]
 transform = Transform3D(0.04000001, -3.7252903e-09, 0, 3.7252903e-09, 0.04000001, 0, 0, 0, 0.04, -0.0030546188, -0.04339415, 0.20309639)

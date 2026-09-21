@@ -14,7 +14,7 @@ func shot_fired():
 func _process(delta: float) -> void:
 	position.z = (recoil + fast_recoil) * 0.0
 	position.y = (recoil + fast_recoil) * 0.2
-	rotation.x = (recoil + fast_recoil) * 0.9
+	rotation.x = (recoil + fast_recoil) * 0.5
 	rotation.y = (recoil + fast_recoil) * -0.1
 	recoil = move_toward(recoil, 0.0, ((recoil * 1.0) + 1.0) * delta)
 	fast_recoil = move_toward(fast_recoil, 0.0, ((fast_recoil * 10.0) + 1.0) * delta)

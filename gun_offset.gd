@@ -5,7 +5,7 @@ extends Node3D
 var offsets = []
 
 @onready var clamber_offset = $Offset/ClamberOffset
-@onready var recoil_offset = $Offset/RecoilOffset
+@onready var recoil_offset = $Offset/RecoilOffsetLate
 @onready var gun_final = $Offset/GunFinal
 
 @onready var muzzle_flash_anim = $Offset/GunFinal/gun/Flash/AnimationPlayer
@@ -41,12 +41,21 @@ func _process(delta: float) -> void:
 	
 	# Additive offsets
 	for o in offsets:
-		t += o.position * o.transform_amplitude
-		r += o.rotation * o.rotation_amplitude
+		if "Late" not in o.name:
+			t += o.position * o.transform_amplitude
+			r += o.rotation * o.rotation_amplitude
 	
 	# Apply
 	gun_final.position = t
 	gun_final.rotation = r
+	
+	# Late offsets
+	for o in offsets:
+		if "Late" in o.name:
+			gun_final.translate_object_local(o.position * o.transform_amplitude)
+			gun_final.rotate_object_local(Vector3.UP, o.rotation.y * o.rotation_amplitude)
+			gun_final.rotate_object_local(Vector3.RIGHT, o.rotation.x * o.rotation_amplitude)
+			gun_final.rotate_object_local(Vector3.FORWARD, o.rotation.z * o.rotation_amplitude)
 	
 	# heat haze visual
 	heat_haze_effect.gun_heat = gun_heat
