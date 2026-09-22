@@ -19,8 +19,6 @@ const CAST_WALKING = -1.75
 const CAST_JUMPING = -1.45
 var LANDING_FRICTION = 20.0 # TODO: get this from ground material
 
-var MAX_FLOOR_ANGLE = 0.3 # TODO: get this from ground material
-
 var walking = false
 var running = false
 var creeping = false
@@ -35,18 +33,24 @@ var clamber_strength = 0.0
 var walk_intersect_query = PhysicsShapeQueryParameters3D.new()
 
 func _ready() -> void:
-	MAX_FLOOR_ANGLE = floor_max_angle #TODO: get this from ground material
 	foot_cast_ratio = FOOT_HEIGHT / (-jump_recovery_cast.target_position.y)
 
 func on_floor():
-	return (floor_cast_center.is_colliding() and (Vector3.UP.angle_to(floor_cast_center.get_collision_normal())) < MAX_FLOOR_ANGLE) \
-		or (jump_recovery_cast.is_colliding() and (Vector3.UP.angle_to(jump_recovery_cast.get_collision_normal(0))) < MAX_FLOOR_ANGLE)
+	return (floor_cast_center.is_colliding() and (Vector3.UP.angle_to(floor_cast_center.get_collision_normal())) < floor_max_angle) \
+		or (jump_recovery_cast.is_colliding() and (Vector3.UP.angle_to(jump_recovery_cast.get_collision_normal(0))) < floor_max_angle)
 
 func to_floor_fraction():
 	var center = 0.0
 	if floor_cast_center.is_colliding():
 		center = (floor_cast_center.global_position - floor_cast_center.get_collision_point()).length() / floor_cast_center.target_position.length()
 	return max(jump_recovery_cast.get_closest_collision_unsafe_fraction(), center)
+
+func get_floor_material():
+	if floor_cast_center.is_colliding():
+		return floor_cast_center.get_collider()
+	elif jump_recovery_cast.is_colliding():
+		return jump_recovery_cast.get_collider(0)
+	return null
 
 func try_enter_air_state():
 	if jump_shape.disabled: # quick check if we are already in the state
@@ -96,6 +100,10 @@ func stick_to_ground(delta):
 		velocity.y = -0.01
 
 func _physics_process(delta: float) -> void:
+	var floor = get_floor_material()
+	if floor != null:
+		floor_max_angle = floor.floor_angle
+	
 	stick_to_ground(delta)
 	
 	clamber_strength = move_toward(clamber_strength, 0.0, 1.5 * delta)

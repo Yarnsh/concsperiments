@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://4dvuhdxltlrt"]
 
-[ext_resource type="Script" uid="uid://xim1e6ugw1fp" path="res://concrete_hit_effect.gd" id="1_qxw15"]
+[ext_resource type="Script" uid="uid://xim1e6ugw1fp" path="res://vfx/concrete_hit_effect.gd" id="1_qxw15"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_dinsh"]
 direction = Vector3(0, 0, -1)

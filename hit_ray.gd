@@ -1,13 +1,10 @@
 extends RayCast3D
 
-@onready var hit_effect = load("res://concrete_hit_effect.tscn")
-@onready var hit_decal = load("res://concrete_bullet_hole_decal.tscn") # TODO: pick this based on what material we hit
-
 func fire():
 	force_raycast_update()
 	if is_colliding():
-		var hit = hit_effect.instantiate()
-		var decal = hit_decal.instantiate()
+		var hit = get_collider().hit_vfx.instantiate()
+		var decal = get_collider().bullet_hole.instantiate()
 		get_tree().root.add_child(hit)
 		get_tree().root.add_child(decal)
 		hit.global_position = get_collision_point()

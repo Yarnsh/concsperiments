@@ -29,9 +29,8 @@ func iterate(node, scene):
 					
 					nnode.set_surface_override_material(0, new_mat)
 				if !nnode.name.contains("-nc"):
-					print(nnode.name)
 					nnode.create_trimesh_collision()
-					print(2)
+					nnode.get_child(0).set_script(load("res://scripts/environment/collider_material.gd"))
 			return # if we deleted this node no point looking at the children
 		elif node is Light3D:
 			node.light_cull_mask = 0b11111111_11111111_11111111_11111110

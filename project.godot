@@ -15,6 +15,10 @@ run/main_scene="uid://xmfmc3f2t2tq"
 config/features=PackedStringArray("26.1", "Forward Plus", "Redot")
 config/icon="res://icon.svg"
 
+[autoload]
+
+ColliderMaterialDefinitions="*res://collider_material_definitions.gd"
+
 [input]
 
 Jump={
