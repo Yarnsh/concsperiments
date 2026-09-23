@@ -6,7 +6,8 @@ var rotation_amplitude = 1.0
 var clamber_target = 0.0
 
 func trigger_clamber(clamb_amount):
-	clamber_target = max(clamber_target, clamb_amount)
+	# TODO: set a max value for this, and some kind of curve to the values
+	clamber_target = max(clamber_target, clamb_amount * 3.0)
 
 func _process(delta: float) -> void:
 	position = position.move_toward(clamber_target * Vector3.DOWN * 1.5, (position - (clamber_target * Vector3.DOWN * 1.0)).length() * 3.0 * delta)

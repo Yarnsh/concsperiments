@@ -16,8 +16,9 @@ const JUMP_VELOCITY = 1.5
 const FOOT_HEIGHT = 0.3
 var foot_cast_ratio = 0.1
 const CAST_WALKING = -1.75
-const CAST_JUMPING = -1.45
+const CAST_JUMPING = -1.15
 var LANDING_FRICTION = 20.0 # TODO: get this from ground material
+var MAX_FLOOR_ANGLE = 0.3
 
 var walking = false
 var running = false
@@ -36,8 +37,8 @@ func _ready() -> void:
 	foot_cast_ratio = FOOT_HEIGHT / (-jump_recovery_cast.target_position.y)
 
 func on_floor():
-	return (floor_cast_center.is_colliding() and (Vector3.UP.angle_to(floor_cast_center.get_collision_normal())) < floor_max_angle) \
-		or (jump_recovery_cast.is_colliding() and (Vector3.UP.angle_to(jump_recovery_cast.get_collision_normal(0))) < floor_max_angle)
+	return (floor_cast_center.is_colliding() and (Vector3.UP.angle_to(floor_cast_center.get_collision_normal())) < MAX_FLOOR_ANGLE) \
+		or (jump_recovery_cast.is_colliding() and (Vector3.UP.angle_to(jump_recovery_cast.get_collision_normal(0))) < MAX_FLOOR_ANGLE)
 
 func to_floor_fraction():
 	var center = 0.0
@@ -73,7 +74,7 @@ func trigger_clamber(clamb):
 		clamber_strength = clamb
 
 func stick_to_ground(delta):
-	if velocity.y <= 0.0 and on_floor():
+	if on_floor():
 		var largest_fraction = to_floor_fraction()
 		
 		var y_move
@@ -102,7 +103,7 @@ func stick_to_ground(delta):
 func _physics_process(delta: float) -> void:
 	var floor = get_floor_material()
 	if floor != null:
-		floor_max_angle = floor.floor_angle
+		MAX_FLOOR_ANGLE = floor.floor_angle
 	
 	stick_to_ground(delta)
 	

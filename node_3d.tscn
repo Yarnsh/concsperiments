@@ -331,6 +331,8 @@ script = ExtResource("1_r3fl7")
 [node name="CharacterBody3D" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.539818, 1.2751937, -10.783923)
 collision_layer = 2
+floor_stop_on_slope = false
+floor_max_angle = 0.0
 floor_snap_length = 0.0
 script = ExtResource("2_a0tk4")
 
