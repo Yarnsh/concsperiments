@@ -1,0 +1,6 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://cm0hvyp80y8t5"]
+
+[resource]
+resource_name = "shiny"
+cull_mode = 2
+vertex_color_use_as_albedo = true

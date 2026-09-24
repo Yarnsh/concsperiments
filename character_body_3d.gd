@@ -89,21 +89,22 @@ func stick_to_ground(delta):
 		translate_object_local(Vector3.UP * y_move)
 		trigger_clamber(max(1.0 - (largest_fraction + foot_cast_ratio), abs(velocity.y * 0.05)))
 		camera.translate_object_local(Vector3.DOWN * y_move)
-		if !will_walk_shape_collide():
-			if walk_shape.disabled:
-				after_landing_vel.x = (global_position.x - prev_pos.x) / delta
-				after_landing_vel.y = (global_position.z - prev_pos.z) / delta
-			walk_shape.disabled = false
-			jump_shape.disabled = true
-			floor_cast_center.target_position.y = CAST_WALKING
-			jump_recovery_cast.target_position.y = CAST_WALKING
-			foot_cast_ratio = FOOT_HEIGHT / (-jump_recovery_cast.target_position.y)
+		
+		if walk_shape.disabled:
+			after_landing_vel.x = (global_position.x - prev_pos.x) / delta
+			after_landing_vel.y = (global_position.z - prev_pos.z) / delta
+		walk_shape.disabled = false
+		jump_shape.disabled = true
+		floor_cast_center.target_position.y = CAST_WALKING
+		jump_recovery_cast.target_position.y = CAST_WALKING
+		foot_cast_ratio = FOOT_HEIGHT / (-jump_recovery_cast.target_position.y)
 		velocity.y = -0.01
 
 func _physics_process(delta: float) -> void:
-	var floor = get_floor_material()
-	if floor != null:
-		MAX_FLOOR_ANGLE = floor.floor_angle
+	var floor_mat = get_floor_material()
+	if floor_mat != null:
+		MAX_FLOOR_ANGLE = floor_mat.floor_angle
+		LANDING_FRICTION = floor_mat.landing_friction
 	
 	stick_to_ground(delta)
 	

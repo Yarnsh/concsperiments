@@ -3,6 +3,7 @@ extends Node
 var material_name = "unknown"
 
 var floor_angle = 0.0
+var landing_friction = 0.0
 var bullet_hole = null
 var hit_vfx = null
 
@@ -16,6 +17,10 @@ func _ready() -> void:
 		floor_angle = def["floor_angle"]
 	else:
 		floor_angle = ColliderMaterialDefinitions.defaults["floor_angle"]
+	if "landing_friction" in def:
+		landing_friction = def["landing_friction"]
+	else:
+		landing_friction = ColliderMaterialDefinitions.defaults["landing_friction"]
 	if "bullet_hole" in def:
 		bullet_hole = load(def["bullet_hole"])
 	else:
