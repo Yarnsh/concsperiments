@@ -34,6 +34,7 @@ var clamber_strength = 0.0
 var walk_intersect_query = PhysicsShapeQueryParameters3D.new()
 
 func _ready() -> void:
+	Globals.player = self
 	foot_cast_ratio = FOOT_HEIGHT / (-jump_recovery_cast.target_position.y)
 
 func on_floor():
