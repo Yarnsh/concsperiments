@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://ddbkovuohjfcp"
-path="res://.godot/imported/T-Pose.fbx-421413233c2624ece5d7b133e51a3139.scn"
+uid="uid://cr77ly1axphf8"
+path="res://.godot/imported/soldier.fbx-7e645096a30fd331aaeb06dd269b1b10.scn"
 
 [deps]
 
-source_file="res://testing_things/T-Pose.fbx"
-dest_files=["res://.godot/imported/T-Pose.fbx-421413233c2624ece5d7b133e51a3139.scn"]
+source_file="res://testing_things/soldier.fbx"
+dest_files=["res://.godot/imported/soldier.fbx-7e645096a30fd331aaeb06dd269b1b10.scn"]
 
 [params]
 
@@ -33,7 +33,7 @@ animation/fps=30
 animation/trimming=true
 animation/remove_immutable_tracks=true
 animation/import_rest_as_RESET=false
-import_script/path=""
+import_script/path="uid://bdoyfgf0pirim"
 materials/extract=0
 materials/extract_format=0
 materials/extract_path=""

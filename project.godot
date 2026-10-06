@@ -21,8 +21,8 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-ColliderMaterialDefinitions="*res://collider_material_definitions.gd"
-Globals="*res://globals.gd"
+ColliderMaterialDefinitions="*res://scripts/collider_material_definitions.gd"
+Globals="*res://scripts/globals.gd"
 
 [input]
 

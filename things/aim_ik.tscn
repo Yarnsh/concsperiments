@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://c5ijhqgmv8qya"]
+
+[ext_resource type="Script" uid="uid://cogcl358wvxw4" path="res://scripts/aim_ik.gd" id="1_dy2iy"]
+[ext_resource type="Script" uid="uid://3crq6jxhxawv" path="res://scripts/torso_aim.gd" id="1_q6u0f"]
+
+[node name="AimIK" type="GodotIK"]
+iteration_count = 4
+script = ExtResource("1_dy2iy")
+
+[node name="Hips" type="BoneAttachment3D" parent="."]
+transform = Transform3D(1, -8.742818e-05, -3.4958136e-06, 8.742818e-05, 1, -3.0477243e-10, 3.4958136e-06, -8.602008e-13, 1, 2.3841858e-07, 0.96484023, -0.00032043457)
+bone_name = "mixamorig_Hips"
+bone_idx = 0
+use_external_skeleton = true
+external_skeleton = NodePath("../..")
+
+[node name="Node3D" type="Node3D" parent="Hips"]
+transform = Transform3D(1, 0, 0, 0, 1.0000001, 0, 0, 0, 1.0000001, 0, 0, 0)
+script = ExtResource("1_q6u0f")
+
+[node name="Torso" type="GodotIKEffector" parent="Hips/Node3D"]
+bone_name = "mixamorig_Spine2"
+bone_idx = 3
+chain_length = 3
+transform_mode = 3
+transform = Transform3D(0.9999999, -1.4551919e-11, 0, 1.4551913e-11, 0.99999964, -1.1064283e-16, 0, 5.849271e-17, 0.9999997, 0, 0.405, 0)

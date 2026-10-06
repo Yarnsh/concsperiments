@@ -1,6 +1,6 @@
 extends Node
 
-var material_name = "unknown"
+@export var material_name = "unknown"
 
 var floor_angle = 0.0
 var landing_friction = 0.0

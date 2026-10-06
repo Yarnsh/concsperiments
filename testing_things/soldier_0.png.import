@@ -2,23 +2,24 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b5yqsi346qkbc"
-path="res://.godot/imported/T-Pose_3.png-a0a839e6c2ad358191ac880e8cc92877.ctex"
+uid="uid://b658qdsp4n035"
+path.s3tc="res://.godot/imported/soldier_0.png-3960cbe1cb66fc9b81eb867941a1b3e5.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 generator_parameters={
-"md5": "0e67a6b69fbde21c02c789899b82d869"
+"md5": "c459c84392c3168b7b2464630628bd5d"
 }
 
 [deps]
 
-source_file="res://testing_things/T-Pose_3.png"
-dest_files=["res://.godot/imported/T-Pose_3.png-a0a839e6c2ad358191ac880e8cc92877.ctex"]
+source_file="res://testing_things/soldier_0.png"
+dest_files=["res://.godot/imported/soldier_0.png-3960cbe1cb66fc9b81eb867941a1b3e5.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
@@ -40,4 +41,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=1
+detect_3d/compress_to=0

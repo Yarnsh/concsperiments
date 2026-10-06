@@ -1,0 +1,345 @@
+[gd_scene load_steps=19 format=3 uid="uid://dtf5dplkeylf3"]
+
+[ext_resource type="Script" uid="uid://bcc6t1ho4iw47" path="res://scripts/environment/collider_material.gd" id="1_wojs2"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2yde8"]
+size = Vector3(0.38342285, 0.30688477, 0.26971436)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_obt1j"]
+size = Vector3(0.38342285, 0.30688477, 0.26971436)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_id0nj"]
+size = Vector3(0.38342285, 0.30688477, 0.26971436)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1q667"]
+size = Vector3(0.38342285, 0.34204102, 0.26971436)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ype4i"]
+size = Vector3(0.19726563, 0.21813965, 0.23851776)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_riyl1"]
+size = Vector3(0.111328125, 0.33132935, 0.12371826)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_pb8dk"]
+size = Vector3(0.111328125, 0.33132935, 0.09277344)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2mu51"]
+size = Vector3(0.10131836, 0.15460968, 0.07650757)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vmvb8"]
+size = Vector3(0.111328125, 0.33132935, 0.12371826)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4i7mf"]
+size = Vector3(0.111328125, 0.33132935, 0.09277344)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3s0n5"]
+size = Vector3(0.10131836, 0.15460968, 0.07650757)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qpkl4"]
+size = Vector3(0.16653442, 0.5069275, 0.16239929)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_g4s1x"]
+size = Vector3(0.1261673, 0.531662, 0.12971115)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_pf4ct"]
+size = Vector3(0.10449219, 0.1752348, 0.08084679)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5w2ad"]
+size = Vector3(0.16653442, 0.5069275, 0.16239929)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8p5mg"]
+size = Vector3(0.1261673, 0.531662, 0.12971115)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dsgk7"]
+size = Vector3(0.10870361, 0.1752348, 0.08084679)
+
+[node name="Colliders" type="Node3D"]
+
+[node name="Hips" type="BoneAttachment3D" parent="."]
+transform = Transform3D(1, -8.742818e-05, -3.4958136e-06, 8.742818e-05, 1, -3.0477243e-10, 3.4958136e-06, -8.602008e-13, 1, 2.3841858e-07, 0.96484023, -0.00032043457)
+bone_name = "mixamorig_Hips"
+bone_idx = 0
+use_external_skeleton = true
+external_skeleton = NodePath("../../Armature/Skeleton3D")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="Hips"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_wojs2")
+material_name = "person"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hips/RigidBody3D"]
+transform = Transform3D(1, -3.0071018e-18, 0, -3.0071018e-18, 1, 0, 0, 0, 1, 7.1525574e-07, 0, -0.023651123)
+shape = SubResource("BoxShape3D_2yde8")
+
+[node name="Spine" type="BoneAttachment3D" parent="."]
+transform = Transform3D(1, -5.736694e-05, -4.5197094e-06, 5.7478264e-05, 0.99953294, 0.030559234, 2.7645092e-06, -0.030559234, 0.99953294, 2.3841858e-07, 1.0571033, 0.015450478)
+bone_name = "mixamorig_Spine"
+bone_idx = 1
+use_external_skeleton = true
+external_skeleton = NodePath("../../Armature/Skeleton3D")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="Spine"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_wojs2")
+material_name = "person"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Spine/RigidBody3D"]
+transform = Transform3D(1, -3.0071018e-18, 0, -3.0071018e-18, 1, 0, 0, 0, 1, 7.1525574e-07, 0, -0.023651123)
+shape = SubResource("BoxShape3D_obt1j")
+
+[node name="Spine1" type="BoneAttachment3D" parent="."]
+transform = Transform3D(1, -0.00017407195, -4.377627e-06, 0.00017393772, 0.99742544, 0.0717105, -8.11643e-06, -0.0717105, 0.99742544, -9.059906e-06, 1.2195759, 0.010482788)
+bone_name = "mixamorig_Spine1"
+bone_idx = 2
+use_external_skeleton = true
+external_skeleton = NodePath("../../Armature/Skeleton3D")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="Spine1"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_wojs2")
+material_name = "person"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Spine1/RigidBody3D"]
+transform = Transform3D(1, -3.0071018e-18, 0, -3.0071018e-18, 1, 0, 0, 0, 1, 7.1525574e-07, 0, -0.023651123)
+shape = SubResource("BoxShape3D_id0nj")
+
+[node name="Spine2" type="BoneAttachment3D" parent="."]
+transform = Transform3D(0.9999999, -8.742818e-05, -3.4958152e-06, 8.74282e-05, 0.9999997, 2.2351742e-08, 3.4958143e-06, -2.2351742e-08, 0.9999998, -3.2901764e-05, 1.3562299, 0.0006580353)
+bone_name = "mixamorig_Spine2"
+bone_idx = 3
+use_external_skeleton = true
+external_skeleton = NodePath("../../Armature/Skeleton3D")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="Spine2"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_wojs2")
+material_name = "person"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Spine2/RigidBody3D"]
+transform = Transform3D(1, 5.0853564e-11, -2.728484e-12, -1.3104644e-10, 0.9999989, -2.1316282e-14, -4.092726e-12, 8.881784e-15, 0.9999989, 7.1525574e-07, 0.017578125, -0.023651123)
+shape = SubResource("BoxShape3D_1q667")
+
+[node name="Head" type="BoneAttachment3D" parent="."]
+transform = Transform3D(0.9999999, -8.3493294e-05, 2.5934882e-05, 8.74282e-05, 0.9541361, -0.29937172, 2.5012582e-07, 0.29937175, 0.9541362, -5.221367e-05, 1.5761584, 0.04274082)
+bone_name = "mixamorig_Head"
+bone_idx = 6
+use_external_skeleton = true
+external_skeleton = NodePath("../../Armature/Skeleton3D")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="Head"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_wojs2")
+material_name = "person"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Head/RigidBody3D"]
+transform = Transform3D(1, 1.8299176e-09, 9.449366e-10, -2.680899e-09, 1, 2.9802322e-08, -1.5916157e-12, -3.2782555e-07, 1, 4.7683716e-07, 0.06048417, 0.0005235672)
+shape = SubResource("BoxShape3D_ype4i")
+
+[node name="LeftArm" type="BoneAttachment3D" parent="."]
+transform = Transform3D(-2.5939198e-05, 0.99999964, 8.364767e-05, 0.29937172, 8.7581575e-05, -0.9541361, -0.9541362, 1.6577542e-07, -0.2993718, 0.18459105, 1.4595497, -0.025481224)
+bone_name = "mixamorig_LeftArm"
+bone_idx = 16
+use_external_skeleton = true
+external_skeleton = NodePath("../../Armature/Skeleton3D")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="LeftArm"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_wojs2")
+material_name = "person"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LeftArm/RigidBody3D"]
+transform = Transform3D(1, -4.37268e-10, 0, -4.749552e-10, 1, 2.842171e-12, 0, 1.1425918e-09, 1, 2.861023e-06, 0.13020325, -0.0091507435)
+shape = SubResource("BoxShape3D_riyl1")
+
+[node name="LeftForeArm" type="BoneAttachment3D" parent="."]
+transform = Transform3D(-2.5930112e-05, 0.99999976, 8.364847e-05, 0.29937175, 8.757962e-05, -0.9541361, -0.9541363, 1.7468689e-07, -0.2993718, 0.46146083, 1.4595739, -0.025481224)
+bone_name = "mixamorig_LeftForeArm"
+bone_idx = 17
+use_external_skeleton = true
+external_skeleton = NodePath("../../Armature/Skeleton3D")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="LeftForeArm"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_wojs2")
+material_name = "person"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LeftForeArm/RigidBody3D"]
+transform = Transform3D(1, -4.019114e-10, -4.172325e-07, -4.791616e-10, 1, 1.4372858e-10, 5.9604645e-08, 1.2667805e-09, 1, 2.861023e-06, 0.13020325, -0.009150028)
+shape = SubResource("BoxShape3D_pb8dk")
+
+[node name="LeftHand" type="BoneAttachment3D" parent="."]
+transform = Transform3D(-2.5930112e-05, 0.99999976, 8.364847e-05, 0.29937175, 8.757962e-05, -0.9541361, -0.9541363, 1.7468689e-07, -0.2993718, 0.74019885, 1.4595983, -0.025481224)
+bone_name = "mixamorig_LeftHand"
+bone_idx = 18
+use_external_skeleton = true
+external_skeleton = NodePath("../../Armature/Skeleton3D")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="LeftHand"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_wojs2")
+material_name = "person"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LeftHand/RigidBody3D"]
+transform = Transform3D(1, -1.3716317e-10, -4.172325e-07, -4.791616e-10, 1, 1.0313954e-09, 5.9604645e-08, 2.1252475e-09, 1, -9.536743e-07, 0.077625275, 0.014454126)
+shape = SubResource("BoxShape3D_2mu51")
+
+[node name="RightArm" type="BoneAttachment3D" parent="."]
+transform = Transform3D(2.5859259e-05, -1.0000001, 8.3491206e-05, -0.29937193, -8.741021e-05, -0.9541363, 0.9541365, -3.594905e-07, -0.29937202, -0.18467498, 1.4595174, -0.025481224)
+bone_name = "mixamorig_RightArm"
+bone_idx = 45
+use_external_skeleton = true
+external_skeleton = NodePath("../../Armature/Skeleton3D")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="RightArm"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_wojs2")
+material_name = "person"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RightArm/RigidBody3D"]
+transform = Transform3D(1, -4.37268e-10, 0, -4.749552e-10, 1, 2.842171e-12, 0, 1.1425918e-09, 1, 2.861023e-06, 0.13020325, -0.0091507435)
+shape = SubResource("BoxShape3D_vmvb8")
+
+[node name="RightForeArm" type="BoneAttachment3D" parent="."]
+transform = Transform3D(2.584065e-05, -1.0000001, 8.3514686e-05, -0.29937196, -8.742704e-05, -0.9541363, 0.9541366, -3.842787e-07, -0.29937202, -0.461545, 1.459493, -0.025482178)
+bone_name = "mixamorig_RightForeArm"
+bone_idx = 46
+use_external_skeleton = true
+external_skeleton = NodePath("../../Armature/Skeleton3D")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="RightForeArm"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_wojs2")
+material_name = "person"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RightForeArm/RigidBody3D"]
+transform = Transform3D(1, -4.019114e-10, -4.172325e-07, -4.791616e-10, 1, 1.4372858e-10, 5.9604645e-08, 1.2667805e-09, 1, 2.861023e-06, 0.13020325, -0.009150028)
+shape = SubResource("BoxShape3D_4i7mf")
+
+[node name="RightHand" type="BoneAttachment3D" parent="."]
+transform = Transform3D(2.584065e-05, -1.0000001, 8.3514686e-05, -0.29937196, -8.742704e-05, -0.9541363, 0.9541366, -3.842787e-07, -0.29937202, -0.7402828, 1.4594687, -0.025482178)
+bone_name = "mixamorig_RightHand"
+bone_idx = 47
+use_external_skeleton = true
+external_skeleton = NodePath("../../Armature/Skeleton3D")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="RightHand"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_wojs2")
+material_name = "person"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RightHand/RigidBody3D"]
+transform = Transform3D(1, -1.3716317e-10, -4.172325e-07, -4.791616e-10, 1, 1.0313954e-09, 5.9604645e-08, 2.1252475e-09, 1, -9.536743e-07, 0.077625275, 0.014454126)
+shape = SubResource("BoxShape3D_3s0n5")
+
+[node name="LeftLeg" type="BoneAttachment3D" parent="."]
+transform = Transform3D(-0.9999999, -0.00015575919, -2.7753617e-06, 0.00015578224, -0.99991226, -0.013260347, -7.096969e-07, -0.013260351, 0.9999121, 0.09633803, 0.9321071, -0.00032043457)
+bone_name = "mixamorig_LeftUpLeg"
+bone_idx = 73
+use_external_skeleton = true
+external_skeleton = NodePath("../../Armature/Skeleton3D")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="LeftLeg"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_wojs2")
+material_name = "person"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LeftLeg/RigidBody3D"]
+transform = Transform3D(1, -4.986469e-09, -1.09480786e-10, 4.986469e-09, 1, 7.2644646e-08, 1.09480425e-10, -7.2644646e-08, 1, -0.009506464, 0.22465265, -0.0103263855)
+shape = SubResource("BoxShape3D_qpkl4")
+
+[node name="LeftLowerLeg" type="BoneAttachment3D" parent="."]
+transform = Transform3D(-0.9999999, 0.00016531146, 7.828903e-06, -0.00016549538, -0.99866915, -0.051580586, -7.0837905e-07, -0.05158058, 0.99866885, 0.096272945, 0.51448524, -0.005859375)
+bone_name = "mixamorig_LeftLeg"
+bone_idx = 74
+use_external_skeleton = true
+external_skeleton = NodePath("../../Armature/Skeleton3D")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="LeftLowerLeg"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_wojs2")
+material_name = "person"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LeftLowerLeg/RigidBody3D"]
+transform = Transform3D(1, -4.992568e-09, -1.882654e-10, 4.9859388e-09, 1, 7.0780516e-08, 5.4001248e-11, -7.0780516e-08, 1, -0.0011794567, 0.2370199, -0.013175964)
+shape = SubResource("BoxShape3D_g4s1x")
+
+[node name="LeftFoot" type="BoneAttachment3D" parent="."]
+transform = Transform3D(-0.9997262, -0.014206761, 0.01858184, 0.018829789, -0.017522186, 0.9996692, -0.0138764735, 0.99974537, 0.017785072, 0.09450483, 0.001158461, 0.056744576)
+bone_name = "mixamorig_LeftToeBase"
+bone_idx = 76
+use_external_skeleton = true
+external_skeleton = NodePath("../../Armature/Skeleton3D")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="LeftFoot"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_wojs2")
+material_name = "person"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LeftFoot/RigidBody3D"]
+transform = Transform3D(1.0000331, -4.2375177e-07, 1.1877273e-07, 2.7939677e-08, 1.0000331, -4.1127205e-06, -1.9645086e-07, -3.7252903e-09, 1.0000328, -0.009505749, 0.01730442, 0.045554012)
+shape = SubResource("BoxShape3D_pf4ct")
+
+[node name="RightLeg" type="BoneAttachment3D" parent="."]
+transform = Transform3D(-1.0000004, -0.00015578179, -2.777193e-06, 0.00015580491, -0.9999118, -0.013309536, -7.0356487e-07, -0.0133095365, 0.99991167, -0.096337795, 0.9321073, -0.00032043457)
+bone_name = "mixamorig_RightUpLeg"
+bone_idx = 79
+use_external_skeleton = true
+external_skeleton = NodePath("../../Armature/Skeleton3D")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="RightLeg"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_wojs2")
+material_name = "person"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RightLeg/RigidBody3D"]
+transform = Transform3D(1, -4.986469e-09, -1.09480786e-10, 4.986469e-09, 1, 7.2644646e-08, 1.09480425e-10, -7.2644646e-08, 1, -0.009506464, 0.22465265, -0.0103263855)
+shape = SubResource("BoxShape3D_5w2ad")
+
+[node name="RightLowerLeg" type="BoneAttachment3D" parent="."]
+transform = Transform3D(-1.0000002, 0.0001653114, 7.922909e-06, -0.00016550008, -0.99867195, -0.05152969, -6.060591e-07, -0.051529683, 0.9986717, -0.09640288, 0.5144856, -0.005879402)
+bone_name = "mixamorig_RightLeg"
+bone_idx = 80
+use_external_skeleton = true
+external_skeleton = NodePath("../../Armature/Skeleton3D")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="RightLowerLeg"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_wojs2")
+material_name = "person"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RightLowerLeg/RigidBody3D"]
+transform = Transform3D(1, -4.992568e-09, -1.882654e-10, 4.9859388e-09, 1, 7.0780516e-08, 5.4001248e-11, -7.0780516e-08, 1, -0.0011794567, 0.2370199, -0.013175964)
+shape = SubResource("BoxShape3D_8p5mg")
+
+[node name="RightFoot" type="BoneAttachment3D" parent="."]
+transform = Transform3D(-0.9997419, 0.014179089, -0.01774932, -0.017996531, -0.017500907, 0.99968517, 0.013863988, 0.9997463, 0.017751664, -0.098171234, 0.0011575967, 0.056744576)
+bone_name = "mixamorig_RightToeBase"
+bone_idx = 82
+use_external_skeleton = true
+external_skeleton = NodePath("../../Armature/Skeleton3D")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="RightFoot"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_wojs2")
+material_name = "person"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RightFoot/RigidBody3D"]
+transform = Transform3D(1.0000331, -4.2840838e-07, 8.256757e-08, 2.7939677e-08, 1.0000331, -4.1294843e-06, -1.610315e-07, 2.7939677e-08, 1.0000328, 0.009506464, 0.017308235, 0.045554012)
+shape = SubResource("BoxShape3D_dsgk7")
