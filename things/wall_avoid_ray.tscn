@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dab444876sphj"]
+
+[ext_resource type="Script" uid="uid://b6ygv3lkyiuod" path="res://scripts/wall_avoid_ray.gd" id="1_uuw2s"]
+
+[node name="WallAvoidRay" type="RayCast3D"]
+hit_back_faces = false
+script = ExtResource("1_uuw2s")

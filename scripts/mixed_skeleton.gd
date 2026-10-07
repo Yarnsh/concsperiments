@@ -7,7 +7,6 @@ var id_mapping = []
 func _ready() -> void:
 	for bid in range(get_bone_count()):
 		id_mapping.append(mix_skeletons[0].find_bone(get_bone_name(bid)))
-	print(id_mapping)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

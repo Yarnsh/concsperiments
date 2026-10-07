@@ -1,5 +1,7 @@
 extends Node
 
+signal bullet_hit
+
 @export var material_name = "unknown"
 
 var floor_angle = 0.0
@@ -29,3 +31,6 @@ func _ready() -> void:
 		hit_vfx = load(def["hit_vfx"])
 	else:
 		hit_vfx = load(ColliderMaterialDefinitions.defaults["hit_vfx"])
+
+func hit_by_bullet():
+	bullet_hit.emit()

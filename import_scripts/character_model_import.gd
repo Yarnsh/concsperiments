@@ -27,7 +27,6 @@ func _post_import(scene):
 			if mat is BaseMaterial3D and !c.name.contains("-nm"):
 				var new_mat = ShaderMaterial.new()
 				new_mat.shader = load("res://shaders/scenery.gdshader")
-				print(mat.albedo_texture)
 				new_mat.set_shader_parameter("texture_albedo", mat.albedo_texture)
 				
 				c.set_surface_override_material(0, new_mat)

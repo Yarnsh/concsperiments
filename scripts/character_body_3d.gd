@@ -20,6 +20,8 @@ const CAST_JUMPING = -1.15
 var LANDING_FRICTION = 20.0 # TODO: get this from ground material
 var MAX_FLOOR_ANGLE = 0.3
 
+var input = Globals.Inputs.new()
+
 var walking = false
 var running = false
 var creeping = false
@@ -34,7 +36,7 @@ var clamber_strength = 0.0
 var walk_intersect_query = PhysicsShapeQueryParameters3D.new()
 
 func _ready() -> void:
-	Globals.player = self
+	Globals.player = self # TESTING
 	foot_cast_ratio = FOOT_HEIGHT / (-jump_recovery_cast.target_position.y)
 
 func on_floor():
@@ -70,7 +72,8 @@ func will_walk_shape_collide():
 	return result.size() > 0
 
 func trigger_clamber(clamb):
-	gun.trigger_clamber(clamb)
+	if gun != null: # TODO: detach this better
+		gun.trigger_clamber(clamb)
 	if clamb > clamber_strength:
 		clamber_strength = clamb
 
@@ -89,7 +92,8 @@ func stick_to_ground(delta):
 		
 		translate_object_local(Vector3.UP * y_move)
 		trigger_clamber(max(1.0 - (largest_fraction + foot_cast_ratio), abs(velocity.y * 0.05)))
-		camera.translate_object_local(Vector3.DOWN * y_move)
+		if camera != null: # TODO: detach this better
+			camera.translate_object_local(Vector3.DOWN * y_move)
 		
 		if walk_shape.disabled:
 			after_landing_vel.x = (global_position.x - prev_pos.x) / delta
@@ -117,20 +121,22 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity.y = -0.01
 	
-	if Input.is_action_just_pressed("Jump") and on_floor():
+	if input.is_action_just_pressed("Jump") and on_floor():
 		velocity.y = JUMP_VELOCITY
 		try_enter_air_state()
 	
-	input_dir = Input.get_vector("Left", "Right", "Forward", "Back")
-	var direction = (Vector3(input_dir.x, 0, input_dir.y).rotated(Vector3.UP, camera.rotation.y)).normalized()
+	input_dir = input.get_vector("Left", "Right", "Forward", "Back")
+	var direction = Vector3(input_dir.x, 0.0, input_dir.y)
+	if camera != null: # TODO: detach this better
+		direction = (Vector3(input_dir.x, 0, input_dir.y).rotated(Vector3.UP, camera.rotation.y)).normalized()
 	flat_dir.x = direction.x
 	flat_dir.y = direction.z
 	
 	flat_vel.x = velocity.x
 	flat_vel.y = velocity.z
 	
-	running = Input.is_action_pressed("Run")
-	creeping = Input.is_action_pressed("Creep")
+	running = input.is_action_pressed("Run")
+	creeping = input.is_action_pressed("Creep")
 	walking = direction and on_floor()
 	
 	var flat_vel_target = flat_dir
