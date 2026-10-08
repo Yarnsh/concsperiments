@@ -9,5 +9,4 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	target = Globals.player.global_position + (Vector3.UP * 0.1)
 	look_at(target, Vector3.UP, true)

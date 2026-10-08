@@ -17,6 +17,7 @@ warnings/check_invalid_track_paths=false
 config/name="concsperiments"
 run/main_scene="uid://xmfmc3f2t2tq"
 config/features=PackedStringArray("26.1", "Forward Plus", "Redot")
+run/max_fps=60
 config/icon="res://icon.svg"
 
 [autoload]

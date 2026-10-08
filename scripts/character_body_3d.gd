@@ -1,7 +1,8 @@
 extends CharacterBody3D
 
-@onready var camera = $CameraRotator
-@onready var gun = $CameraRotator/Gun
+var camera
+var gun
+var model
 
 @onready var walk_shape = $WalkShape
 @onready var jump_shape = $JumpShape
@@ -21,11 +22,13 @@ var LANDING_FRICTION = 20.0 # TODO: get this from ground material
 var MAX_FLOOR_ANGLE = 0.3
 
 var input = Globals.Inputs.new()
+var look_target = Vector3.ZERO
 
 var walking = false
 var running = false
 var creeping = false
 
+var look_angle = 0.0
 var input_dir = Vector2.ZERO
 var flat_vel = Vector2.ZERO
 var flat_dir = Vector2.ZERO
@@ -36,7 +39,10 @@ var clamber_strength = 0.0
 var walk_intersect_query = PhysicsShapeQueryParameters3D.new()
 
 func _ready() -> void:
-	Globals.player = self # TESTING
+	camera = get_node_or_null("CameraRotator")
+	gun = get_node_or_null("CameraRotator/Gun")
+	model = get_node_or_null("Model")
+	
 	foot_cast_ratio = FOOT_HEIGHT / (-jump_recovery_cast.target_position.y)
 
 func on_floor():
@@ -105,7 +111,19 @@ func stick_to_ground(delta):
 		foot_cast_ratio = FOOT_HEIGHT / (-jump_recovery_cast.target_position.y)
 		velocity.y = -0.01
 
+func flat(vec3 : Vector3) -> Vector2:
+	return Vector2(vec3.x, vec3.z)
+
+func update_look_angle():
+	if camera != null:
+		look_angle = camera.rotation.y
+	else:
+		look_angle = -((flat(-global_transform.basis.z)).angle_to(flat(look_target) - flat(global_position)))
+	if model != null:
+		model.global_rotation.y = look_angle
+
 func _physics_process(delta: float) -> void:
+	update_look_angle()
 	var floor_mat = get_floor_material()
 	if floor_mat != null:
 		MAX_FLOOR_ANGLE = floor_mat.floor_angle
@@ -126,9 +144,7 @@ func _physics_process(delta: float) -> void:
 		try_enter_air_state()
 	
 	input_dir = input.get_vector("Left", "Right", "Forward", "Back")
-	var direction = Vector3(input_dir.x, 0.0, input_dir.y)
-	if camera != null: # TODO: detach this better
-		direction = (Vector3(input_dir.x, 0, input_dir.y).rotated(Vector3.UP, camera.rotation.y)).normalized()
+	var direction = (Vector3(input_dir.x, 0, input_dir.y).rotated(Vector3.UP, look_angle)).normalized()
 	flat_dir.x = direction.x
 	flat_dir.y = direction.z
 	

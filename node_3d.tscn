@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://xmfmc3f2t2tq"]
+[gd_scene load_steps=15 format=3 uid="uid://xmfmc3f2t2tq"]
 
 [ext_resource type="PackedScene" uid="uid://tx5oa36f5n0k" path="res://conc.blend" id="1_noarx"]
 [ext_resource type="Script" uid="uid://c3ylqjlw424qr" path="res://scripts/main.gd" id="1_r3fl7"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dbux6t1psgurc" path="res://things/camera_rotator.tscn" id="5_6iypd"]
 [ext_resource type="PackedScene" uid="uid://qgrir1kg2njo" path="res://things/rain_system.tscn" id="6_tereu"]
 [ext_resource type="PackedScene" uid="uid://dab444876sphj" path="res://things/wall_avoid_ray.tscn" id="7_6iypd"]
+[ext_resource type="Script" uid="uid://crpkedkbqs1gj" path="res://npc.gd" id="9_tereu"]
 [ext_resource type="Texture2D" uid="uid://c1sy7p5vt4kw4" path="res://dramatic-sunset-2089-30k-hdri-panoramas_7932_max-x1920.jpg" id="14_wlxy5"]
 [ext_resource type="PackedScene" uid="uid://cr77ly1axphf8" path="res://testing_things/soldier.fbx" id="24_5t8nk"]
 [ext_resource type="Script" uid="uid://diwn8c5hhtqa0" path="res://testing_things/soldier.gd" id="25_5t8nk"]
@@ -49,11 +50,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_jsnrv")
 
-[node name="Node3D" type="Node3D" parent="."]
+[node name="NPC" type="Node3D" parent="."]
+script = ExtResource("9_tereu")
 
-[node name="CharacterBody3D" parent="Node3D" instance=ExtResource("4_4arys")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.984061, 0.6309917, -14.80026)
+[node name="CharacterBody3D" parent="NPC" instance=ExtResource("4_4arys")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0.631, -15)
 
-[node name="soldier" parent="Node3D/CharacterBody3D" instance=ExtResource("24_5t8nk")]
+[node name="Model" parent="NPC/CharacterBody3D" instance=ExtResource("24_5t8nk")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, -1, 0)
 script = ExtResource("25_5t8nk")
