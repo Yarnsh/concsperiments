@@ -120,7 +120,7 @@ func update_look_angle():
 	else:
 		look_angle = -((flat(-global_transform.basis.z)).angle_to(flat(look_target) - flat(global_position)))
 	if model != null:
-		model.global_rotation.y = look_angle
+		model.global_rotation.y = look_angle + PI
 
 func _physics_process(delta: float) -> void:
 	update_look_angle()

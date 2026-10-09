@@ -1,5 +1,7 @@
 extends Node
 
+var nav = null
+
 class Inputs:
 	var pressed = {}
 	var just_pressed = []
