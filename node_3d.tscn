@@ -52,6 +52,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.539818, 1.2751937, -10.7839
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
 
 [node name="RainSystem" parent="Player/CharacterBody3D" instance=ExtResource("6_tereu")]
+transform = Transform3D(0.5043765, -0.68118066, -0.53065723, 0.6548605, 0.70232123, -0.27910948, 0.56281585, -0.2067302, 0.80031294, 0, 0, 0)
 
 [node name="WallAvoidRay" parent="Player/CharacterBody3D" instance=ExtResource("7_6iypd")]
 
@@ -65,7 +66,7 @@ script = ExtResource("9_tereu")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0.631, -15)
 
 [node name="Model" parent="NPC/CharacterBody3D" instance=ExtResource("24_5t8nk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+transform = Transform3D(5, 0, 0, 0, 1, 0, 0, 0, 5, 0, -0.65238166, 0)
 script = ExtResource("25_5t8nk")
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]

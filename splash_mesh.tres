@@ -1,6 +1,6 @@
 [gd_resource type="ArrayMesh" load_steps=5 format=4 uid="uid://fmjvkqv04duh"]
 
-[ext_resource type="Shader" uid="uid://bcbj0aotp2a4q" path="res://rain.gdshader" id="1_yja1a"]
+[ext_resource type="Shader" uid="uid://bojhnlp05h7ps" path="res://vfx/particle.gdshader" id="1_yja1a"]
 [ext_resource type="Texture2D" uid="uid://b2faqvjtnjamq" path="res://rain_splash.png" id="2_eq0nk"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5ckur"]

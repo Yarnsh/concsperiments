@@ -10,6 +10,7 @@ var offsets = []
 
 @onready var muzzle_flash_anim = $Offset/GunFinal/gun/Flash/AnimationPlayer
 @onready var heat_haze_effect = $Offset/GunFinal/gun/HeatHaze
+@onready var shot_sfx = $ShotSFX
 
 var last_cam_move = Vector2.ZERO
 var cam_move_offset = Vector2.ZERO
@@ -64,5 +65,6 @@ func _process(delta: float) -> void:
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("Fire"):
 		muzzle_flash_anim.play("flash")
+		shot_sfx.play()
 		recoil_offset.shot_fired()
 		gun_heat += 0.05

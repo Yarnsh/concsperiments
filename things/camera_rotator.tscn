@@ -1,7 +1,8 @@
-[gd_scene load_steps=26 format=3 uid="uid://dbux6t1psgurc"]
+[gd_scene load_steps=27 format=3 uid="uid://dbux6t1psgurc"]
 
 [ext_resource type="Script" uid="uid://d1oldice8j1qh" path="res://scripts/camera_3d.gd" id="1_lligi"]
 [ext_resource type="Script" uid="uid://bexex0b4g7wrc" path="res://scripts/gun_offset.gd" id="2_epbjl"]
+[ext_resource type="AudioStream" uid="uid://b6yfnisxhgpjf" path="res://sfx/gunshot.wav" id="3_3og8q"]
 [ext_resource type="Script" uid="uid://b3ynq4xq1au8l" path="res://scripts/walk_offset_animator.gd" id="3_ls0mj"]
 [ext_resource type="Script" uid="uid://b21gevtdjav0v" path="res://scripts/clamber_offset.gd" id="4_3og8q"]
 [ext_resource type="AudioStream" uid="uid://dtw1cpowtcx12" path="res://sfx/concrete_footstep.wav" id="4_epbjl"]
@@ -227,6 +228,10 @@ script = ExtResource("1_lligi")
 
 [node name="Gun" type="Node3D" parent="."]
 script = ExtResource("2_epbjl")
+
+[node name="ShotSFX" type="AudioStreamPlayer" parent="Gun"]
+stream = ExtResource("3_3og8q")
+volume_db = -5.725
 
 [node name="Offset" type="Node3D" parent="Gun"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.082, -0.18241286, -0.581333)

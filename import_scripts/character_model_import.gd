@@ -22,7 +22,7 @@ func _post_import(scene):
 	
 	for c in skeleton.get_children():
 		if c is MeshInstance3D:
-			c.layers = 0b00000000_00000000_00000000_00000010
+			c.layers = 0b00000000_00000000_00000000_00000011
 			var mat = c.get_active_material(0)
 			if mat is BaseMaterial3D and !c.name.contains("-nm"):
 				var new_mat = ShaderMaterial.new()
