@@ -1,6 +1,7 @@
 extends Node3D
 
 @onready var gun_offset = $Gun
+@onready var footstep_player = $Gun/Offset/WalkOffset/FootSteps
 
 var _mouse_position = Vector2(0.0, 0.0)
 var _total_pitch = 0.0
@@ -17,6 +18,10 @@ var up_strength = 7.0
 
 func _ready() -> void:
 	start_position = position
+
+func set_footstep_noise(sfx):
+	if footstep_player.stream != sfx:
+		footstep_player.stream = sfx
 
 func _process(delta: float) -> void:
 	_update_mouselook()

@@ -24,6 +24,7 @@ var MAX_FLOOR_ANGLE = 0.3
 var input = Globals.Inputs.new()
 var look_target = Vector3.ZERO
 
+var floor_mat = null
 var walking = false
 var running = false
 var creeping = false
@@ -124,7 +125,7 @@ func update_look_angle():
 
 func _physics_process(delta: float) -> void:
 	update_look_angle()
-	var floor_mat = get_floor_material()
+	floor_mat = get_floor_material()
 	if floor_mat != null:
 		MAX_FLOOR_ANGLE = floor_mat.floor_angle
 		LANDING_FRICTION = floor_mat.landing_friction

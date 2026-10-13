@@ -2,6 +2,7 @@ extends Node3D
 
 @onready var character = $"../../../.."
 @onready var anim = $AnimationPlayer
+@onready var sfx = $FootSteps
 var transform_amplitude = 0.0
 var rotation_amplitude = 0.0
 var target_amp = 0.0
@@ -37,5 +38,6 @@ func _process(delta: float) -> void:
 	
 	transform_amplitude = move_toward(transform_amplitude, target_amp, 3.0 * delta)
 	rotation_amplitude = transform_amplitude
+	sfx.set_volume_linear(transform_amplitude)
 	speed = move_toward(speed, target_speed, 5.0 * delta)
 	anim.speed_scale = speed

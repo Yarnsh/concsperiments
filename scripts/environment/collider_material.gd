@@ -8,6 +8,7 @@ var floor_angle = 0.0
 var landing_friction = 0.0
 var bullet_hole = null
 var hit_vfx = null
+var footstep_sfx = null
 
 func _ready() -> void:
 	var ml = get_parent().name.rsplit("_", true, 1)
@@ -31,6 +32,10 @@ func _ready() -> void:
 		hit_vfx = load(def["hit_vfx"])
 	else:
 		hit_vfx = load(ColliderMaterialDefinitions.defaults["hit_vfx"])
+	if "footstep_sfx" in def:
+		footstep_sfx = load(def["footstep_sfx"])
+	else:
+		footstep_sfx = load(ColliderMaterialDefinitions.defaults["footstep_sfx"])
 
 func hit_by_bullet():
 	bullet_hit.emit()
