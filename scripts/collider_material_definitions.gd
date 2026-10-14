@@ -5,7 +5,8 @@ const defaults = {
 	"landing_friction": 20.0,
 	"bullet_hole": "res://vfx/concrete_bullet_hole_decal.tscn",
 	"hit_vfx": "res://vfx/concrete_hit_effect.tscn",
-	"footstep_sfx": "res://sfx/concrete_footstep.wav"
+	"footstep_sfx": "res://sfx/concrete_footstep.wav",
+	"slide_sfx": "res://sfx/concrete_slide.wav"
 }
 
 const defs = {

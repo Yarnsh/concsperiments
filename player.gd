@@ -5,5 +5,3 @@ extends Node3D
 
 func _physics_process(delta: float) -> void:
 	body.input.copy_inputs()
-	if body.floor_mat != null:
-		cam.set_footstep_noise(body.floor_mat.footstep_sfx)

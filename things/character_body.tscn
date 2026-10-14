@@ -45,3 +45,17 @@ target_position = Vector3(0, 1, 0)
 [node name="FloorCastCenter" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 target_position = Vector3(0, -1.75, 0)
+
+[node name="SFXFoot" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.943007, 0)
+attenuation_filter_cutoff_hz = 20500.0
+
+[node name="SFXLand" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.943007, 0)
+attenuation_filter_cutoff_hz = 20500.0
+
+[node name="SFXSlide" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.943007, 0)
+volume_db = -80.0
+autoplay = true
+attenuation_filter_cutoff_hz = 20500.0

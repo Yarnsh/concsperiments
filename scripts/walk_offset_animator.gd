@@ -2,7 +2,7 @@ extends Node3D
 
 @onready var character = $"../../../.."
 @onready var anim = $AnimationPlayer
-@onready var sfx = $FootSteps
+@onready var sfx = $"../../../../SFXFoot" # We need this to control footsteps on the player side
 var transform_amplitude = 0.0
 var rotation_amplitude = 0.0
 var target_amp = 0.0
@@ -11,6 +11,9 @@ var target_speed = 1.0
 var was_walking = false
 var walk_stop_time = -1
 const AFTER_WALK_TIME = 500
+
+func foot_step():
+	sfx.play()
 
 func _process(delta: float) -> void:
 	target_amp = 0.0
@@ -38,6 +41,6 @@ func _process(delta: float) -> void:
 	
 	transform_amplitude = move_toward(transform_amplitude, target_amp, 3.0 * delta)
 	rotation_amplitude = transform_amplitude
-	sfx.set_volume_linear(transform_amplitude)
+	sfx.set_volume_linear(transform_amplitude * 0.2)
 	speed = move_toward(speed, target_speed, 5.0 * delta)
 	anim.speed_scale = speed

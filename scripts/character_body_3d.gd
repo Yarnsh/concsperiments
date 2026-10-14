@@ -10,6 +10,11 @@ var model
 @onready var floor_cast_center = $FloorCastCenter
 @onready var ceiling_avoid_cast = $CeilingAvoidCast
 
+@onready var sfx_foot = $SFXFoot
+@onready var sfx_land = $SFXLand
+@onready var sfx_slide = $SFXSlide
+var sfx_slide_target_volume = 0.0
+
 const SPEED = 6.0
 const CREEP_SPEED = 3.0
 const RUN_SPEED = 10.0
@@ -49,6 +54,8 @@ func _ready() -> void:
 func on_floor():
 	return (floor_cast_center.is_colliding() and (Vector3.UP.angle_to(floor_cast_center.get_collision_normal())) < MAX_FLOOR_ANGLE) \
 		or (jump_recovery_cast.is_colliding() and (Vector3.UP.angle_to(jump_recovery_cast.get_collision_normal(0))) < MAX_FLOOR_ANGLE)
+func touching_floor():
+	return floor_cast_center.is_colliding() or jump_recovery_cast.is_colliding()
 
 func to_floor_fraction():
 	var center = 0.0
@@ -85,7 +92,11 @@ func trigger_clamber(clamb):
 		clamber_strength = clamb
 
 func stick_to_ground(delta):
+	print(sfx_slide.volume_linear)
 	if on_floor():
+		sfx_slide_target_volume = 0.0
+		sfx_slide.set_volume_linear(move_toward(sfx_slide.get_volume_linear(), sfx_slide_target_volume, delta * 2.0))
+		
 		var largest_fraction = to_floor_fraction()
 		
 		var y_move
@@ -103,6 +114,8 @@ func stick_to_ground(delta):
 			camera.translate_object_local(Vector3.DOWN * y_move)
 		
 		if walk_shape.disabled:
+			sfx_land.set_volume_linear(clamp(-(global_position.y - prev_pos.y) * 0.02 / delta, 0.0, 1.0))
+			sfx_land.play()
 			after_landing_vel.x = (global_position.x - prev_pos.x) / delta
 			after_landing_vel.y = (global_position.z - prev_pos.z) / delta
 		walk_shape.disabled = false
@@ -111,6 +124,12 @@ func stick_to_ground(delta):
 		jump_recovery_cast.target_position.y = CAST_WALKING
 		foot_cast_ratio = FOOT_HEIGHT / (-jump_recovery_cast.target_position.y)
 		velocity.y = -0.01
+	elif touching_floor():
+		sfx_slide_target_volume = clamp(((global_position - prev_pos) / delta).length() * 0.04, 0.0, 1.0)
+		sfx_slide.set_volume_linear(move_toward(sfx_slide.get_volume_linear(), sfx_slide_target_volume, delta * 1.0))
+	else:
+		sfx_slide_target_volume = 0.0
+		sfx_slide.set_volume_linear(move_toward(sfx_slide.get_volume_linear(), sfx_slide_target_volume, delta * 2.0))
 
 func flat(vec3 : Vector3) -> Vector2:
 	return Vector2(vec3.x, vec3.z)
@@ -123,12 +142,21 @@ func update_look_angle():
 	if model != null:
 		model.global_rotation.y = look_angle + PI
 
+func set_floor_noise(def):
+	if sfx_foot.stream != def.footstep_sfx:
+		sfx_foot.stream = def.footstep_sfx
+		sfx_land.stream = def.footstep_sfx
+	if sfx_slide.stream != def.slide_sfx:
+		sfx_slide.stream = def.slide_sfx
+		sfx_slide.play()
+
 func _physics_process(delta: float) -> void:
 	update_look_angle()
 	floor_mat = get_floor_material()
 	if floor_mat != null:
 		MAX_FLOOR_ANGLE = floor_mat.floor_angle
 		LANDING_FRICTION = floor_mat.landing_friction
+		set_floor_noise(floor_mat)
 	
 	stick_to_ground(delta)
 	
