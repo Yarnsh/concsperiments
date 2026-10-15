@@ -28,6 +28,8 @@ var MAX_FLOOR_ANGLE = 0.3
 
 var input = Globals.Inputs.new()
 var look_target = Vector3.ZERO
+var aim_target = null
+var dead = false
 
 var floor_mat = null
 var walking = false
@@ -92,7 +94,6 @@ func trigger_clamber(clamb):
 		clamber_strength = clamb
 
 func stick_to_ground(delta):
-	print(sfx_slide.volume_linear)
 	if on_floor():
 		sfx_slide_target_volume = 0.0
 		sfx_slide.set_volume_linear(move_toward(sfx_slide.get_volume_linear(), sfx_slide_target_volume, delta * 2.0))
@@ -168,54 +169,58 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity.y = -0.01
 	
-	if input.is_action_just_pressed("Jump") and on_floor():
-		velocity.y = JUMP_VELOCITY
-		try_enter_air_state()
-	
-	input_dir = input.get_vector("Left", "Right", "Forward", "Back")
-	var direction = (Vector3(input_dir.x, 0, input_dir.y).rotated(Vector3.UP, look_angle)).normalized()
-	flat_dir.x = direction.x
-	flat_dir.y = direction.z
-	
-	flat_vel.x = velocity.x
-	flat_vel.y = velocity.z
-	
-	running = input.is_action_pressed("Run")
-	creeping = input.is_action_pressed("Creep")
-	walking = direction and on_floor()
-	
-	var flat_vel_target = flat_dir
-	
-	if on_floor():
-		after_landing_vel = after_landing_vel.move_toward(Vector2.ZERO, LANDING_FRICTION * delta)
+	if !dead:
+		if input.is_action_just_pressed("Jump") and on_floor():
+			velocity.y = JUMP_VELOCITY
+			try_enter_air_state()
 		
-		if direction:
-			if creeping:
-				flat_vel_target = flat_vel_target * CREEP_SPEED
-			elif running:
-				flat_vel_target = flat_vel_target * RUN_SPEED
-			else:
-				flat_vel_target = flat_vel_target * SPEED
-		else:
-			flat_vel_target = flat_vel_target * 0
+		input_dir = input.get_vector("Left", "Right", "Forward", "Back")
+		var direction = (Vector3(input_dir.x, 0, input_dir.y).rotated(Vector3.UP, look_angle)).normalized()
+		flat_dir.x = direction.x
+		flat_dir.y = direction.z
+		
+		flat_vel.x = velocity.x
+		flat_vel.y = velocity.z
+		
+		running = input.is_action_pressed("Run")
+		creeping = input.is_action_pressed("Creep")
+		walking = direction and on_floor()
+		
+		var flat_vel_target = flat_dir
+		
+		if on_floor():
+			after_landing_vel = after_landing_vel.move_toward(Vector2.ZERO, LANDING_FRICTION * delta)
 			
-		flat_vel_target = flat_vel_target.normalized() * max(0.05, flat_vel_target.length() - (clamber_strength * SPEED * 3.0))
-		flat_vel = flat_vel.move_toward(flat_vel_target, (flat_vel - flat_vel_target).length() * 30.0 * delta)
-		if after_landing_vel.length_squared() < 0.001:
-			flat_vel += after_landing_vel
+			if direction:
+				if creeping:
+					flat_vel_target = flat_vel_target * CREEP_SPEED
+				elif running:
+					flat_vel_target = flat_vel_target * RUN_SPEED
+				else:
+					flat_vel_target = flat_vel_target * SPEED
+			else:
+				flat_vel_target = flat_vel_target * 0
+				
+			flat_vel_target = flat_vel_target.normalized() * max(0.05, flat_vel_target.length() - (clamber_strength * SPEED * 3.0))
+			flat_vel = flat_vel.move_toward(flat_vel_target, (flat_vel - flat_vel_target).length() * 30.0 * delta)
+			if after_landing_vel.length_squared() < 0.001:
+				flat_vel += after_landing_vel
+			else:
+				var f = flat_vel.project(after_landing_vel)
+				flat_vel -= f
+				if f.length_squared() < after_landing_vel.length_squared():
+					f = after_landing_vel
+				flat_vel += f
 		else:
-			var f = flat_vel.project(after_landing_vel)
-			flat_vel -= f
-			if f.length_squared() < after_landing_vel.length_squared():
-				f = after_landing_vel
-			flat_vel += f
+			flat_vel += flat_dir * 4.0 * delta
+			if flat_vel.length() > SPEED or not flat_vel:
+				flat_vel = flat_vel.move_toward(Vector2.ZERO, 4.0 * delta)
+		
+		velocity.x = flat_vel.x
+		velocity.z = flat_vel.y
 	else:
-		flat_vel += flat_dir * 4.0 * delta
-		if flat_vel.length() > SPEED or not flat_vel:
-			flat_vel = flat_vel.move_toward(Vector2.ZERO, 4.0 * delta)
-	
-	velocity.x = flat_vel.x
-	velocity.z = flat_vel.y
+		velocity.x = 0.0
+		velocity.z = 0.0
 	
 	prev_pos = global_position
 	move_and_slide()

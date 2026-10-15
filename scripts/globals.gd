@@ -2,6 +2,8 @@ extends Node
 
 var nav = null
 
+var player_body = null
+
 class Inputs:
 	var pressed = {}
 	var just_pressed = []

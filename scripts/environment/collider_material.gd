@@ -26,9 +26,10 @@ func _ready() -> void:
 	else:
 		landing_friction = ColliderMaterialDefinitions.defaults["landing_friction"]
 	if "bullet_hole" in def:
-		bullet_hole = load(def["bullet_hole"])
+		if def["bullet_hole"] != null:
+			bullet_hole = load(def["bullet_hole"])
 	else:
-		bullet_hole = load(ColliderMaterialDefinitions.defaults["bullet_hole"])
+		pass # the default bullet hole is nothing
 	if "hit_vfx" in def:
 		hit_vfx = load(def["hit_vfx"])
 	else:

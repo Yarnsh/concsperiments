@@ -3,7 +3,7 @@ extends Node
 const defaults = {
 	"floor_angle": deg_to_rad(40),
 	"landing_friction": 20.0,
-	"bullet_hole": "res://vfx/concrete_bullet_hole_decal.tscn",
+	"bullet_hole": null,
 	"hit_vfx": "res://vfx/concrete_hit_effect.tscn",
 	"footstep_sfx": "res://sfx/concrete_footstep.wav",
 	"slide_sfx": "res://sfx/concrete_slide.wav"
