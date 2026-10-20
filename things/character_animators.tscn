@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://bkpv5rr1ckasd"]
+[gd_scene load_steps=8 format=3 uid="uid://bkpv5rr1ckasd"]
 
 [ext_resource type="Script" uid="uid://cohn7ifg5si4i" path="res://scripts/character_animators.gd" id="1_wknax"]
 [ext_resource type="Script" uid="uid://culd8ejuemnb8" path="res://scripts/mix_skeleton.gd" id="2_davsa"]
+[ext_resource type="AnimationLibrary" uid="uid://dsejyay6gi6ij" path="res://animations/mixamo_human/combat_walks.fbx" id="3_e2qrb"]
 [ext_resource type="AnimationLibrary" uid="uid://dmldl3bfq355b" path="res://animations/mixamo_human/pistol_guy.fbx" id="3_kp45f"]
 
 [sub_resource type="Animation" id="Animation_7iqf4"]
@@ -851,6 +852,7 @@ script = ExtResource("2_davsa")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="LowerBody"]
 libraries = {
 &"": SubResource("AnimationLibrary_08v14"),
+&"combat_walks": ExtResource("3_e2qrb"),
 &"pistol_guy": ExtResource("3_kp45f")
 }
 
@@ -1461,6 +1463,7 @@ active_bone = &"mixamorig_Spine"
 [node name="AnimationPlayer" type="AnimationPlayer" parent="UpperBody"]
 libraries = {
 &"": SubResource("AnimationLibrary_08v14"),
+&"combat_walks": ExtResource("3_e2qrb"),
 &"pistol_guy": ExtResource("3_kp45f")
 }
 autoplay = "pistol_guy/Armature|walk"

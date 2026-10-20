@@ -14,9 +14,9 @@ func _ready() -> void:
 
 func play_upper_body(anim):
 	upper_target_mix = 1.0
-	upper_animator.play(anim)
+	upper_animator.play(anim, 0.7)
 func play_lower_body(anim):
-	lower_animator.play(anim)
+	lower_animator.play(anim, 0.7)
 
 func stop_upper_body():
 	upper_target_mix = 0.0

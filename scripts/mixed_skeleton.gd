@@ -15,5 +15,6 @@ func _process(delta: float) -> void:
 			continue
 		var t = Transform3D.IDENTITY
 		for s in mix_skeletons:
-			t = t.interpolate_with(s.get_bone_pose(id_mapping[bid]), s.mix)
+			if id_mapping[bid] in s.active_bone_ids:
+				t = t.interpolate_with(s.get_bone_pose(id_mapping[bid]), s.mix)
 		set_bone_pose(bid, t)

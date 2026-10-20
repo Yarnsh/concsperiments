@@ -81,13 +81,23 @@ func move_to_range(dist):
 	else:
 		move_towards_until_range(dist)
 
+func move_to_random():
+	if path_age > path_age_limit:
+		set_path(NavigationServer3D.map_get_random_point(Globals.nav.get_navigation_map(), 1, true))
+	
+	if path == null or path.is_empty(): # Couldn't figure out where to move
+		body.input.set_input("Creep", 0.0)
+		body.input.set_2axis(Vector2.ZERO, "Left", "Right", "Forward", "Back")
+	else:
+		follow_path()
+
 func _physics_process(delta: float) -> void:
 	body.input.tick()
 	path_age += 1
 	
 	if !body.dead:
 		# Test movement
-		move_to_range(5.0)
+		move_to_random()
 		
 		# test combat
 		if Globals.player_body != null:
