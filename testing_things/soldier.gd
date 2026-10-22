@@ -8,7 +8,9 @@ var anims = {
 	"walk_forward": "combat_walks/Armature|walk_forward",
 	"walk_back": "combat_walks/Armature|walk_back",
 	"walk_right": "combat_walks/Armature|walk_right",
-	"walk_left": "combat_walks/Armature|walk_left"
+	"walk_left": "combat_walks/Armature|walk_left",
+	
+	"aim": "combat_walks/Armature|walk_forward"
 }
 
 @onready var character = $".."
@@ -28,10 +30,11 @@ func hit_by_bullet():
 
 func _process(delta: float) -> void:
 	if !character.dead:
-		anim.play_upper_body(anims["walk"])
 		aim_ik.target = character.aim_target
 		
 		if character.aim_target != null:
+			anim.play_upper_body(anims["aim"], 0.3)
+			
 			var lat = character.aim_target
 			lat.y = global_position.y
 			look_at(lat)
@@ -49,6 +52,7 @@ func _process(delta: float) -> void:
 			else:
 				anim.play_lower_body(anims["stand"])
 		else:
+			anim.stop_upper_body()
 			if character.walking:
 				anim.play_lower_body(anims["walk"])
 			else:
