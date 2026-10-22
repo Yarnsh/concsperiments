@@ -8,7 +8,6 @@ var model
 @onready var jump_shape = $JumpShape
 @onready var jump_recovery_cast = $JumpRecoveryCast
 @onready var floor_cast_center = $FloorCastCenter
-@onready var ceiling_avoid_cast = $CeilingAvoidCast
 
 @onready var sfx_foot = $SFXFoot
 @onready var sfx_land = $SFXLand
@@ -105,9 +104,6 @@ func stick_to_ground(delta):
 			y_move = ((1.0 - largest_fraction) * -jump_recovery_cast.target_position.y) - FOOT_HEIGHT
 		else:
 			y_move = ((1.0 - largest_fraction) * -jump_recovery_cast.target_position.y)
-		
-		if ceiling_avoid_cast.is_colliding(): # This avoids us dipping down when under a sloped ceiling
-			y_move -= min(y_move, ceiling_avoid_cast.get_closest_collision_safe_fraction()) # length is one so this is fine
 		
 		translate_object_local(Vector3.UP * y_move)
 		trigger_clamber(max(1.0 - (largest_fraction + foot_cast_ratio), abs(velocity.y * 0.05)))
