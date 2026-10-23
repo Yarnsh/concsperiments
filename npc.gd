@@ -21,6 +21,33 @@ func _stop():
 	body.input.set_input("Creep", 0.0)
 	body.input.set_2axis(Vector2.ZERO, "Left", "Right", "Forward", "Back")
 
+func check_if_visible(b):
+	if (b.global_position - body.global_position).length() < b.loudness:
+		return (b.global_position - body.global_position)
+	
+	if model.global_basis.z.dot(b.global_position - body.global_position) < 0:
+		return false
+	
+	target_visibility_checker.collision_mask = 0b00000000_00000000_00000000_00000001
+	target_visibility_checker.target_position = target_visibility_checker.to_local(b.global_position + (Vector3.UP * target_visibility_checker.position.y))
+	target_visibility_checker.force_raycast_update()
+	if !target_visibility_checker.is_colliding():
+		return (b.global_position - body.global_position)
+	return false
+
+func find_attack_target():
+	var result = null
+	var max_dist =  990.0
+	for b in Globals.actors:
+		if b != body and !b.dead:
+			var r = check_if_visible(b)
+			if r:
+				var l = r.length()
+				if l < max_dist:
+					max_dist = l
+					result = b
+	attack_target = result
+
 func set_path(to):
 	var start = NavigationServer3D.map_get_closest_point(Globals.nav.get_navigation_map(), body.global_position)
 	var end = NavigationServer3D.map_get_closest_point(Globals.nav.get_navigation_map(), to)
@@ -123,6 +150,7 @@ func _update_target_visibility():
 	if attack_target == null:
 		return
 	
+	target_visibility_checker.collision_mask = 0b00000000_00000000_00000000_00000011
 	target_visibility_checker.target_position = target_visibility_checker.to_local(attack_target.global_position + (Vector3.UP * target_visibility_checker.position.y))
 	target_visibility_checker.force_raycast_update()
 	if target_visibility_checker.is_colliding(): # it really should be no matter what
@@ -140,11 +168,12 @@ func _physics_process(delta: float) -> void:
 		if target_visivility_age < 10:
 			_update_target_visibility()
 		
-		# Test movement
-		attack()
-		
 		# test combat
-		if Globals.player_body != null:
-			attack_target = Globals.player_body
-			body.aim_target = attack_target.global_position
+		if attack_target == null:
+			find_attack_target()
+			if attack_target != null:
+				body.aim_target = attack_target.global_position
+				print("FOUND YOU")
+		else:
+			attack()
 	

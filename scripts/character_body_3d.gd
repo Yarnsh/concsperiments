@@ -29,6 +29,7 @@ var input = Globals.Inputs.new()
 var look_target = Vector3.ZERO
 var aim_target = null
 var dead = false
+var loudness = 0.0
 
 var floor_mat = null
 var walking = false
@@ -51,6 +52,8 @@ func _ready() -> void:
 	model = get_node_or_null("Model")
 	
 	foot_cast_ratio = FOOT_HEIGHT / (-jump_recovery_cast.target_position.y)
+	
+	Globals.actors.append(self)
 
 func on_floor():
 	return (floor_cast_center.is_colliding() and (Vector3.UP.angle_to(floor_cast_center.get_collision_normal())) < MAX_FLOOR_ANGLE) \
@@ -148,6 +151,7 @@ func set_floor_noise(def):
 		sfx_slide.play()
 
 func _physics_process(delta: float) -> void:
+	loudness = move_toward(loudness, 0.0, delta * 20.0)
 	update_look_angle()
 	floor_mat = get_floor_material()
 	if floor_mat != null:

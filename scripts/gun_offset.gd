@@ -68,3 +68,4 @@ func _input(event: InputEvent) -> void:
 		shot_sfx.play()
 		recoil_offset.shot_fired()
 		gun_heat += 0.05
+		character.loudness = max(character.loudness, 10.0) # TODO: base loudness off equiped gun
