@@ -29,6 +29,7 @@ var input = Globals.Inputs.new()
 var look_target = Vector3.ZERO
 var aim_target = null
 var dead = false
+var team = null
 var loudness = 0.0
 
 var floor_mat = null
@@ -138,7 +139,7 @@ func update_look_angle():
 	if camera != null:
 		look_angle = camera.rotation.y
 	else:
-		look_angle = -((flat(-global_transform.basis.z)).angle_to(flat(look_target) - flat(global_position)))
+		look_angle = -((flat(Vector3.FORWARD)).angle_to(flat(look_target) - flat(global_position)))
 	if model != null:
 		model.global_rotation.y = look_angle + PI
 

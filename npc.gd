@@ -11,11 +11,15 @@ var path_i = 0
 var path_age = 0
 var path_age_limit = 30
 
+@export var team = "bad"
 var attack_target = null
 var target_visibility_check = false
 var target_visivility_age = 0
 @export var TRIGGER_DELAY = 30
 var trigger_delay = 0
+
+func _ready() -> void:
+	body.team = team
 
 func _stop():
 	body.input.set_input("Creep", 0.0)
@@ -39,7 +43,7 @@ func find_attack_target():
 	var result = null
 	var max_dist =  990.0
 	for b in Globals.actors:
-		if b != body and !b.dead:
+		if b != body and !b.dead and b.team != team:
 			var r = check_if_visible(b)
 			if r:
 				var l = r.length()
@@ -165,14 +169,19 @@ func _physics_process(delta: float) -> void:
 	target_visivility_age += 1
 	
 	if !body.dead:
+		if attack_target != null and attack_target.dead:
+			attack_target = null
+		
 		if target_visivility_age < 10:
 			_update_target_visibility()
+		
+		if attack_target != null:
+			body.aim_target = attack_target.global_position
 		
 		# test combat
 		if attack_target == null:
 			find_attack_target()
 			if attack_target != null:
-				body.aim_target = attack_target.global_position
 				print("FOUND YOU")
 		else:
 			attack()
