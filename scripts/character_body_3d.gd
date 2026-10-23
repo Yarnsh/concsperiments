@@ -176,7 +176,7 @@ func _physics_process(delta: float) -> void:
 			try_enter_air_state()
 		
 		input_dir = input.get_vector("Left", "Right", "Forward", "Back")
-		var direction = (Vector3(input_dir.x, 0, input_dir.y).rotated(Vector3.UP, look_angle)).normalized()
+		var direction = (Vector3(input_dir.x, 0, input_dir.y).rotated(Vector3.UP, look_angle))#.normalized()
 		flat_dir.x = direction.x
 		flat_dir.y = direction.z
 		

@@ -74,6 +74,36 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
 enabled = false
 collision_mask = 3
 
+[node name="NPC3" type="Node3D" parent="."]
+script = ExtResource("9_tereu")
+
+[node name="CharacterBody3D" parent="NPC3" instance=ExtResource("4_4arys")]
+transform = Transform3D(0.10810353, 0, -0.9941397, 0, 1, 0, 0.9941397, 0, 0.10810353, 17.967445, 0.631, -20.99865)
+
+[node name="Model" parent="NPC3/CharacterBody3D" instance=ExtResource("24_5t8nk")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, -1, 0)
+script = ExtResource("25_5t8nk")
+
+[node name="TargetVisibilityChecker" type="RayCast3D" parent="NPC3/CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
+enabled = false
+collision_mask = 3
+
+[node name="NPC2" type="Node3D" parent="."]
+script = ExtResource("9_tereu")
+
+[node name="CharacterBody3D" parent="NPC2" instance=ExtResource("4_4arys")]
+transform = Transform3D(0.10810353, 0, -0.9941397, 0, 1, 0, 0.9941397, 0, 0.10810353, 14.944035, 0.631, -20.99865)
+
+[node name="Model" parent="NPC2/CharacterBody3D" instance=ExtResource("24_5t8nk")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, -1, 0)
+script = ExtResource("25_5t8nk")
+
+[node name="TargetVisibilityChecker" type="RayCast3D" parent="NPC2/CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
+enabled = false
+collision_mask = 3
+
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_tereu")
 script = ExtResource("11_cdqbm")

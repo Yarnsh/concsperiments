@@ -11,6 +11,8 @@ var path_i = 0
 var path_age = 0
 var path_age_limit = 30
 
+var move_input = Vector2.ZERO
+
 @export var team = "bad"
 var attack_target = null
 var target_visibility_check = false
@@ -23,7 +25,7 @@ func _ready() -> void:
 
 func _stop():
 	body.input.set_input("Creep", 0.0)
-	body.input.set_2axis(Vector2.ZERO, "Left", "Right", "Forward", "Back")
+	move_input = Vector2.ZERO
 
 func check_if_visible(b):
 	if (b.global_position - body.global_position).length() < b.loudness:
@@ -80,7 +82,7 @@ func follow_path():
 		
 		body.look_target = path[path_i]
 		body.input.set_input("Creep", 1.0)
-		body.input.set_2axis(Vector2.DOWN, "Left", "Right", "Forward", "Back")
+		move_input = Vector2.DOWN
 		
 
 func move_to_point_range(dist):
@@ -125,7 +127,7 @@ func move_to_random():
 	
 	if path == null or path.is_empty(): # Couldn't figure out where to move
 		body.input.set_input("Creep", 0.0)
-		body.input.set_2axis(Vector2.ZERO, "Left", "Right", "Forward", "Back")
+		move_input = Vector2.ZERO
 	else:
 		follow_path()
 
@@ -159,10 +161,20 @@ func _update_target_visibility():
 	target_visibility_checker.force_raycast_update()
 	if target_visibility_checker.is_colliding(): # it really should be no matter what
 		var b = target_visibility_checker.get_collider()
-		if b is CharacterBody3D: # TODO: check if thing we see is on our team or not, and that its actually a character
+		if b is CharacterBody3D and b.team != team:
 			target_visibility_check = true # TODO: store more info, like if we see the actual target or something valid on the way
 
+func _seperation_input():
+	var inp = Vector2.ZERO
+	for b in Globals.actors:
+		if b != body and !b.dead:
+			var v = Globals.flat(b.global_position - body.global_position)
+			if v.length() < 1.0:
+				inp -= v.normalized() * (1.0 - v.length())
+	return inp.rotated(-body.look_angle)
+
 func _physics_process(delta: float) -> void:
+	move_input = Vector2.ZERO
 	body.input.set_input("Fire", 0.0)
 	body.input.tick()
 	path_age += 1
@@ -185,4 +197,9 @@ func _physics_process(delta: float) -> void:
 				print("FOUND YOU")
 		else:
 			attack()
+		
+		# wall/character avoidance
+		move_input += _seperation_input()
+		
+		body.input.set_2axis(move_input, "Left", "Right", "Forward", "Back")
 	

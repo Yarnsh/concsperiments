@@ -58,3 +58,6 @@ class Inputs:
 		else:
 			set_input(u, abs(value.y))
 			set_input(d, 0.0)
+
+func flat(vec3 : Vector3) -> Vector2:
+	return Vector2(vec3.x, vec3.z)
