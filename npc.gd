@@ -20,15 +20,22 @@ var target_visivility_age = 0
 @export var TRIGGER_DELAY = 30
 var trigger_delay = 0
 
-var brain_timer = 0
-var brain_state = 0
+var current_plan = null
+var target_plan = null
+var plan_delay = 0
 
 func _ready() -> void:
 	body.team = team
+	_set_target_plan(find_attack_target, 0)
 
 func _stop():
 	body.input.set_input("Creep", 0.0)
 	move_input = Vector2.ZERO
+
+func _set_target_plan(plan, delay):
+	if target_plan != plan:
+		target_plan = plan
+		plan_delay = delay
 
 func check_if_visible(b):
 	if (b.global_position - body.global_position).length() < b.loudness:
@@ -55,7 +62,11 @@ func find_attack_target():
 				if l < max_dist:
 					max_dist = l
 					result = b
-	attack_target = result
+	if attack_target == null and result != null:
+		print("FOUND YOU")
+	if result != null:
+		attack_target = result
+		_set_target_plan(fire_at_target, 60)
 
 func set_path(to):
 	var start = NavigationServer3D.map_get_closest_point(Globals.nav.get_navigation_map(), body.global_position)
@@ -136,20 +147,22 @@ func move_to_random():
 
 func fire_at_target():
 	if attack_target == null:
+		_set_target_plan(find_attack_target, 20)
 		return
 	
-	if trigger_delay <= 0 and target_visibility_check:
+	if trigger_delay <= 0:
 		body.input.set_input("Fire", 1.0)
 		trigger_delay = TRIGGER_DELAY
 	else:
 		trigger_delay -= 1
-
-func attack():
+	
 	if !target_visibility_check:
-		move_towards_until_range(1)
-	else:
-		_stop()
-		fire_at_target()
+		_set_target_plan(pursue_target, 60)
+
+func pursue_target():
+	move_towards_until_range(1)
+	if target_visibility_check:
+		_set_target_plan(fire_at_target, 30)
 
 func _update_target_visibility():
 	target_visivility_age = 0
@@ -183,7 +196,6 @@ func _physics_process(delta: float) -> void:
 	target_visivility_age += 1
 	
 	if !body.dead:
-		brain_timer += 1
 		if attack_target != null and attack_target.dead:
 			attack_target = null
 		
@@ -193,22 +205,14 @@ func _physics_process(delta: float) -> void:
 		if attack_target != null:
 			body.aim_target = attack_target.global_position
 		
-		# test combat
-		if attack_target == null:
-			find_attack_target()
-			if attack_target != null:
-				print("FOUND YOU")
+		if current_plan != target_plan and plan_delay <= 0:
+			print("NEW PLAN: ", target_plan.get_method())
+			current_plan = target_plan
 		else:
-			if brain_state == 0:
-				move_to_random()
-				if brain_timer > 120:
-					brain_state = 1
-					brain_timer = 0
-			else:
-				attack()
-				if brain_timer > 300:
-					brain_state = 0
-					brain_timer = 0
+			plan_delay -= 1
+		
+		if current_plan != null:
+			current_plan.call()
 		
 		# wall/character avoidance
 		move_input += _seperation_input()
