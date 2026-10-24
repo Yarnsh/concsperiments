@@ -6,6 +6,8 @@ var actors = []
 var player_body = null
 
 class Inputs:
+	signal action_pressed(action)
+	
 	var pressed = {}
 	var just_pressed = []
 	var just_released = []
@@ -33,6 +35,7 @@ class Inputs:
 				pressed[action] = Input.get_action_strength(action)
 			if Input.is_action_just_pressed(action):
 				just_pressed.append(action)
+				action_pressed.emit(action)
 			if Input.is_action_just_released(action):
 				just_released.append(action)
 	
@@ -43,6 +46,7 @@ class Inputs:
 		else:
 			if action not in pressed:
 				just_pressed.append(action)
+				action_pressed.emit(action)
 			pressed[action] = value
 	
 	func set_2axis(value : Vector2, l, r, u, d):

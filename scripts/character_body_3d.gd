@@ -38,6 +38,7 @@ var running = false
 var creeping = false
 
 var look_angle = 0.0
+var aim_angle = 0.0
 var input_dir = Vector2.ZERO
 var flat_vel = Vector2.ZERO
 var flat_dir = Vector2.ZERO
@@ -53,6 +54,7 @@ func _ready() -> void:
 	model = get_node_or_null("Model")
 	
 	foot_cast_ratio = FOOT_HEIGHT / (-jump_recovery_cast.target_position.y)
+	look_target = global_position - global_basis.z
 	
 	Globals.actors.append(self)
 
@@ -135,13 +137,16 @@ func stick_to_ground(delta):
 func flat(vec3 : Vector3) -> Vector2:
 	return Vector2(vec3.x, vec3.z)
 
-func update_look_angle():
+func update_look_angle(delta):
 	if camera != null:
 		look_angle = camera.rotation.y
+		aim_angle = camera.rotation.y
 	else:
 		look_angle = -((flat(Vector3.FORWARD)).angle_to(flat(look_target) - flat(global_position)))
-	if model != null:
-		model.global_rotation.y = look_angle + PI
+		if aim_target != null:
+			aim_angle = -((flat(Vector3.FORWARD)).angle_to(flat(aim_target) - flat(global_position)))
+		else:
+			aim_angle = look_angle
 
 func set_floor_noise(def):
 	if sfx_foot.stream != def.footstep_sfx:
@@ -153,7 +158,7 @@ func set_floor_noise(def):
 
 func _physics_process(delta: float) -> void:
 	loudness = move_toward(loudness, 0.0, delta * 20.0)
-	update_look_angle()
+	update_look_angle(delta)
 	floor_mat = get_floor_material()
 	if floor_mat != null:
 		MAX_FLOOR_ANGLE = floor_mat.floor_angle
@@ -176,9 +181,11 @@ func _physics_process(delta: float) -> void:
 			try_enter_air_state()
 		
 		input_dir = input.get_vector("Left", "Right", "Forward", "Back")
-		var direction = (Vector3(input_dir.x, 0, input_dir.y).rotated(Vector3.UP, look_angle))#.normalized()
+		var direction = (Vector3(input_dir.x, 0, input_dir.y).rotated(Vector3.UP, look_angle))
 		flat_dir.x = direction.x
 		flat_dir.y = direction.z
+		if flat_dir.length() > 1.0:
+			flat_dir = flat_dir.normalized()
 		
 		flat_vel.x = velocity.x
 		flat_vel.y = velocity.z

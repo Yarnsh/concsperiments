@@ -10,7 +10,7 @@ var anims = {
 	"walk_right": "combat_walks/Armature|walk_right",
 	"walk_left": "combat_walks/Armature|walk_left",
 	
-	"aim": "combat_walks/Armature|walk_forward"
+	"aim": "combat_walks/Armature|aim"
 }
 
 @onready var character = $".."
@@ -31,14 +31,19 @@ func hit_by_bullet():
 func _process(delta: float) -> void:
 	if !character.dead:
 		aim_ik.target = character.aim_target
+		if character.aim_target == null:
+			global_rotation.y = rotate_toward(global_rotation.y, character.look_angle + PI, delta * 5.0)
+		else:
+			global_rotation.y = rotate_toward(global_rotation.y, character.aim_angle + PI, delta * 5.0)
+		#global_rotation.y = character.look_angle + PI
 		
 		if character.aim_target != null:
 			anim.play_upper_body(anims["aim"], 0.3)
 			
-			var lat = character.aim_target
-			lat.y = global_position.y
-			look_at(lat)
-			rotate_y(PI) # TODO: make the model face the right way I guess
+			#lat.y = global_position.y
+			#look_at(lat)
+			#rotate_y(PI) # TODO: make the model face the right way I guess
+			
 			if character.walking:
 				var angle = global_basis.z.signed_angle_to(Vector3(character.flat_dir.x, 0.0, character.flat_dir.y), Vector3.UP)
 				if angle < PI/4 and angle > -PI/4:

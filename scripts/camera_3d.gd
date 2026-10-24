@@ -17,6 +17,7 @@ var up_strength = 7.0
 
 func _ready() -> void:
 	start_position = position
+	get_parent().input.action_pressed.connect(input_pressed)
 
 func _process(delta: float) -> void:
 	_update_mouselook()
@@ -44,6 +45,10 @@ func _update_mouselook():
 
 	rotate_y(deg_to_rad(-yaw))
 	rotate_object_local(Vector3(1,0,0), deg_to_rad(-pitch))
+
+func input_pressed(action):
+	if action == "Fire":
+		gun_offset.fire()
 
 func _input(event):
 	if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:

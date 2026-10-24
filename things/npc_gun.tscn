@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://cwi71j5bb3y2p"]
+
+[ext_resource type="Script" uid="uid://dukhh5t0fi4ui" path="res://npc_gun.gd" id="1_f2674"]
+[ext_resource type="PackedScene" uid="uid://dxop58sak1srn" path="res://gun.blend" id="2_7qaww"]
+[ext_resource type="PackedScene" uid="uid://bjxk1lo2hkrj8" path="res://vfx/muzzleflash.tscn" id="3_1d6h7"]
+[ext_resource type="AudioStream" uid="uid://b6yfnisxhgpjf" path="res://sfx/gunshot.wav" id="4_phaxf"]
+
+[node name="NPCGun" type="BoneAttachment3D"]
+transform = Transform3D(2.6501715e-05, -0.99999946, 8.447096e-05, -0.2993606, -8.847273e-05, -0.95413923, 0.95413905, -1.937151e-07, -0.29936048, 0, 0, 0)
+bone_name = "mixamorig_RightHand"
+bone_idx = 56
+use_external_skeleton = true
+external_skeleton = NodePath("../Armature/Skeleton3D")
+script = ExtResource("1_f2674")
+
+[node name="gun" parent="." instance=ExtResource("2_7qaww")]
+transform = Transform3D(-0.3272833, 0.94152355, 0.080119744, -0.016337665, 0.07913846, -0.9967304, -0.94478554, -0.32752192, -0.010518391, 0.04912567, 0.25862694, 0.015629768)
+
+[node name="Cube" parent="gun" index="0"]
+layers = 3
+
+[node name="Flash" parent="gun" instance=ExtResource("3_1d6h7")]
+
+[node name="SFX" type="AudioStreamPlayer3D" parent="gun"]
+stream = ExtResource("4_phaxf")
+volume_db = -9.335
+attenuation_filter_cutoff_hz = 20500.0
+attenuation_filter_db = 0.0
+
+[editable path="gun"]

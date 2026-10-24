@@ -20,6 +20,9 @@ var target_visivility_age = 0
 @export var TRIGGER_DELAY = 30
 var trigger_delay = 0
 
+var brain_timer = 0
+var brain_state = 0
+
 func _ready() -> void:
 	body.team = team
 
@@ -136,7 +139,6 @@ func fire_at_target():
 		return
 	
 	if trigger_delay <= 0 and target_visibility_check:
-		print("BANG!")
 		body.input.set_input("Fire", 1.0)
 		trigger_delay = TRIGGER_DELAY
 	else:
@@ -181,6 +183,7 @@ func _physics_process(delta: float) -> void:
 	target_visivility_age += 1
 	
 	if !body.dead:
+		brain_timer += 1
 		if attack_target != null and attack_target.dead:
 			attack_target = null
 		
@@ -196,7 +199,16 @@ func _physics_process(delta: float) -> void:
 			if attack_target != null:
 				print("FOUND YOU")
 		else:
-			attack()
+			if brain_state == 0:
+				move_to_random()
+				if brain_timer > 120:
+					brain_state = 1
+					brain_timer = 0
+			else:
+				attack()
+				if brain_timer > 300:
+					brain_state = 0
+					brain_timer = 0
 		
 		# wall/character avoidance
 		move_input += _seperation_input()

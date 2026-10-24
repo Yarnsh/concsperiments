@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://xmfmc3f2t2tq"]
+[gd_scene load_steps=18 format=3 uid="uid://xmfmc3f2t2tq"]
 
 [ext_resource type="PackedScene" uid="uid://tx5oa36f5n0k" path="res://conc.blend" id="1_noarx"]
 [ext_resource type="Script" uid="uid://c3ylqjlw424qr" path="res://scripts/main.gd" id="1_r3fl7"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dab444876sphj" path="res://things/wall_avoid_ray.tscn" id="7_6iypd"]
 [ext_resource type="Script" uid="uid://crpkedkbqs1gj" path="res://npc.gd" id="9_tereu"]
 [ext_resource type="Script" uid="uid://c7lix40bpjj45" path="res://navigation.gd" id="11_cdqbm"]
+[ext_resource type="PackedScene" uid="uid://cwi71j5bb3y2p" path="res://things/npc_gun.tscn" id="11_imku0"]
 [ext_resource type="Texture2D" uid="uid://c1sy7p5vt4kw4" path="res://dramatic-sunset-2089-30k-hdri-panoramas_7932_max-x1920.jpg" id="14_wlxy5"]
 [ext_resource type="PackedScene" uid="uid://cr77ly1axphf8" path="res://testing_things/soldier.fbx" id="24_5t8nk"]
 [ext_resource type="Script" uid="uid://diwn8c5hhtqa0" path="res://testing_things/soldier.gd" id="25_5t8nk"]
@@ -69,37 +70,10 @@ transform = Transform3D(0.10810353, 0, -0.9941397, 0, 1, 0, 0.9941397, 0, 0.1081
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, -1, 0)
 script = ExtResource("25_5t8nk")
 
+[node name="NPCGun" parent="NPC/CharacterBody3D/Model" instance=ExtResource("11_imku0")]
+transform = Transform3D(2.6501715e-05, -0.99999946, 8.447096e-05, -0.2993606, -8.847273e-05, -0.95413923, 0.95413905, -1.937151e-07, -0.29936048, -0.74027634, 1.4594676, -0.02548027)
+
 [node name="TargetVisibilityChecker" type="RayCast3D" parent="NPC/CharacterBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
-enabled = false
-collision_mask = 3
-
-[node name="NPC3" type="Node3D" parent="."]
-script = ExtResource("9_tereu")
-
-[node name="CharacterBody3D" parent="NPC3" instance=ExtResource("4_4arys")]
-transform = Transform3D(0.10810353, 0, -0.9941397, 0, 1, 0, 0.9941397, 0, 0.10810353, 17.967445, 0.631, -20.99865)
-
-[node name="Model" parent="NPC3/CharacterBody3D" instance=ExtResource("24_5t8nk")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, -1, 0)
-script = ExtResource("25_5t8nk")
-
-[node name="TargetVisibilityChecker" type="RayCast3D" parent="NPC3/CharacterBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
-enabled = false
-collision_mask = 3
-
-[node name="NPC2" type="Node3D" parent="."]
-script = ExtResource("9_tereu")
-
-[node name="CharacterBody3D" parent="NPC2" instance=ExtResource("4_4arys")]
-transform = Transform3D(0.10810353, 0, -0.9941397, 0, 1, 0, 0.9941397, 0, 0.10810353, 14.944035, 0.631, -20.99865)
-
-[node name="Model" parent="NPC2/CharacterBody3D" instance=ExtResource("24_5t8nk")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, -1, 0)
-script = ExtResource("25_5t8nk")
-
-[node name="TargetVisibilityChecker" type="RayCast3D" parent="NPC2/CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
 enabled = false
 collision_mask = 3

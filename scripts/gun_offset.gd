@@ -12,6 +12,8 @@ var offsets = []
 @onready var heat_haze_effect = $Offset/GunFinal/gun/HeatHaze
 @onready var shot_sfx = $ShotSFX
 
+@onready var shooter = $Offset/GunFinal/gun/HitRay
+
 var last_cam_move = Vector2.ZERO
 var cam_move_offset = Vector2.ZERO
 var cam_move_sensitivity = 3.0
@@ -62,10 +64,10 @@ func _process(delta: float) -> void:
 	heat_haze_effect.gun_heat = gun_heat
 	gun_heat = move_toward(gun_heat, 0.0, 0.05 * delta)
 
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("Fire"):
-		muzzle_flash_anim.play("flash")
-		shot_sfx.play()
-		recoil_offset.shot_fired()
-		gun_heat += 0.05
-		character.loudness = max(character.loudness, 10.0) # TODO: base loudness off equiped gun
+func fire():
+	muzzle_flash_anim.play("flash")
+	shot_sfx.play()
+	recoil_offset.shot_fired()
+	gun_heat += 0.05
+	character.loudness = max(character.loudness, 10.0) # TODO: base loudness off equiped gun
+	shooter.fire()
