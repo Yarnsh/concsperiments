@@ -22,7 +22,3 @@ func fire():
 				decal.look_at(get_collision_point() + get_collision_normal())
 			
 		get_collider().hit_by_bullet()
-
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("Fire"):
-		fire()

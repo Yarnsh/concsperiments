@@ -11,10 +11,10 @@
 [ext_resource type="PackedScene" uid="uid://cqdvsku2px540" path="res://SnW39-2.blend" id="8_heafs"]
 [ext_resource type="Script" uid="uid://3yudokjb4c68" path="res://scripts/laser_cast.gd" id="9_ujn0g"]
 [ext_resource type="PackedScene" uid="uid://cfu8qxb86xyo8" path="res://laser.blend" id="10_k2i5x"]
-[ext_resource type="Script" uid="uid://cvhw5dl4grdc5" path="res://scripts/hit_ray.gd" id="11_qtpek"]
 [ext_resource type="Shader" uid="uid://dpe8xr3hvnpfr" path="res://heat_haze.gdshader" id="12_kw26h"]
 [ext_resource type="PackedScene" uid="uid://bjxk1lo2hkrj8" path="res://vfx/muzzleflash.tscn" id="12_ls0mj"]
 [ext_resource type="Script" uid="uid://cpl3x6ultkgc1" path="res://scripts/gun_heat_haze.gd" id="13_i3hnp"]
+[ext_resource type="PackedScene" uid="uid://dwywjxx8aamo6" path="res://things/hit_ray.tscn" id="13_ls0mj"]
 
 [sub_resource type="Animation" id="Animation_jsk3o"]
 length = 0.001
@@ -216,10 +216,7 @@ layers = 2
 [node name="Flash" parent="Gun/Offset/GunFinal/gun" instance=ExtResource("12_ls0mj")]
 transform = Transform3D(1.0000002, -5.9604638e-08, 0, 5.9604638e-08, 1.0000002, 0, 0, 0, 1, -0.00533247, -0.0079267025, -0.15646094)
 
-[node name="HitRay" type="RayCast3D" parent="Gun/Offset/GunFinal/gun"]
-target_position = Vector3(0, 0, -500)
-collision_mask = 5
-script = ExtResource("11_qtpek")
+[node name="HitRay" parent="Gun/Offset/GunFinal/gun" instance=ExtResource("13_ls0mj")]
 
 [node name="HeatHaze" type="GPUParticles3D" parent="Gun/Offset/GunFinal/gun"]
 cast_shadow = 0

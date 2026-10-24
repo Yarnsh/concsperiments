@@ -17,10 +17,12 @@ var anims = {
 @onready var colliders = $Colliders
 @onready var anim = $Armature/Skeleton3D/Animators
 @onready var aim_ik = $Armature/Skeleton3D/AimIK
+@onready var gun = $NPCGun
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	colliders.bullet_hit.connect(hit_by_bullet)
+	gun.add_exceptions(colliders.get_all_colliders())
 
 func hit_by_bullet():
 	if !character.dead:

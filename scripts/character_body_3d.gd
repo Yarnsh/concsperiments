@@ -137,7 +137,7 @@ func stick_to_ground(delta):
 func flat(vec3 : Vector3) -> Vector2:
 	return Vector2(vec3.x, vec3.z)
 
-func update_look_angle(delta):
+func update_look_angle():
 	if camera != null:
 		look_angle = camera.rotation.y
 		aim_angle = camera.rotation.y
@@ -158,7 +158,7 @@ func set_floor_noise(def):
 
 func _physics_process(delta: float) -> void:
 	loudness = move_toward(loudness, 0.0, delta * 20.0)
-	update_look_angle(delta)
+	update_look_angle()
 	floor_mat = get_floor_material()
 	if floor_mat != null:
 		MAX_FLOOR_ANGLE = floor_mat.floor_angle

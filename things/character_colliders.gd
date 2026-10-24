@@ -10,3 +10,9 @@ func _ready() -> void:
 
 func hit_by_bullet():
 	bullet_hit.emit()
+
+func get_all_colliders():
+	var result = []
+	for c in get_children():
+		result.append(c.get_child(0))
+	return result
