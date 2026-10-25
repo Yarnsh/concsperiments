@@ -1,5 +1,7 @@
 extends Node3D
 
+signal hit_by_bullet
+
 var anims = {
 	"death": "pistol_guy/Armature|death",
 	"walk": "pistol_guy/Armature|walk",
@@ -17,18 +19,21 @@ var anims = {
 @onready var colliders = $Colliders
 @onready var anim = $Armature/Skeleton3D/Animators
 @onready var aim_ik = $Armature/Skeleton3D/AimIK
-@onready var gun = $NPCGun
+var gun = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	colliders.bullet_hit.connect(hit_by_bullet)
-	gun.add_exceptions(colliders.get_all_colliders())
+	colliders.bullet_hit.connect(got_shot)
+	gun = get_node_or_null("NPCGun")
+	if gun != null:
+		gun.add_exceptions(colliders.get_all_colliders())
 
-func hit_by_bullet():
-	if !character.dead:
-		character.dead = true
-		anim.stop_upper_body()
-		anim.play_lower_body(anims["death"])
+func got_shot():
+	hit_by_bullet.emit()
+
+func die():
+	anim.stop_upper_body()
+	anim.play_lower_body(anims["death"])
 
 func _process(delta: float) -> void:
 	if !character.dead:

@@ -12,7 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://cwi71j5bb3y2p" path="res://things/npc_gun.tscn" id="11_imku0"]
 [ext_resource type="Texture2D" uid="uid://c1sy7p5vt4kw4" path="res://dramatic-sunset-2089-30k-hdri-panoramas_7932_max-x1920.jpg" id="14_wlxy5"]
 [ext_resource type="PackedScene" uid="uid://cr77ly1axphf8" path="res://testing_things/soldier.fbx" id="24_5t8nk"]
-[ext_resource type="Script" uid="uid://diwn8c5hhtqa0" path="res://testing_things/soldier.gd" id="25_5t8nk"]
+[ext_resource type="Script" uid="uid://diwn8c5hhtqa0" path="res://testing_things/model.gd" id="25_5t8nk"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_i0g27"]
 panorama = ExtResource("14_wlxy5")
@@ -56,6 +56,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
 transform = Transform3D(0.5043765, -0.68118066, -0.53065723, 0.6548605, 0.70232123, -0.27910948, 0.56281585, -0.2067302, 0.80031294, 0, 0, 0)
 
 [node name="WallAvoidRay" parent="Player/CharacterBody3D" instance=ExtResource("7_6iypd")]
+
+[node name="Model" parent="Player/CharacterBody3D" instance=ExtResource("24_5t8nk")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, -1, 0)
+script = ExtResource("25_5t8nk")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_jsnrv")
@@ -105,3 +109,5 @@ script = ExtResource("11_cdqbm")
 
 [node name="Node3D" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4260223, 29.91207)
+
+[editable path="Player/CharacterBody3D/Model"]

@@ -29,6 +29,7 @@ var input = Globals.Inputs.new()
 var look_target = Vector3.ZERO
 var aim_target = null
 var dead = false
+var health = 3
 var team = null
 var loudness = 0.0
 
@@ -56,7 +57,19 @@ func _ready() -> void:
 	foot_cast_ratio = FOOT_HEIGHT / (-jump_recovery_cast.target_position.y)
 	look_target = global_position - global_basis.z
 	
+	if model != null:
+		model.hit_by_bullet.connect(got_shot)
+	
 	Globals.actors.append(self)
+
+func got_shot():
+	if health > 0:
+		print("OW")
+		health -= 1
+		if health <= 0:
+			dead = true
+			if model != null:
+				model.die()
 
 func on_floor():
 	return (floor_cast_center.is_colliding() and (Vector3.UP.angle_to(floor_cast_center.get_collision_normal())) < MAX_FLOOR_ANGLE) \
