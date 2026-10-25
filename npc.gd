@@ -23,9 +23,11 @@ var trigger_delay = 0
 var current_plan = null
 var target_plan = null
 var plan_delay = 0
+var new_target_delay = 0
 
 func _ready() -> void:
 	body.team = team
+	body.damage_taken.connect(_damage_taken)
 	_set_target_plan(find_attack_target, 0)
 
 func _stop():
@@ -52,6 +54,8 @@ func check_if_visible(b):
 	return false
 
 func find_attack_target():
+	if new_target_delay > 0:
+		return
 	var result = null
 	var max_dist =  990.0
 	for b in Globals.actors:
@@ -67,6 +71,7 @@ func find_attack_target():
 	if result != null:
 		attack_target = result
 		_set_target_plan(fire_at_target, 60)
+		new_target_delay = 60
 
 func set_path(to):
 	var start = NavigationServer3D.map_get_closest_point(Globals.nav.get_navigation_map(), body.global_position)
@@ -188,12 +193,21 @@ func _seperation_input():
 				inp -= v.normalized() * (1.0 - v.length())
 	return inp.rotated(-body.look_angle)
 
+func _damage_taken(source):
+	if source != null and new_target_delay <= 0 and !source.dead:
+		print("NEW TARGET: ", source)
+		attack_target = source
+		new_target_delay = 300
+		_set_target_plan(fire_at_target, 30)
+
 func _physics_process(delta: float) -> void:
 	move_input = Vector2.ZERO
 	body.input.set_input("Fire", 0.0)
 	body.input.tick()
 	path_age += 1
 	target_visivility_age += 1
+	if new_target_delay > 0:
+		new_target_delay -= 1
 	
 	if !body.dead:
 		if attack_target != null and attack_target.dead:

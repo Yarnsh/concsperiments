@@ -22,6 +22,7 @@ var cam_move_recovery = 0.1
 var gun_heat = 0.0
 
 func _ready() -> void:
+	shooter.source = character
 	for c in offsets_parent.get_children():
 		if "Offset" in c.name:
 			offsets.append(c)

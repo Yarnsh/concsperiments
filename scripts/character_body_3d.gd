@@ -1,5 +1,7 @@
 extends CharacterBody3D
 
+signal damage_taken(source)
+
 var camera
 var gun
 var model
@@ -62,9 +64,10 @@ func _ready() -> void:
 	
 	Globals.actors.append(self)
 
-func got_shot():
+func got_shot(source):
 	if health > 0:
 		print("OW")
+		damage_taken.emit(source)
 		health -= 1
 		if health <= 0:
 			dead = true

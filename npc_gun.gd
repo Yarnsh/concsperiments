@@ -11,6 +11,7 @@ extends BoneAttachment3D
 func _ready() -> void:
 	# TODO: pick the bone ID based on the expected bone name, as our skeleton might have a different bone order
 	character.input.action_pressed.connect(action_pressed)
+	hit_ray.source = character
 
 func add_exceptions(exc):
 	for e in exc:

@@ -1,6 +1,6 @@
 extends Node3D
 
-signal hit_by_bullet
+signal hit_by_bullet(source)
 
 var anims = {
 	"death": "pistol_guy/Armature|death",
@@ -28,8 +28,8 @@ func _ready() -> void:
 	if gun != null:
 		gun.add_exceptions(colliders.get_all_colliders())
 
-func got_shot():
-	hit_by_bullet.emit()
+func got_shot(source):
+	hit_by_bullet.emit(source)
 
 func die():
 	anim.stop_upper_body()

@@ -1,5 +1,7 @@
 extends RayCast3D
 
+var source = null
+
 func fire():
 	force_raycast_update()
 	if is_colliding():
@@ -21,4 +23,4 @@ func fire():
 			else:
 				decal.look_at(get_collision_point() + get_collision_normal())
 			
-		get_collider().hit_by_bullet()
+		get_collider().hit_by_bullet(source)
