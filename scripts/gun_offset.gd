@@ -26,6 +26,10 @@ func _ready() -> void:
 		if "Offset" in c.name:
 			offsets.append(c)
 
+func add_exceptions(exc):
+	for e in exc:
+		shooter.add_exception(e)
+
 func set_camera_movement(cam_move):
 	last_cam_move = cam_move * cam_move_sensitivity
 
