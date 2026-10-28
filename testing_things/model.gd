@@ -19,6 +19,9 @@ var anims = {
 @onready var colliders = $Colliders
 @onready var anim = $Armature/Skeleton3D/Animators
 @onready var aim_ik = $Armature/Skeleton3D/AimIK
+@onready var foot_sfx = $"../SFXFoot"
+@onready var foot_stepper_l = $Armature/Skeleton3D/FootStepperL
+@onready var foot_stepper_r = $Armature/Skeleton3D/FootStepperR
 var gun = null
 
 # Called when the node enters the scene tree for the first time.
@@ -27,6 +30,12 @@ func _ready() -> void:
 	gun = get_node_or_null("NPCGun")
 	if gun != null:
 		gun.add_exceptions(colliders.get_all_colliders())
+
+func disable_model_footsteps():
+	foot_stepper_l.queue_free()
+	foot_stepper_r.queue_free()
+func footstep():
+	foot_sfx.play()
 
 func got_shot(source):
 	hit_by_bullet.emit(source)

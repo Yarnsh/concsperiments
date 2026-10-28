@@ -41,4 +41,16 @@ func _post_import(scene):
 	aim_ik.set_owner(scene)
 	skeleton.set_script(load("res://scripts/mixed_skeleton.gd"))
 	
+	var footsteppers_prefab = load("res://things/foot_stepper.tscn")
+	var lstep = footsteppers_prefab.instantiate()
+	lstep.bone = "mixamorig_LeftFoot"
+	lstep.name = "FootStepperL"
+	var rstep = footsteppers_prefab.instantiate()
+	rstep.bone = "mixamorig_RightFoot"
+	rstep.name = "FootStepperR"
+	skeleton.add_child(lstep)
+	lstep.set_owner(scene)
+	skeleton.add_child(rstep)
+	rstep.set_owner(scene)
+	
 	return scene

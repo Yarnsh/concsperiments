@@ -6,6 +6,7 @@ extends Node3D
 
 func _ready() -> void:
 	model.visible = false
+	model.disable_model_footsteps()
 	Globals.player_body = body
 	cam.gun_offset.add_exceptions(model.colliders.get_all_colliders())
 

@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://4dvuhdxltlrt"]
+[gd_scene load_steps=10 format=3 uid="uid://4dvuhdxltlrt"]
 
 [ext_resource type="Texture2D" uid="uid://dpbvvgtrowaji" path="res://vfx/smoke.png" id="1_7y305"]
 [ext_resource type="Shader" uid="uid://bojhnlp05h7ps" path="res://vfx/particle.gdshader" id="1_lnisd"]
 [ext_resource type="Script" uid="uid://xim1e6ugw1fp" path="res://vfx/concrete_hit_effect.gd" id="1_qxw15"]
+[ext_resource type="AudioStream" uid="uid://b1c51k1alsbrt" path="res://sfx/concrete_shot.wav" id="4_4nnvw"]
 
 [sub_resource type="Curve" id="Curve_7y305"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.4621212, 0), 0.0, 0.0, 0, 0]
@@ -42,5 +43,13 @@ explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_dinsh")
 draw_pass_1 = SubResource("QuadMesh_8a50n")
 script = ExtResource("1_qxw15")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_4nnvw")
+unit_size = 2.0
+max_db = 0.0
+autoplay = true
+attenuation_filter_cutoff_hz = 20500.0
+attenuation_filter_db = 0.0
 
 [connection signal="finished" from="." to="." method="_on_finished"]
