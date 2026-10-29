@@ -17,6 +17,13 @@ const defs = {
 		"hit_vfx": "res://vfx/concrete_hit_effect.tscn",
 		"footstep_sfx": "res://sfx/concrete_footstep.wav"
 	},
+	"hollowmetal": {
+		"floor_angle": deg_to_rad(40),
+		"landing_friction": 20.0,
+		"bullet_hole": "res://vfx/concrete_bullet_hole_decal.tscn",
+		"hit_vfx": "res://vfx/hollow_metal_hit_effect.tscn",
+		"footstep_sfx": "res://sfx/hollow_metal_step.wav"
+	},
 	"wood": {
 		"floor_angle": deg_to_rad(15),
 		"bullet_hole": "res://vfx/wood_bullet_hole_decal.tscn",

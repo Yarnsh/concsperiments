@@ -13,8 +13,10 @@ var slide_sfx = null
 
 func _ready() -> void:
 	var ml = get_parent().name.rsplit("_", true, 1)
+	print(ml)
 	if ml.size() > 1:
 		material_name = ml[1]
+		print(material_name)
 	
 	var def = ColliderMaterialDefinitions.defs.get(material_name, {})
 	if "floor_angle" in def:

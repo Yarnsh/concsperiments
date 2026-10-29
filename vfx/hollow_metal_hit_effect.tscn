@@ -1,0 +1,55 @@
+[gd_scene load_steps=10 format=3 uid="uid://djmr3qc3ydmtc"]
+
+[ext_resource type="Shader" uid="uid://bojhnlp05h7ps" path="res://vfx/particle.gdshader" id="1_bamjw"]
+[ext_resource type="Texture2D" uid="uid://bmvfyu8t8uae6" path="res://flare.png" id="2_bamjw"]
+[ext_resource type="Script" uid="uid://xim1e6ugw1fp" path="res://vfx/concrete_hit_effect.gd" id="3_sxeux"]
+[ext_resource type="AudioStream" uid="uid://bfxwfh6kfmvsy" path="res://sfx/hollow_metal_hit.wav" id="4_qiyhp"]
+
+[sub_resource type="Curve" id="Curve_7y305"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.4621212, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_lnisd"]
+curve = SubResource("Curve_7y305")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_dinsh"]
+direction = Vector3(0, 0, -1)
+spread = 13.889
+initial_velocity_min = 2.0
+initial_velocity_max = 7.0
+gravity = Vector3(0, 0, 0)
+linear_accel_min = -4.0000024
+linear_accel_max = -4.0000024
+color = Color(0, 0, 0, 1)
+alpha_curve = SubResource("CurveTexture_lnisd")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4nnvw"]
+render_priority = 0
+shader = ExtResource("1_bamjw")
+shader_parameter/albedo = Color(1, 0.93733335, 0.53, 1)
+shader_parameter/albedo_tex = ExtResource("2_bamjw")
+
+[sub_resource type="QuadMesh" id="QuadMesh_sxeux"]
+material = SubResource("ShaderMaterial_4nnvw")
+size = Vector2(0.05, 0.05)
+
+[node name="ConcreteHitEffect" type="GPUParticles3D"]
+layers = 2
+cast_shadow = 0
+emitting = false
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_dinsh")
+draw_pass_1 = SubResource("QuadMesh_sxeux")
+script = ExtResource("3_sxeux")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_qiyhp")
+unit_size = 5.0
+max_db = 0.0
+autoplay = true
+attenuation_filter_cutoff_hz = 20500.0
+attenuation_filter_db = 0.0
+
+[connection signal="finished" from="." to="." method="_on_finished"]

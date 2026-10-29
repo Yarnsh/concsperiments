@@ -310,7 +310,7 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, -
 script = ExtResource("25_5t8nk")
 
 [node name="NPCGun" parent="NPC/CharacterBody3D/Model" instance=ExtResource("11_imku0")]
-transform = Transform3D(2.6501715e-05, -0.99999946, 8.447096e-05, -0.2993606, -8.847273e-05, -0.95413923, 0.95413905, -1.937151e-07, -0.29936048, -0.74027634, 1.4594676, -0.02548027)
+transform = Transform3D(2.5987625e-05, -1, 8.3461404e-05, -0.29937187, -8.741242e-05, -0.9541362, 0.9541363, -2.4586916e-07, -0.29937184, -0.74027634, 1.4594688, -0.02548027)
 
 [node name="TargetVisibilityChecker" type="RayCast3D" parent="NPC/CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
@@ -329,7 +329,7 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, -
 script = ExtResource("25_5t8nk")
 
 [node name="NPCGun" parent="NPC2/CharacterBody3D/Model" instance=ExtResource("11_imku0")]
-transform = Transform3D(2.6501715e-05, -0.99999946, 8.447096e-05, -0.2993606, -8.847273e-05, -0.95413923, 0.95413905, -1.937151e-07, -0.29936048, -0.74028015, 1.4594672, -0.025483131)
+transform = Transform3D(2.5987625e-05, -1, 8.3461404e-05, -0.29937187, -8.741242e-05, -0.9541362, 0.9541363, -2.4586916e-07, -0.29937184, -0.74028015, 1.4594684, -0.025483131)
 
 [node name="TargetVisibilityChecker" type="RayCast3D" parent="NPC2/CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)

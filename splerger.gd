@@ -344,6 +344,7 @@ func split_by_surface(orig_mi : MeshInstance3D, attachment_node : Node, use_loca
 	
 	var count = mesh.get_surface_count()
 	if count <= 1:
+		orig_mi.name += "_" + orig_mi.get_active_material(0).resource_name
 		return [orig_mi]
 	
 	var newstuff = []
