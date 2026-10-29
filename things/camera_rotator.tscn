@@ -181,10 +181,10 @@ script = ExtResource("7_tavuc")
 [node name="GunFinal" type="Node3D" parent="Gun/Offset"]
 
 [node name="gun" type="Node3D" parent="Gun/Offset/GunFinal"]
-transform = Transform3D(0.9848077, -0.17364818, 0, 0.17364818, 0.9848077, 0, 0, 0, 1, 0, 0.018097878, -0.24929333)
+transform = Transform3D(0.9848077, -0.17364818, 0, 0.17364818, 0.9848077, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="SnW39-2" parent="Gun/Offset/GunFinal/gun" instance=ExtResource("8_heafs")]
-transform = Transform3D(0.04000001, -3.7252903e-09, 0, 3.7252903e-09, 0.04000001, 0, 0, 0, 0.04, -0.0030546188, -0.04339415, 0.20309639)
+transform = Transform3D(0.040000014, -4.1909516e-09, 0, 4.1909516e-09, 0.040000014, 0, 0, 0, 0.04, 0.0075593106, 0.016800448, 0.0064050555)
 
 [node name="Cube" parent="Gun/Offset/GunFinal/gun/SnW39-2" index="0"]
 layers = 3
@@ -202,6 +202,7 @@ visible = false
 visible = false
 
 [node name="LaserCast" type="RayCast3D" parent="Gun/Offset/GunFinal/gun"]
+transform = Transform3D(1, -1.4901161e-08, 0, 1.4901161e-08, 1, 0, 0, 0, 1, 0.0106139295, 0.06019459, -0.19669133)
 target_position = Vector3(0, 0, -100)
 collision_mask = 5
 hit_back_faces = false
@@ -214,15 +215,20 @@ transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
 layers = 2
 
 [node name="Flash" parent="Gun/Offset/GunFinal/gun" instance=ExtResource("12_ls0mj")]
-transform = Transform3D(1.0000002, -5.9604638e-08, 0, 5.9604638e-08, 1.0000002, 0, 0, 0, 1, -0.00533247, -0.0079267025, -0.15646094)
+transform = Transform3D(1.0000002, -7.450579e-08, 0, 7.450579e-08, 1.0000002, 0, 0, 0, 1, 0.0052814633, 0.05226788, -0.35315222)
 
 [node name="HitRay" parent="Gun/Offset/GunFinal/gun" instance=ExtResource("13_ls0mj")]
+transform = Transform3D(1, -1.4901161e-08, 0, 1.4901161e-08, 1, 0, 0, 0, 1, 0.0106139295, 0.06019459, -0.19669133)
 
 [node name="HeatHaze" type="GPUParticles3D" parent="Gun/Offset/GunFinal/gun"]
+transform = Transform3D(1, -1.4901161e-08, 0, 1.4901161e-08, 1, 0, 0, 0, 1, 0.0106139295, 0.06019459, -0.19669133)
 cast_shadow = 0
 process_material = SubResource("ParticleProcessMaterial_imku0")
 draw_pass_1 = SubResource("QuadMesh_3v7ru")
 script = ExtResource("13_i3hnp")
+
+[node name="Muzzle" type="Node3D" parent="Gun/Offset/GunFinal"]
+transform = Transform3D(0.9848077, -0.17364818, 0, 0.17364818, 0.9848077, 0, 0, 0, 1, 0.00041399896, 0.06099859, -0.19699997)
 
 [editable path="Gun/Offset/GunFinal/gun/SnW39-2"]
 [editable path="Gun/Offset/GunFinal/gun/LaserCast/laser"]
