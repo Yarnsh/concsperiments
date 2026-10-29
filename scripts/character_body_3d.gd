@@ -130,7 +130,7 @@ func stick_to_ground(delta):
 		translate_object_local(Vector3.UP * y_move)
 		trigger_clamber(max(1.0 - (largest_fraction + foot_cast_ratio), abs(velocity.y * 0.05)))
 		if camera != null: # TODO: detach this better
-			camera.translate_object_local(Vector3.DOWN * y_move)
+			camera.global_position.y -= y_move
 		
 		if walk_shape.disabled:
 			sfx_land.set_volume_linear(clamp(-(global_position.y - prev_pos.y) * 0.02 / delta, 0.0, 1.0))

@@ -156,7 +156,7 @@ stream = ExtResource("3_3og8q")
 volume_db = -5.725
 
 [node name="Offset" type="Node3D" parent="Gun"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.082, -0.18241286, -0.581333)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.082, -0.2582976, -0.4973148)
 
 [node name="WalkOffset" type="Node3D" parent="Gun/Offset"]
 script = ExtResource("3_ls0mj")

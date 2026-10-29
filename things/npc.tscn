@@ -1,0 +1,25 @@
+[gd_scene load_steps=6 format=3 uid="uid://dishrhhaajd40"]
+
+[ext_resource type="Script" uid="uid://crpkedkbqs1gj" path="res://npc.gd" id="1_6ijss"]
+[ext_resource type="PackedScene" uid="uid://cy0oslvwdm5gw" path="res://things/character_body.tscn" id="2_w2nqr"]
+[ext_resource type="PackedScene" uid="uid://cr77ly1axphf8" path="res://testing_things/soldier.fbx" id="3_l5c3e"]
+[ext_resource type="Script" uid="uid://diwn8c5hhtqa0" path="res://testing_things/model.gd" id="4_2edei"]
+[ext_resource type="PackedScene" uid="uid://cwi71j5bb3y2p" path="res://things/npc_gun.tscn" id="5_de4kw"]
+
+[node name="NPC" type="Node3D"]
+script = ExtResource("1_6ijss")
+
+[node name="CharacterBody3D" parent="." instance=ExtResource("2_w2nqr")]
+transform = Transform3D(0.10810353, 0, -0.9941397, 0, 1, 0, 0.9941397, 0, 0.10810353, 16.430485, 0.631, -20.99865)
+
+[node name="Model" parent="CharacterBody3D" instance=ExtResource("3_l5c3e")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, -1, 0)
+script = ExtResource("4_2edei")
+
+[node name="NPCGun" parent="CharacterBody3D/Model" instance=ExtResource("5_de4kw")]
+transform = Transform3D(-1.1086691e-07, -0.9999999, 4.1982875e-07, 1.1633168e-05, -4.347314e-07, -0.9999997, 0.99999964, -3.3943851e-07, 1.16905285e-05, -0.7402402, 1.4467785, -0.054996077)
+
+[node name="TargetVisibilityChecker" type="RayCast3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
+enabled = false
+collision_mask = 3
