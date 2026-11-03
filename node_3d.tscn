@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://xmfmc3f2t2tq"]
+[gd_scene load_steps=17 format=3 uid="uid://xmfmc3f2t2tq"]
 
 [ext_resource type="PackedScene" uid="uid://tx5oa36f5n0k" path="res://conc.blend" id="1_noarx"]
 [ext_resource type="Script" uid="uid://c3ylqjlw424qr" path="res://scripts/main.gd" id="1_r3fl7"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://qgrir1kg2njo" path="res://things/rain_system.tscn" id="6_tereu"]
 [ext_resource type="PackedScene" uid="uid://dab444876sphj" path="res://things/wall_avoid_ray.tscn" id="7_6iypd"]
 [ext_resource type="Script" uid="uid://c7lix40bpjj45" path="res://navigation.gd" id="11_cdqbm"]
+[ext_resource type="PackedScene" uid="uid://ejwgl2ufwq7f" path="res://castle.blend" id="12_cdqbm"]
 [ext_resource type="Texture2D" uid="uid://c1sy7p5vt4kw4" path="res://dramatic-sunset-2089-30k-hdri-panoramas_7932_max-x1920.jpg" id="14_wlxy5"]
 [ext_resource type="PackedScene" uid="uid://cr77ly1axphf8" path="res://testing_things/soldier.fbx" id="24_5t8nk"]
 [ext_resource type="Script" uid="uid://diwn8c5hhtqa0" path="res://testing_things/model.gd" id="25_5t8nk"]
@@ -68,5 +69,11 @@ script = ExtResource("11_cdqbm")
 
 [node name="conc" parent="NavigationRegion3D" instance=ExtResource("1_noarx")]
 
+[node name="castle" parent="NavigationRegion3D" instance=ExtResource("12_cdqbm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.30564, 0, -35.811535)
+
 [node name="Node3D" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4260223, 29.91207)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.21943758, 0.9756265, 0, -0.9756265, 0.21943758, 0, 0, 0)
