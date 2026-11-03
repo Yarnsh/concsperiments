@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://xmfmc3f2t2tq"]
+[gd_scene load_steps=41 format=3 uid="uid://xmfmc3f2t2tq"]
 
 [ext_resource type="PackedScene" uid="uid://tx5oa36f5n0k" path="res://conc.blend" id="1_noarx"]
 [ext_resource type="Script" uid="uid://c3ylqjlw424qr" path="res://scripts/main.gd" id="1_r3fl7"]
@@ -9,6 +9,8 @@
 [ext_resource type="PackedScene" uid="uid://dab444876sphj" path="res://things/wall_avoid_ray.tscn" id="7_6iypd"]
 [ext_resource type="Script" uid="uid://c7lix40bpjj45" path="res://navigation.gd" id="11_cdqbm"]
 [ext_resource type="PackedScene" uid="uid://ejwgl2ufwq7f" path="res://castle.blend" id="12_cdqbm"]
+[ext_resource type="Shader" uid="uid://dbfyx8uok54uj" path="res://shaders/point_light_flare.gdshader" id="12_wlxy5"]
+[ext_resource type="Texture2D" uid="uid://ybpei46de0dt" path="res://sprites/bright.png" id="13_3v7ru"]
 [ext_resource type="Texture2D" uid="uid://c1sy7p5vt4kw4" path="res://dramatic-sunset-2089-30k-hdri-panoramas_7932_max-x1920.jpg" id="14_wlxy5"]
 [ext_resource type="PackedScene" uid="uid://cr77ly1axphf8" path="res://testing_things/soldier.fbx" id="24_5t8nk"]
 [ext_resource type="Script" uid="uid://diwn8c5hhtqa0" path="res://testing_things/model.gd" id="25_5t8nk"]
@@ -38,6 +40,149 @@ geometry_collision_mask = 1
 agent_radius = 0.2
 agent_max_climb = 0.3
 agent_max_slope = 46.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_orjue"]
+resource_local_to_scene = true
+render_priority = -1
+shader = ExtResource("12_wlxy5")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/texture_albedo = ExtResource("13_3v7ru")
+shader_parameter/thing_size = 0.35469402313232423
+
+[sub_resource type="QuadMesh" id="QuadMesh_bdspo"]
+resource_local_to_scene = true
+material = SubResource("ShaderMaterial_orjue")
+size = Vector2(0, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wd1xe"]
+resource_local_to_scene = true
+render_priority = -1
+shader = ExtResource("12_wlxy5")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/texture_albedo = ExtResource("13_3v7ru")
+shader_parameter/thing_size = 0.35469402313232423
+
+[sub_resource type="QuadMesh" id="QuadMesh_2byeg"]
+resource_local_to_scene = true
+material = SubResource("ShaderMaterial_wd1xe")
+size = Vector2(0, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rhjbq"]
+resource_local_to_scene = true
+render_priority = -1
+shader = ExtResource("12_wlxy5")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/texture_albedo = ExtResource("13_3v7ru")
+shader_parameter/thing_size = 0.35469402313232423
+
+[sub_resource type="QuadMesh" id="QuadMesh_qo4u2"]
+resource_local_to_scene = true
+material = SubResource("ShaderMaterial_rhjbq")
+size = Vector2(0, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6sn8d"]
+resource_local_to_scene = true
+render_priority = -1
+shader = ExtResource("12_wlxy5")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/texture_albedo = ExtResource("13_3v7ru")
+shader_parameter/thing_size = 0.35469402313232423
+
+[sub_resource type="QuadMesh" id="QuadMesh_nr12o"]
+resource_local_to_scene = true
+material = SubResource("ShaderMaterial_6sn8d")
+size = Vector2(0, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uqxas"]
+resource_local_to_scene = true
+render_priority = -1
+shader = ExtResource("12_wlxy5")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/texture_albedo = ExtResource("13_3v7ru")
+shader_parameter/thing_size = 0.7093880462646485
+
+[sub_resource type="QuadMesh" id="QuadMesh_t84c4"]
+resource_local_to_scene = true
+material = SubResource("ShaderMaterial_uqxas")
+size = Vector2(0, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_03ri4"]
+resource_local_to_scene = true
+render_priority = -1
+shader = ExtResource("12_wlxy5")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/texture_albedo = ExtResource("13_3v7ru")
+shader_parameter/thing_size = 0.7093880462646485
+
+[sub_resource type="QuadMesh" id="QuadMesh_sk0oc"]
+resource_local_to_scene = true
+material = SubResource("ShaderMaterial_03ri4")
+size = Vector2(0, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6csw4"]
+resource_local_to_scene = true
+render_priority = -1
+shader = ExtResource("12_wlxy5")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/texture_albedo = ExtResource("13_3v7ru")
+shader_parameter/thing_size = 0.7093880462646485
+
+[sub_resource type="QuadMesh" id="QuadMesh_h00ic"]
+resource_local_to_scene = true
+material = SubResource("ShaderMaterial_6csw4")
+size = Vector2(0, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qwxaj"]
+resource_local_to_scene = true
+render_priority = -1
+shader = ExtResource("12_wlxy5")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/texture_albedo = ExtResource("13_3v7ru")
+shader_parameter/thing_size = 0.7093880462646485
+
+[sub_resource type="QuadMesh" id="QuadMesh_tbw64"]
+resource_local_to_scene = true
+material = SubResource("ShaderMaterial_qwxaj")
+size = Vector2(0, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gd3aq"]
+resource_local_to_scene = true
+render_priority = -1
+shader = ExtResource("12_wlxy5")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/texture_albedo = ExtResource("13_3v7ru")
+shader_parameter/thing_size = 0.7093880462646485
+
+[sub_resource type="QuadMesh" id="QuadMesh_i75l0"]
+resource_local_to_scene = true
+material = SubResource("ShaderMaterial_gd3aq")
+size = Vector2(0, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7pt5c"]
+resource_local_to_scene = true
+render_priority = -1
+shader = ExtResource("12_wlxy5")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/texture_albedo = ExtResource("13_3v7ru")
+shader_parameter/thing_size = 0.7093880462646485
+
+[sub_resource type="QuadMesh" id="QuadMesh_qqxvk"]
+resource_local_to_scene = true
+material = SubResource("ShaderMaterial_7pt5c")
+size = Vector2(0, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dnqa7"]
+resource_local_to_scene = true
+render_priority = -1
+shader = ExtResource("12_wlxy5")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/texture_albedo = ExtResource("13_3v7ru")
+shader_parameter/thing_size = 0.7093880462646485
+
+[sub_resource type="QuadMesh" id="QuadMesh_bw83v"]
+resource_local_to_scene = true
+material = SubResource("ShaderMaterial_dnqa7")
+size = Vector2(0, 0)
 
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_r3fl7")
@@ -69,11 +214,47 @@ script = ExtResource("11_cdqbm")
 
 [node name="conc" parent="NavigationRegion3D" instance=ExtResource("1_noarx")]
 
-[node name="castle" parent="NavigationRegion3D" instance=ExtResource("12_cdqbm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.30564, 0, -35.811535)
+[node name="LightFlare-nm-nc" parent="NavigationRegion3D/conc/Point" index="0"]
+mesh = SubResource("QuadMesh_bdspo")
+
+[node name="LightFlare-nm-nc" parent="NavigationRegion3D/conc/Point_001" index="0"]
+mesh = SubResource("QuadMesh_2byeg")
+
+[node name="LightFlare-nm-nc" parent="NavigationRegion3D/conc/Point_006" index="0"]
+mesh = SubResource("QuadMesh_qo4u2")
+
+[node name="LightFlare-nm-nc" parent="NavigationRegion3D/conc/Point_007" index="0"]
+mesh = SubResource("QuadMesh_nr12o")
+
+[node name="LightFlare-nm-nc" parent="NavigationRegion3D/conc/Light" index="0"]
+mesh = SubResource("QuadMesh_t84c4")
+
+[node name="LightFlare-nm-nc" parent="NavigationRegion3D/conc/Light_001" index="0"]
+mesh = SubResource("QuadMesh_sk0oc")
+
+[node name="LightFlare-nm-nc" parent="NavigationRegion3D/conc/Light_002" index="0"]
+mesh = SubResource("QuadMesh_h00ic")
+
+[node name="LightFlare-nm-nc" parent="NavigationRegion3D/conc/Light_003" index="0"]
+mesh = SubResource("QuadMesh_tbw64")
+
+[node name="LightFlare-nm-nc" parent="NavigationRegion3D/conc/Light_004" index="0"]
+mesh = SubResource("QuadMesh_i75l0")
+
+[node name="LightFlare-nm-nc" parent="NavigationRegion3D/conc/Light_005" index="0"]
+mesh = SubResource("QuadMesh_qqxvk")
+
+[node name="LightFlare-nm-nc" parent="NavigationRegion3D/conc/Light_006" index="0"]
+mesh = SubResource("QuadMesh_bw83v")
+
+[node name="castle" parent="." instance=ExtResource("12_cdqbm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34.951614, 0, -32.435158)
 
 [node name="Node3D" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4260223, 29.91207)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.21943758, 0.9756265, 0, -0.9756265, 0.21943758, 0, 0, 0)
+visible = false
+
+[editable path="NavigationRegion3D/conc"]
