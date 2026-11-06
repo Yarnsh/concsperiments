@@ -191,7 +191,7 @@ script = ExtResource("1_r3fl7")
 script = ExtResource("3_j3e5s")
 
 [node name="CharacterBody3D" parent="Player" instance=ExtResource("4_4arys")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.539818, 1.2751937, -10.783923)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.539818, 1.2751937, -42.16454)
 
 [node name="CameraRotator" parent="Player/CharacterBody3D" instance=ExtResource("5_6iypd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
