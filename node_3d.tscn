@@ -8,9 +8,9 @@
 [ext_resource type="PackedScene" uid="uid://qgrir1kg2njo" path="res://things/rain_system.tscn" id="6_tereu"]
 [ext_resource type="PackedScene" uid="uid://dab444876sphj" path="res://things/wall_avoid_ray.tscn" id="7_6iypd"]
 [ext_resource type="Script" uid="uid://c7lix40bpjj45" path="res://navigation.gd" id="11_cdqbm"]
-[ext_resource type="PackedScene" uid="uid://ejwgl2ufwq7f" path="res://castle.blend" id="12_cdqbm"]
 [ext_resource type="Shader" uid="uid://dbfyx8uok54uj" path="res://shaders/point_light_flare.gdshader" id="12_wlxy5"]
 [ext_resource type="Texture2D" uid="uid://ybpei46de0dt" path="res://sprites/bright.png" id="13_3v7ru"]
+[ext_resource type="PackedScene" uid="uid://cj4guyu5o73gm" path="res://house.blend" id="14_3v7ru"]
 [ext_resource type="Texture2D" uid="uid://c1sy7p5vt4kw4" path="res://dramatic-sunset-2089-30k-hdri-panoramas_7932_max-x1920.jpg" id="14_wlxy5"]
 [ext_resource type="PackedScene" uid="uid://cr77ly1axphf8" path="res://testing_things/soldier.fbx" id="24_5t8nk"]
 [ext_resource type="Script" uid="uid://diwn8c5hhtqa0" path="res://testing_things/model.gd" id="25_5t8nk"]
@@ -191,7 +191,7 @@ script = ExtResource("1_r3fl7")
 script = ExtResource("3_j3e5s")
 
 [node name="CharacterBody3D" parent="Player" instance=ExtResource("4_4arys")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.539818, 1.2751937, -42.16454)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.734304, 1.2751937, -62.876892)
 
 [node name="CameraRotator" parent="Player/CharacterBody3D" instance=ExtResource("5_6iypd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
@@ -247,14 +247,14 @@ mesh = SubResource("QuadMesh_qqxvk")
 [node name="LightFlare-nm-nc" parent="NavigationRegion3D/conc/Light_006" index="0"]
 mesh = SubResource("QuadMesh_bw83v")
 
-[node name="castle" parent="." instance=ExtResource("12_cdqbm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34.951614, 0, -32.435158)
-
 [node name="Node3D" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4260223, 29.91207)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.21943758, 0.9756265, 0, -0.9756265, 0.21943758, 0, 0, 0)
 visible = false
+
+[node name="house" parent="." instance=ExtResource("14_3v7ru")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8787899, 0, -54.747795)
 
 [editable path="NavigationRegion3D/conc"]

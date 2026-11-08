@@ -10,6 +10,10 @@ func iterate(node, scene):
 		var children = node.get_children()
 		
 		if node is MeshInstance3D:
+			if "-r" in node.name:
+				node.queue_free()
+				return
+			
 			var spl = Splerger.new()
 			var new_meshs = spl.split_by_surface(node, node.get_parent())
 			print(new_meshs)
