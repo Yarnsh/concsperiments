@@ -5,6 +5,8 @@ extends Node
 var path_idx = 0
 var path_dir = 1
 
+var state = "CALM"
+
 func _ready() -> void:
 	npc.damage_taken.connect(damage_reaction)
 	npc.plan_done.connect(plan_done)
@@ -18,6 +20,7 @@ func path_ready():
 func damage_reaction(source):
 	if source in Globals.actors:
 		npc.attack_target = source
+		npc.set_target_plan(npc.fire_at_target, 30)
 
 func plan_done():
 	if npc.current_plan == npc.follow_path and path != null:
@@ -32,3 +35,15 @@ func plan_done():
 				path = null
 		if path != null:
 			npc.set_path(path.points[path_idx])
+
+func _physics_process(delta: float) -> void:
+	npc.speed_input = 0
+	
+	if npc.current_plan == npc.fire_at_target:
+		if !npc.target_visibility_check and npc.target_visibility_change_age > 60:
+			npc.set_target_plan(npc.pursue_target, 0)
+	elif npc.current_plan == npc.pursue_target:
+		if npc.target_visibility_check and npc.target_visibility_change_age > 10:
+			npc.set_target_plan(npc.fire_at_target, 20)
+		elif !npc.target_visibility_check and npc.target_visibility_change_age > 600:
+			npc.set_target_plan(npc.move_to_random, 0)

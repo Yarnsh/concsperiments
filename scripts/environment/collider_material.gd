@@ -4,6 +4,10 @@ signal bullet_hit(source)
 
 @export var material_name = "unknown"
 
+@onready var bone_attachment = $".."
+var skeleton : Skeleton3D
+var body_collider = false
+
 var floor_angle = 0.0
 var landing_friction = 0.0
 var bullet_hole = null
@@ -12,6 +16,9 @@ var footstep_sfx = null
 var slide_sfx = null
 
 func _ready() -> void:
+	if bone_attachment is BoneAttachment3D:
+		body_collider = true
+		skeleton = bone_attachment.get_skeleton()
 	var ml = get_parent().name.rsplit("_", true, 1)
 	print(ml)
 	if ml.size() > 1:
@@ -47,3 +54,9 @@ func _ready() -> void:
 
 func hit_by_bullet(source):
 	bullet_hit.emit(source)
+	
+	if body_collider:
+		bump_bone()
+
+func bump_bone():
+	skeleton.bump_bone(bone_attachment.bone_idx, 0.6)

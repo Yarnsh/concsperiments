@@ -16,22 +16,22 @@ var model
 @onready var sfx_slide = $SFXSlide
 var sfx_slide_target_volume = 0.0
 
-const SPEED = 6.0
-const CREEP_SPEED = 3.0
-const RUN_SPEED = 10.0
+const SPEED = 5.0
+const CREEP_SPEED = 2.0
+const RUN_SPEED = 8.0
 const JUMP_VELOCITY = 1.5
 const FOOT_HEIGHT = 0.3
 var foot_cast_ratio = 0.1
 const CAST_WALKING = -1.75
 const CAST_JUMPING = -1.15
-var LANDING_FRICTION = 20.0 # TODO: get this from ground material
+var LANDING_FRICTION = 20.0
 var MAX_FLOOR_ANGLE = 0.3
 
 var input = Globals.Inputs.new()
 var look_target = Vector3.ZERO
 var aim_target = null
 var dead = false
-var health = 3
+@export var health = 3
 var team = null
 var loudness = 0.0
 

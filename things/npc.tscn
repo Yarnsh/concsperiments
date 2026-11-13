@@ -11,6 +11,7 @@ script = ExtResource("1_6ijss")
 
 [node name="CharacterBody3D" parent="." instance=ExtResource("2_w2nqr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+health = 9999
 
 [node name="Model" parent="CharacterBody3D" instance=ExtResource("3_l5c3e")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, -1, 0)

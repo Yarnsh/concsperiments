@@ -7,7 +7,10 @@ signal plan_done
 @onready var model = $CharacterBody3D/Model
 @onready var target_visibility_checker = $CharacterBody3D/TargetVisibilityChecker
 
-const CLOSE_ENOUGH = 1
+const V_CLOSE_ENOUGH = 1.0
+const H_CLOSE_ENOUGH = 0.1
+func close_enough(point):
+	return abs(body.global_position.y - point.y) <= V_CLOSE_ENOUGH and Globals.flat(point - body.global_position).length() <= H_CLOSE_ENOUGH
 
 var path = null
 var path_i = 0
@@ -15,11 +18,13 @@ var path_age = 0
 var path_age_limit = 30
 
 var move_input = Vector2.ZERO
+var speed_input = 1
 
 @export var team = "bad"
 var attack_target = null
 var target_visibility_check = false
-var target_visivility_age = 0
+var target_visibility_age = 0
+var target_visibility_change_age = 0
 @export var TRIGGER_DELAY = 30
 var trigger_delay = 0
 
@@ -32,7 +37,6 @@ func _ready() -> void:
 	body.damage_taken.connect(_damage_taken)
 
 func stop():
-	body.input.set_input("Creep", 0.0)
 	move_input = Vector2.ZERO
 
 func set_target_plan(plan, delay):
@@ -89,7 +93,7 @@ func set_path(to):
 
 func follow_path():
 	if path != null and len(path) >= 2:
-		while len(path) > path_i and body.global_position.distance_to(path[path_i]) < CLOSE_ENOUGH:
+		while len(path) > path_i and close_enough(path[path_i]):
 			path_i += 1
 		
 		if len(path) <= path_i:
@@ -98,7 +102,6 @@ func follow_path():
 			return
 		
 		body.look_target = path[path_i]
-		body.input.set_input("Creep", 1.0)
 		move_input = Vector2.DOWN
 	elif path != null:
 		path = null
@@ -146,7 +149,6 @@ func move_to_random():
 		set_path(NavigationServer3D.map_get_random_point(Globals.nav.get_navigation_map(), 1, true))
 	
 	if path == null or path.is_empty(): # Couldn't figure out where to move
-		body.input.set_input("Creep", 0.0)
 		move_input = Vector2.ZERO
 	else:
 		follow_path()
@@ -165,19 +167,17 @@ func fire_and_pursue_target():
 	if attack_target == null:
 		return
 	
-	fire_at_target()
-	
-	if !target_visibility_check:
-		set_target_plan(pursue_target, 60)
+	if target_visibility_check:
+		fire_at_target()
+	else:
+		pursue_target()
 
 func pursue_target():
 	move_towards_until_range(1)
-	if target_visibility_check:
-		set_target_plan(fire_and_pursue_target, 30)
 
 func _update_target_visibility():
-	target_visivility_age = 0
-	target_visibility_check = false
+	target_visibility_age = 0
+	var tvc = false
 	
 	if attack_target == null:
 		return
@@ -188,7 +188,11 @@ func _update_target_visibility():
 	if target_visibility_checker.is_colliding(): # it really should be no matter what
 		var b = target_visibility_checker.get_collider()
 		if b is CharacterBody3D and b.team != team:
-			target_visibility_check = true # TODO: store more info, like if we see the actual target or something valid on the way
+			tvc = true # TODO: store more info, like if we see the actual target or something valid on the way
+	
+	if tvc != target_visibility_check:
+		target_visibility_change_age = 0
+		target_visibility_check = tvc
 
 func _seperation_input():
 	var inp = Vector2.ZERO
@@ -207,8 +211,20 @@ func _physics_process(delta: float) -> void:
 	move_input = Vector2.ZERO
 	body.input.set_input("Fire", 0.0)
 	body.input.tick()
+	match speed_input:
+		0:
+			body.input.set_input("Creep", 1.0)
+			body.input.set_input("Run", 0.0)
+		1:
+			body.input.set_input("Creep", 0.0)
+			body.input.set_input("Run", 0.0)
+		2:
+			body.input.set_input("Creep", 0.0)
+			body.input.set_input("Run", 1.0)
+	
 	path_age += 1
-	target_visivility_age += 1
+	target_visibility_age += 1
+	target_visibility_change_age += 1
 	
 	if !body.dead:
 		if attack_target != null and attack_target.dead:
@@ -216,6 +232,9 @@ func _physics_process(delta: float) -> void:
 		
 		if attack_target != null:
 			body.aim_target = attack_target.global_position
+		
+		if target_visibility_age > 10:
+			_update_target_visibility()
 		
 		if current_plan != target_plan and plan_delay <= 0:
 			print("NEW PLAN: ", target_plan.get_method())

@@ -13,3 +13,6 @@ func _process(delta: float) -> void:
 		target_influence = 0.0
 	influence = move_toward(influence, target_influence, delta / blend_time)
 	aimer_node.target = target
+
+func bump(amount):
+	influence = max(0.0, influence - amount)
