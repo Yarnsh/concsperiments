@@ -147,6 +147,7 @@ size = Vector2(0.05, 0.025)
 script = ExtResource("1_lligi")
 
 [node name="Camera3D" type="Camera3D" parent="."]
+cull_mask = 524287
 
 [node name="Gun" type="Node3D" parent="."]
 script = ExtResource("2_epbjl")
@@ -226,6 +227,12 @@ cast_shadow = 0
 process_material = SubResource("ParticleProcessMaterial_imku0")
 draw_pass_1 = SubResource("QuadMesh_3v7ru")
 script = ExtResource("13_i3hnp")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Gun/Offset/GunFinal/gun"]
+transform = Transform3D(1.0000001, -4.4703484e-08, 0, 2.9802322e-08, 1.0000001, 0, 0, 0, 1, -0.0043109395, -0.024448544, -0.18298721)
+layers = 1023
+spot_range = 50.0
+spot_angle = 20.0
 
 [node name="Muzzle" type="Node3D" parent="Gun/Offset/GunFinal"]
 transform = Transform3D(0.9848077, -0.17364818, 0, 0.17364818, 0.9848077, 0, 0, 0, 1, 0.00041399896, 0.06099859, -0.19699997)

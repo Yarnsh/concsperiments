@@ -1,10 +1,13 @@
 extends Node3D
 
+signal damage_taken(source)
+signal plan_done
+
 @onready var body = $CharacterBody3D
 @onready var model = $CharacterBody3D/Model
 @onready var target_visibility_checker = $CharacterBody3D/TargetVisibilityChecker
 
-const CLOSE_ENOUGH = 2
+const CLOSE_ENOUGH = 1
 
 var path = null
 var path_i = 0
@@ -23,18 +26,16 @@ var trigger_delay = 0
 var current_plan = null
 var target_plan = null
 var plan_delay = 0
-var new_target_delay = 0
 
 func _ready() -> void:
 	body.team = team
 	body.damage_taken.connect(_damage_taken)
-	_set_target_plan(find_attack_target, 0)
 
-func _stop():
+func stop():
 	body.input.set_input("Creep", 0.0)
 	move_input = Vector2.ZERO
 
-func _set_target_plan(plan, delay):
+func set_target_plan(plan, delay):
 	if target_plan != plan:
 		target_plan = plan
 		plan_delay = delay
@@ -54,8 +55,6 @@ func check_if_visible(b):
 	return false
 
 func find_attack_target():
-	if new_target_delay > 0:
-		return
 	var result = null
 	var max_dist =  990.0
 	for b in Globals.actors:
@@ -70,8 +69,6 @@ func find_attack_target():
 		print("FOUND YOU")
 	if result != null:
 		attack_target = result
-		_set_target_plan(fire_at_target, 60)
-		new_target_delay = 60
 
 func set_path(to):
 	var start = NavigationServer3D.map_get_closest_point(Globals.nav.get_navigation_map(), body.global_position)
@@ -91,18 +88,22 @@ func set_path(to):
 	path_age = 0
 
 func follow_path():
-	if len(path) >= 2:
+	if path != null and len(path) >= 2:
 		while len(path) > path_i and body.global_position.distance_to(path[path_i]) < CLOSE_ENOUGH:
 			path_i += 1
 		
 		if len(path) <= path_i:
 			path = null
+			plan_done.emit()
 			return
 		
 		body.look_target = path[path_i]
 		body.input.set_input("Creep", 1.0)
 		move_input = Vector2.DOWN
-		
+	elif path != null:
+		path = null
+		plan_done.emit()
+		return
 
 func move_to_point_range(dist):
 	if attack_target == null:
@@ -112,7 +113,7 @@ func move_to_point_range(dist):
 		set_path(attack_target.global_position + ((body.global_position - attack_target.global_position).normalized() * dist))
 	
 	if path == null or path.is_empty(): # Couldn't figure out where to move
-		_stop()
+		stop()
 	else:
 		follow_path()
 
@@ -127,7 +128,7 @@ func move_towards_until_range(dist):
 		path = null
 	
 	if path == null or path.is_empty(): # Couldn't figure out where to move
-		_stop()
+		stop()
 	else:
 		follow_path()
 
@@ -152,7 +153,6 @@ func move_to_random():
 
 func fire_at_target():
 	if attack_target == null:
-		_set_target_plan(find_attack_target, 20)
 		return
 	
 	if trigger_delay <= 0:
@@ -160,14 +160,20 @@ func fire_at_target():
 		trigger_delay = TRIGGER_DELAY
 	else:
 		trigger_delay -= 1
+
+func fire_and_pursue_target():
+	if attack_target == null:
+		return
+	
+	fire_at_target()
 	
 	if !target_visibility_check:
-		_set_target_plan(pursue_target, 60)
+		set_target_plan(pursue_target, 60)
 
 func pursue_target():
 	move_towards_until_range(1)
 	if target_visibility_check:
-		_set_target_plan(fire_at_target, 30)
+		set_target_plan(fire_and_pursue_target, 30)
 
 func _update_target_visibility():
 	target_visivility_age = 0
@@ -194,11 +200,8 @@ func _seperation_input():
 	return inp.rotated(-body.look_angle)
 
 func _damage_taken(source):
-	if source != null and new_target_delay <= 0 and !source.dead:
-		print("NEW TARGET: ", source)
-		attack_target = source
-		new_target_delay = 300
-		_set_target_plan(fire_at_target, 30)
+	if source != null and !source.dead:
+		damage_taken.emit(source)
 
 func _physics_process(delta: float) -> void:
 	move_input = Vector2.ZERO
@@ -206,15 +209,10 @@ func _physics_process(delta: float) -> void:
 	body.input.tick()
 	path_age += 1
 	target_visivility_age += 1
-	if new_target_delay > 0:
-		new_target_delay -= 1
 	
 	if !body.dead:
 		if attack_target != null and attack_target.dead:
 			attack_target = null
-		
-		if target_visivility_age < 10:
-			_update_target_visibility()
 		
 		if attack_target != null:
 			body.aim_target = attack_target.global_position

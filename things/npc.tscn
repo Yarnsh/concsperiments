@@ -10,14 +10,14 @@
 script = ExtResource("1_6ijss")
 
 [node name="CharacterBody3D" parent="." instance=ExtResource("2_w2nqr")]
-transform = Transform3D(0.10810353, 0, -0.9941397, 0, 1, 0, 0.9941397, 0, 0.10810353, 16.430485, 0.631, -20.99865)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
 [node name="Model" parent="CharacterBody3D" instance=ExtResource("3_l5c3e")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, -1, 0)
 script = ExtResource("4_2edei")
 
 [node name="NPCGun" parent="CharacterBody3D/Model" instance=ExtResource("5_de4kw")]
-transform = Transform3D(-1.1086691e-07, -0.9999999, 4.1982875e-07, 1.1633168e-05, -4.347314e-07, -0.9999997, 0.99999964, -3.3943851e-07, 1.16905285e-05, -0.7402402, 1.4467785, -0.054996077)
+transform = Transform3D(2.6501633e-05, -0.9999996, 8.447014e-05, -0.29936057, -8.847273e-05, -0.9541391, 0.95413923, -1.8759826e-07, -0.29936054, -0.7402824, 1.4594674, -0.025482344)
 
 [node name="TargetVisibilityChecker" type="RayCast3D" parent="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)

@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://bi6g63ayemybb"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_wlxy5"]
+top_radius = 0.2
+bottom_radius = 0.01
+height = 0.5
+radial_segments = 4
+
+[node name="PathPoint" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+layers = 524288
+mesh = SubResource("CylinderMesh_wlxy5")

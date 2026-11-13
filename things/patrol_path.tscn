@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://bsohmxrsqtm6n"]
+
+[ext_resource type="Script" uid="uid://16oa8b6y3i60" path="res://patrol_path.gd" id="1_vfpot"]
+[ext_resource type="PackedScene" uid="uid://bi6g63ayemybb" path="res://things/path_point.tscn" id="2_eavva"]
+
+[node name="PatrolPath" type="Node3D"]
+script = ExtResource("1_vfpot")
+
+[node name="PathPoint" parent="." instance=ExtResource("2_eavva")]
