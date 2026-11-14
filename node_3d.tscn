@@ -65,12 +65,6 @@ transform = Transform3D(0.5043765, -0.68118066, -0.53065723, 0.6548605, 0.702321
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, -1, 0)
 script = ExtResource("25_5t8nk")
 
-[node name="FootStepperL" parent="Player/CharacterBody3D/Model/Armature/Skeleton3D" index="4"]
-transform = Transform3D(-0.99988693, -0.012440485, 0.008453621, 0.015040925, -0.826988, 0.5620178, -7.317285e-07, 0.5620817, 0.8270816, 0.09633773, 0.12302503, -0.026114296)
-
-[node name="FootStepperR" parent="Player/CharacterBody3D/Model/Armature/Skeleton3D" index="5"]
-transform = Transform3D(-0.99988693, -0.012440485, 0.008453621, 0.015040925, -0.826988, 0.5620178, -7.317285e-07, 0.5620817, 0.8270816, 0.09633773, 0.12302503, -0.026114296)
-
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_jsnrv")
 
@@ -97,6 +91,20 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0028133, -1.1920929e-07, -
 script = ExtResource("14_tcnuu")
 path = NodePath("../../PatrolPath")
 
+[node name="NPC3" parent="." instance=ExtResource("13_imku0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0028133, -1.1920929e-07, -48.76865)
+
+[node name="Brain" type="Node" parent="NPC3" node_paths=PackedStringArray("path")]
+script = ExtResource("14_tcnuu")
+path = NodePath("../../PatrolPath")
+
+[node name="NPC2" parent="." instance=ExtResource("13_imku0")]
+transform = Transform3D(-0.99997324, 0, -0.0073128603, 0, 1, 0, 0.0073128603, 0, -0.99997324, 10.372618, 3.4154758, -47.594788)
+
+[node name="Brain" type="Node" parent="NPC2"]
+script = ExtResource("14_tcnuu")
+hold_ground = true
+
 [node name="PatrolPath" parent="." instance=ExtResource("15_tcnuu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -53.718548)
 pingpong = true
@@ -119,5 +127,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.065102, 0, -15.807217)
 [node name="PathPoint6" parent="PatrolPath" instance=ExtResource("16_tuemg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.0703964, 0, -15.807217)
 
-[editable path="Player/CharacterBody3D/Model"]
 [editable path="PatrolPath"]

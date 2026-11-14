@@ -43,11 +43,13 @@ func set_target_plan(plan, delay):
 	if target_plan != plan:
 		target_plan = plan
 		plan_delay = delay
+func set_plan_immediately(plan):
+	target_plan = plan
+	current_plan = plan
+	plan_delay = 0
+	print("NEW INSTANT PLAN: ", target_plan.get_method())
 
 func check_if_visible(b):
-	if (b.global_position - body.global_position).length() < b.loudness:
-		return (b.global_position - body.global_position)
-	
 	if model.global_basis.z.dot(b.global_position - body.global_position) < 0:
 		return false
 	
@@ -58,7 +60,7 @@ func check_if_visible(b):
 		return (b.global_position - body.global_position)
 	return false
 
-func find_attack_target():
+func find_visible_target():
 	var result = null
 	var max_dist =  990.0
 	for b in Globals.actors:
@@ -73,6 +75,7 @@ func find_attack_target():
 		print("FOUND YOU")
 	if result != null:
 		attack_target = result
+	return result
 
 func set_path(to):
 	var start = NavigationServer3D.map_get_closest_point(Globals.nav.get_navigation_map(), body.global_position)
