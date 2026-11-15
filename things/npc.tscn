@@ -1,9 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://dishrhhaajd40"]
+[gd_scene load_steps=5 format=3 uid="uid://dishrhhaajd40"]
 
 [ext_resource type="Script" uid="uid://crpkedkbqs1gj" path="res://npc.gd" id="1_6ijss"]
 [ext_resource type="PackedScene" uid="uid://cy0oslvwdm5gw" path="res://things/character_body.tscn" id="2_w2nqr"]
-[ext_resource type="PackedScene" uid="uid://cr77ly1axphf8" path="res://testing_things/soldier.fbx" id="3_l5c3e"]
-[ext_resource type="Script" uid="uid://diwn8c5hhtqa0" path="res://testing_things/model.gd" id="4_2edei"]
+[ext_resource type="PackedScene" uid="uid://cef5fuabt340s" path="res://models/guy.fbx" id="3_w2nqr"]
 [ext_resource type="PackedScene" uid="uid://cwi71j5bb3y2p" path="res://things/npc_gun.tscn" id="5_de4kw"]
 
 [node name="NPC" type="Node3D"]
@@ -12,14 +11,17 @@ script = ExtResource("1_6ijss")
 [node name="CharacterBody3D" parent="." instance=ExtResource("2_w2nqr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
-[node name="Model" parent="CharacterBody3D" instance=ExtResource("3_l5c3e")]
+[node name="Model" parent="CharacterBody3D" instance=ExtResource("3_w2nqr")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, -1, 0)
-script = ExtResource("4_2edei")
 
 [node name="NPCGun" parent="CharacterBody3D/Model" instance=ExtResource("5_de4kw")]
-transform = Transform3D(2.6501633e-05, -0.9999996, 8.447014e-05, -0.29936057, -8.847273e-05, -0.9541391, 0.95413923, -1.8759826e-07, -0.29936054, -0.7402824, 1.4594674, -0.025482344)
+transform = Transform3D(2.6047479e-05, -1.0000002, 8.500146e-05, -0.29937217, -8.885616e-05, -0.95413613, 0.9541364, -7.4913373e-07, -0.29937217, -0.740283, 1.4594693, -0.025481604)
+bone_idx = 65
 
 [node name="TargetVisibilityChecker" type="RayCast3D" parent="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
 enabled = false
 collision_mask = 3
+
+[node name="BarksSFX" type="AudioStreamPlayer3D" parent="CharacterBody3D"]
+bus = &"Voices"

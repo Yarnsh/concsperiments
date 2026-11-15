@@ -6,6 +6,7 @@ signal plan_done
 @onready var body = $CharacterBody3D
 @onready var model = $CharacterBody3D/Model
 @onready var target_visibility_checker = $CharacterBody3D/TargetVisibilityChecker
+@onready var barks = $CharacterBody3D/BarksSFX
 
 const V_CLOSE_ENOUGH = 1.0
 const H_CLOSE_ENOUGH = 0.1
@@ -209,6 +210,11 @@ func _seperation_input():
 func _damage_taken(source):
 	if source != null and !source.dead:
 		damage_taken.emit(source)
+
+func play_bark(stream):
+	if stream != null:
+		barks.stream = stream
+		barks.play(0.0)
 
 func _physics_process(delta: float) -> void:
 	move_input = Vector2.ZERO

@@ -26,6 +26,7 @@ layers = 3
 stream = ExtResource("4_phaxf")
 volume_db = -9.335
 max_db = 0.0
+bus = &"Guns"
 attenuation_filter_cutoff_hz = 20500.0
 attenuation_filter_db = 0.0
 

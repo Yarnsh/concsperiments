@@ -6,6 +6,13 @@ extends Node
 var path_idx = 0
 var path_dir = 1
 
+var barks = {
+	"enemy_found": load("res://sfx/voices/target_spotted.wav"),
+	"enemy_lost": load("res://sfx/voices/target_lost.wav"),
+	"enemy_chase": load("res://sfx/voices/chase.wav"),
+	"pain": load("res://sfx/voices/ah.wav"),
+}
+
 var state = "CALM"
 
 func _ready() -> void:
@@ -25,6 +32,7 @@ func damage_reaction(source):
 		npc.set_target_plan(npc.fire_at_target, 30)
 		npc.speed_input = 1
 		state = "AGGRESSIVE"
+		npc.play_bark(barks.get("pain"))
 
 func plan_done():
 	if npc.current_plan == npc.follow_path and path != null:
@@ -45,14 +53,17 @@ func _physics_process(delta: float) -> void:
 		if !npc.target_visibility_check and npc.target_visibility_change_age > 60:
 			if !hold_ground:
 				npc.set_target_plan(npc.pursue_target, 0)
+				npc.play_bark(barks.get("enemy_chase"))
 			else:
 				npc.set_target_plan(npc.stop, 60)
+				npc.play_bark(barks.get("enemy_lost"))
 				state = "SEARCHING"
 	elif npc.current_plan == npc.pursue_target:
 		if npc.target_visibility_check and npc.target_visibility_change_age > 10:
 			npc.set_target_plan(npc.fire_at_target, 20)
 		elif !npc.target_visibility_check and npc.target_visibility_change_age > 300:
 			state = "SEARCHING"
+			npc.play_bark(barks.get("enemy_lost"))
 			if !hold_ground:
 				npc.set_target_plan(npc.move_to_random, 0)
 			else:
@@ -60,6 +71,7 @@ func _physics_process(delta: float) -> void:
 	elif state == "SEARCHING":
 		var target = npc.find_visible_target()
 		if target != null:
+			npc.play_bark(barks.get("enemy_found"))
 			state = "AGGRESIVE"
 			npc.attack_target = target
 			npc.set_plan_immediately(npc.stop)

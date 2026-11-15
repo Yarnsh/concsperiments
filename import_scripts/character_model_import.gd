@@ -2,6 +2,7 @@
 extends EditorScenePostImport
 
 func _post_import(scene):
+	scene.set_script(load("res://testing_things/model.gd"))
 	
 	var colliders_prefab = load("res://things/character_colliders.tscn")
 	var colliders = colliders_prefab.instantiate()
@@ -9,7 +10,8 @@ func _post_import(scene):
 	colliders.set_owner(scene)
 	
 	var animation_player = scene.find_child("AnimationPlayer")
-	animation_player.queue_free()
+	if animation_player != null:
+		animation_player.queue_free()
 	
 	var skeleton = scene.find_child("Skeleton3D")
 	
