@@ -11,6 +11,7 @@ var barks = {
 	"enemy_lost": load("res://sfx/voices/target_lost.wav"),
 	"enemy_chase": load("res://sfx/voices/chase.wav"),
 	"pain": load("res://sfx/voices/ah.wav"),
+	"friendly_fire": load("res://sfx/voices/friendly_fire.wav"),
 }
 
 var state = "CALM"
@@ -28,11 +29,18 @@ func path_ready():
 
 func damage_reaction(source):
 	if source in Globals.actors:
-		npc.attack_target = source
-		npc.set_target_plan(npc.fire_at_target, 30)
-		npc.speed_input = 1
-		state = "AGGRESSIVE"
-		npc.play_bark(barks.get("pain"))
+		if source.team == npc.team:
+			npc.attack_target = null
+			npc.set_target_plan(npc.move_to_random, 5, 60)
+			state = "PANIC"
+			npc.speed_input = 2
+			npc.play_bark(barks.get("friendly_fire"))
+		else:
+			npc.attack_target = source
+			npc.set_target_plan(npc.fire_at_target, 30)
+			npc.speed_input = 1
+			state = "AGGRESSIVE"
+			npc.play_bark(barks.get("pain"))
 
 func plan_done():
 	if npc.current_plan == npc.follow_path and path != null:
@@ -47,6 +55,9 @@ func plan_done():
 				path = null
 		if path != null:
 			npc.set_path(path.points[path_idx])
+	if state == "PANIC":
+		state = "SEARCHING"
+		npc.speed_input = 0
 
 func _physics_process(delta: float) -> void:
 	if npc.current_plan == npc.fire_at_target:

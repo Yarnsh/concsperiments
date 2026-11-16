@@ -32,6 +32,7 @@ var trigger_delay = 0
 var current_plan = null
 var target_plan = null
 var plan_delay = 0
+var plan_time = -1
 
 func _ready() -> void:
 	body.team = team
@@ -40,14 +41,16 @@ func _ready() -> void:
 func stop():
 	move_input = Vector2.ZERO
 
-func set_target_plan(plan, delay):
+func set_target_plan(plan, delay, time = -1):
 	if target_plan != plan:
 		target_plan = plan
 		plan_delay = delay
-func set_plan_immediately(plan):
+		plan_time = time
+func set_plan_immediately(plan, time = -1):
 	target_plan = plan
 	current_plan = plan
 	plan_delay = 0
+	plan_time = time
 	print("NEW INSTANT PLAN: ", target_plan.get_method())
 
 func check_if_visible(b):
@@ -250,6 +253,10 @@ func _physics_process(delta: float) -> void:
 			current_plan = target_plan
 		else:
 			plan_delay -= 1
+			plan_time -= 1
+			if plan_time == 0:
+				plan_done.emit()
+				set_plan_immediately(stop)
 		
 		if current_plan != null:
 			current_plan.call()
