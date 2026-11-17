@@ -5,6 +5,8 @@ var rotation_amplitude = 1.0
 
 var recoil = 0.0
 
+@export var recoil_per_shot = 0.3
+
 @export var recoil_offset = Vector3.ZERO
 @export var recoil_rotation = Vector3.ZERO
 
@@ -14,7 +16,7 @@ var spread_offset_idx = 0
 var spread_rotation_idx = 0
 
 func shot_fired():
-	recoil = min(1.0, recoil + 0.3)
+	recoil = min(1.0 + (recoil_per_shot - (randf() * recoil_per_shot)), recoil + recoil_per_shot)
 	if !spread_offsets.is_empty():
 		spread_offset_idx = (spread_offset_idx + 1) % len(spread_offsets)
 	if !spread_rotations.is_empty():

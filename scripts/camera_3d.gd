@@ -1,7 +1,7 @@
 extends Node3D
 
 @onready var body = $".."
-@onready var gun_offset = $Gun
+@export var gun_offset : Node
 
 var _mouse_position = Vector2(0.0, 0.0)
 var _total_pitch = 0.0
