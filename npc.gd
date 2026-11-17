@@ -82,7 +82,7 @@ func find_visible_target():
 	return result
 
 func set_path(to):
-	var start = NavigationServer3D.map_get_closest_point(Globals.nav.get_navigation_map(), body.global_position)
+	var start = NavigationServer3D.map_get_closest_point(Globals.nav.get_navigation_map(), body.global_position + Vector3.DOWN)
 	var end = NavigationServer3D.map_get_closest_point(Globals.nav.get_navigation_map(), to)
 	
 	path = NavigationServer3D.map_get_path(

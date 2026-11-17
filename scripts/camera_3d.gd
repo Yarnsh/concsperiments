@@ -1,5 +1,6 @@
 extends Node3D
 
+@onready var body = $".."
 @onready var gun_offset = $Gun
 
 var _mouse_position = Vector2(0.0, 0.0)
@@ -29,6 +30,10 @@ func _process(delta: float) -> void:
 		position = position.move_toward(start_position, (start_position - position).length_squared() * spring_strength * delta)
 	else:
 		position = position.move_toward(start_position, (start_position - position).length_squared() * up_strength * delta)
+
+func _physics_process(delta: float) -> void:
+	if body.input.is_action_pressed("Fire"):
+		gun_offset.fire_held()
 
 func _update_mouselook():
 	# Only rotates mouse if the mouse is captured

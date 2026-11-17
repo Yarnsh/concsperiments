@@ -17,6 +17,9 @@ const defs = {
 		"hit_vfx": "res://vfx/concrete_hit_effect.tscn",
 		"footstep_sfx": "res://sfx/concrete_footstep.wav"
 	},
+	"person": {
+		"hit_vfx": "res://vfx/body_hit_effect.tscn"
+	},
 	"hollowmetal": {
 		"floor_angle": deg_to_rad(40),
 		"landing_friction": 20.0,
@@ -33,8 +36,5 @@ const defs = {
 		"floor_angle": deg_to_rad(5),
 		"landing_friction": 1.0,
 		"footstep_sfx": "res://sfx/glass_footstep.wav"
-	},
-	"person": {
-		
 	}
 }

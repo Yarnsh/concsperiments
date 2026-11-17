@@ -1,0 +1,239 @@
+[gd_scene load_steps=21 format=3 uid="uid://cr1yc6tbdsaqh"]
+
+[ext_resource type="Script" uid="uid://bexex0b4g7wrc" path="res://scripts/gun_offset.gd" id="1_811bv"]
+[ext_resource type="AudioStream" uid="uid://b6yfnisxhgpjf" path="res://sfx/gunshot.wav" id="2_pboan"]
+[ext_resource type="Script" uid="uid://b3ynq4xq1au8l" path="res://scripts/walk_offset_animator.gd" id="3_sm2i5"]
+[ext_resource type="Script" uid="uid://b21gevtdjav0v" path="res://scripts/clamber_offset.gd" id="4_1lfja"]
+[ext_resource type="Script" uid="uid://bttc6rxnnu1vd" path="res://scripts/strafe_offset.gd" id="5_sj70f"]
+[ext_resource type="Script" uid="uid://qt463s8n1ukf" path="res://scripts/slide_offset.gd" id="6_xlof1"]
+[ext_resource type="Script" uid="uid://dhn7eoa7vvs82" path="res://scripts/recoil_offset.gd" id="7_5d5ks"]
+[ext_resource type="PackedScene" uid="uid://cqdvsku2px540" path="res://SnW39-2.blend" id="8_tlu3u"]
+[ext_resource type="Script" uid="uid://3yudokjb4c68" path="res://scripts/laser_cast.gd" id="9_d3tmc"]
+[ext_resource type="PackedScene" uid="uid://cfu8qxb86xyo8" path="res://laser.blend" id="10_rwp7r"]
+[ext_resource type="PackedScene" uid="uid://bjxk1lo2hkrj8" path="res://vfx/muzzleflash.tscn" id="11_405f2"]
+[ext_resource type="PackedScene" uid="uid://dwywjxx8aamo6" path="res://things/hit_ray.tscn" id="12_gpjir"]
+[ext_resource type="Shader" uid="uid://dpe8xr3hvnpfr" path="res://heat_haze.gdshader" id="13_dnyaa"]
+[ext_resource type="Script" uid="uid://cpl3x6ultkgc1" path="res://scripts/gun_heat_haze.gd" id="14_t0kyc"]
+
+[sub_resource type="Animation" id="Animation_jsk3o"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:position:z")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_4arys"]
+resource_name = "walk_offset"
+length = 1.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.43333334, 0.49874836, 1.3, 1.3547735),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, -0.2, 0), Vector3(-0.182, -0.049, 0), Vector3(-0.182, -0.13, 0), Vector3(0.138, -0.06, 0), Vector3(0.16, -0.14, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.39107594, 0.45492506, 0.4921704, 0.5187742, 0.83535945, 1.1599259, 1.2450581, 1.279643, 1.2956053),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.017453292, -0.034906585, 0), Vector3(0.06981317, 0.06981317, 0), Vector3(0.065606035, 0.06840068, 0), Vector3(-0.05235988, 0.06632251, 0), Vector3(0.017453292, 0.064577185, 0), Vector3(-0.017453292, 0.034906585, 0), Vector3(0.06981317, -0.06981317, 0), Vector3(0.0648577, -0.068359785, 0), Vector3(-0.034906585, -0.06632251, 0), Vector3(-0.017453292, -0.064577185, 0)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.4, 1.2),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"foot_step"
+}, {
+"args": [],
+"method": &"foot_step"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6iypd"]
+_data = {
+&"RESET": SubResource("Animation_jsk3o"),
+&"walk_offset": SubResource("Animation_4arys")
+}
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_imku0"]
+direction = Vector3(0, 1, 0)
+spread = 5.0
+initial_velocity_min = 0.099999994
+initial_velocity_max = 0.25
+gravity = Vector3(0, 0, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_imku0"]
+render_priority = -2
+shader = ExtResource("13_dnyaa")
+
+[sub_resource type="QuadMesh" id="QuadMesh_3v7ru"]
+material = SubResource("ShaderMaterial_imku0")
+size = Vector2(0.05, 0.025)
+
+[node name="Gun" type="Node3D"]
+script = ExtResource("1_811bv")
+shot_delay = 50
+
+[node name="ShotSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_pboan")
+volume_db = -5.725
+bus = &"Guns"
+
+[node name="Offset" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.082, -0.2582976, -0.4973148)
+
+[node name="WalkOffset" type="Node3D" parent="Offset"]
+script = ExtResource("3_sm2i5")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Offset/WalkOffset"]
+libraries = {
+&"": SubResource("AnimationLibrary_6iypd")
+}
+
+[node name="ClamberOffset" type="Node3D" parent="Offset"]
+script = ExtResource("4_1lfja")
+
+[node name="StrafeOffset" type="Node3D" parent="Offset"]
+script = ExtResource("5_sj70f")
+
+[node name="SlideOffset" type="Node3D" parent="Offset"]
+script = ExtResource("6_xlof1")
+
+[node name="RecoilOffsetLate" type="Node3D" parent="Offset"]
+script = ExtResource("7_5d5ks")
+recoil_offset = Vector3(0, 0.2, 0)
+recoil_rotation = Vector3(0.7, 0, 0)
+spread_rotations = Array[Vector3]([Vector3(0.1, 0.2, 0), Vector3(0.3, 0.4, 0), Vector3(0.15, -0.05, 0), Vector3(-0.2, 0.1, 0)])
+
+[node name="GunFinal" type="Node3D" parent="Offset"]
+
+[node name="gun" type="Node3D" parent="Offset/GunFinal"]
+transform = Transform3D(0.9848077, -0.17364818, 0, 0.17364818, 0.9848077, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="SnW39-2" parent="Offset/GunFinal/gun" instance=ExtResource("8_tlu3u")]
+transform = Transform3D(0.040000014, -4.1909516e-09, 0, 4.1909516e-09, 0.040000014, 0, 0, 0, 0.04, 0.0075593106, 0.016800448, 0.0064050555)
+
+[node name="Cube" parent="Offset/GunFinal/gun/SnW39-2" index="0"]
+layers = 3
+
+[node name="Plane" parent="Offset/GunFinal/gun/SnW39-2" index="1"]
+visible = false
+
+[node name="Plane_001" parent="Offset/GunFinal/gun/SnW39-2" index="2"]
+visible = false
+
+[node name="Plane_002" parent="Offset/GunFinal/gun/SnW39-2" index="3"]
+visible = false
+
+[node name="Plane_003" parent="Offset/GunFinal/gun/SnW39-2" index="4"]
+visible = false
+
+[node name="LaserCast" type="RayCast3D" parent="Offset/GunFinal/gun"]
+transform = Transform3D(1, -1.4901161e-08, 0, 1.4901161e-08, 1, 0, 0, 0, 1, 0.0106139295, 0.06019459, -0.19669133)
+target_position = Vector3(0, 0, -100)
+collision_mask = 5
+hit_back_faces = false
+script = ExtResource("9_d3tmc")
+
+[node name="laser" parent="Offset/GunFinal/gun/LaserCast" instance=ExtResource("10_rwp7r")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+
+[node name="Cube" parent="Offset/GunFinal/gun/LaserCast/laser" index="0"]
+layers = 2
+
+[node name="Flash" parent="Offset/GunFinal/gun" instance=ExtResource("11_405f2")]
+transform = Transform3D(1.0000002, -7.450579e-08, 0, 7.450579e-08, 1.0000002, 0, 0, 0, 1, 0.0052814633, 0.05226788, -0.35315222)
+
+[node name="HitRay" parent="Offset/GunFinal/gun" instance=ExtResource("12_gpjir")]
+transform = Transform3D(1, -1.4901161e-08, 0, 1.4901161e-08, 1, 0, 0, 0, 1, 0.0106139295, 0.06019459, -0.19669133)
+
+[node name="HeatHaze" type="GPUParticles3D" parent="Offset/GunFinal/gun"]
+transform = Transform3D(1, -1.4901161e-08, 0, 1.4901161e-08, 1, 0, 0, 0, 1, 0.0106139295, 0.06019459, -0.19669133)
+cast_shadow = 0
+process_material = SubResource("ParticleProcessMaterial_imku0")
+draw_pass_1 = SubResource("QuadMesh_3v7ru")
+script = ExtResource("14_t0kyc")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Offset/GunFinal/gun"]
+transform = Transform3D(1.0000001, -4.4703484e-08, 0, 2.9802322e-08, 1.0000001, 0, 0, 0, 1, -0.0043109395, -0.024448544, -0.18298721)
+layers = 1023
+spot_range = 50.0
+spot_angle = 20.0
+
+[node name="Muzzle" type="Node3D" parent="Offset/GunFinal"]
+transform = Transform3D(0.9848077, -0.17364818, 0, 0.17364818, 0.9848077, 0, 0, 0, 1, 0.00041399896, 0.06099859, -0.19699997)
+
+[editable path="Offset/GunFinal/gun/SnW39-2"]
+[editable path="Offset/GunFinal/gun/LaserCast/laser"]

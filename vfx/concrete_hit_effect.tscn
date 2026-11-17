@@ -6,7 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://b1c51k1alsbrt" path="res://sfx/concrete_shot.wav" id="4_4nnvw"]
 
 [sub_resource type="Curve" id="Curve_7y305"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.4621212, 0), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0.5168539), 0.0, 0.0, 0, 0, Vector2(0.4621212, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="CurveTexture" id="CurveTexture_lnisd"]

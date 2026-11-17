@@ -21,6 +21,10 @@ var cam_move_recovery = 0.1
 
 var gun_heat = 0.0
 
+@export var auto = false
+@export var shot_delay = 0
+var shot_time = 0
+
 func _ready() -> void:
 	shooter.source = character
 	for c in offsets_parent.get_children():
@@ -69,10 +73,16 @@ func _process(delta: float) -> void:
 	heat_haze_effect.gun_heat = gun_heat
 	gun_heat = move_toward(gun_heat, 0.0, 0.05 * delta)
 
+func fire_held():
+	if auto:
+		fire()
+
 func fire():
-	muzzle_flash_anim.play("flash")
-	shot_sfx.play()
-	recoil_offset.shot_fired()
-	gun_heat += 0.05
-	character.loudness = max(character.loudness, 10.0) # TODO: base loudness off equiped gun
-	shooter.fire()
+	if Time.get_ticks_msec() > shot_time + shot_delay:
+		shot_time = Time.get_ticks_msec()
+		muzzle_flash_anim.play("flash")
+		shot_sfx.play()
+		recoil_offset.shot_fired()
+		gun_heat += 0.05
+		character.loudness = max(character.loudness, 10.0) # TODO: base loudness off equiped gun
+		shooter.fire()
