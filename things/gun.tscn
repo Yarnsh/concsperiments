@@ -184,7 +184,6 @@ transform = Transform3D(0.9848077, -0.17364818, 0, 0.17364818, 0.9848077, 0, 0, 
 
 [node name="SnW39-2" parent="Offset/GunFinal/gun" instance=ExtResource("8_tlu3u")]
 transform = Transform3D(0.040000014, -4.1909516e-09, 0, 4.1909516e-09, 0.040000014, 0, 0, 0, 0.04, 0.0075593106, 0.016800448, 0.0064050555)
-visible = false
 
 [node name="Cube" parent="Offset/GunFinal/gun/SnW39-2" index="0"]
 layers = 3

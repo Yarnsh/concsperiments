@@ -4,14 +4,15 @@
 [ext_resource type="PackedScene" uid="uid://cr1yc6tbdsaqh" path="res://things/gun.tscn" id="2_avu2d"]
 [ext_resource type="PackedScene" uid="uid://dxaohoises07" path="res://things/machine_pistol.tscn" id="3_p8x25"]
 
-[node name="CameraRotator" type="Node3D" node_paths=PackedStringArray("gun_offset")]
+[node name="CameraRotator" type="Node3D" node_paths=PackedStringArray("gun_offset", "secondary_gun")]
 script = ExtResource("1_lligi")
-gun_offset = NodePath("MachinePistol")
+gun_offset = NodePath("Gun")
+secondary_gun = NodePath("MachinePistol")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 cull_mask = 524287
 
 [node name="Gun" parent="." instance=ExtResource("2_avu2d")]
-visible = false
 
 [node name="MachinePistol" parent="." instance=ExtResource("3_p8x25")]
+visible = false

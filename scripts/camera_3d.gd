@@ -1,7 +1,10 @@
 extends Node3D
 
 @onready var body = $".."
+@onready var primary_gun = $Gun
+
 @export var gun_offset : Node
+@export var secondary_gun : Node
 
 var _mouse_position = Vector2(0.0, 0.0)
 var _total_pitch = 0.0
@@ -19,6 +22,12 @@ var up_strength = 17.0
 func _ready() -> void:
 	start_position = position
 	get_parent().input.action_pressed.connect(input_pressed)
+	call_deferred("add_gun_exceptions", primary_gun)
+	if secondary_gun != null:
+		call_deferred("add_gun_exceptions", secondary_gun)
+
+func add_gun_exceptions(gun):
+	gun.add_exceptions(body.model.colliders.get_all_colliders())
 
 func _process(delta: float) -> void:
 	_update_mouselook()
@@ -51,9 +60,21 @@ func _update_mouselook():
 	rotate_y(deg_to_rad(-yaw))
 	rotate_object_local(Vector3(1,0,0), deg_to_rad(-pitch))
 
+func switch_gun():
+	if gun_offset == primary_gun and secondary_gun != null:
+		primary_gun.hide()
+		secondary_gun.show()
+		gun_offset = secondary_gun
+	elif gun_offset == secondary_gun:
+		primary_gun.show()
+		secondary_gun.hide()
+		gun_offset = primary_gun
+
 func input_pressed(action):
 	if action == "Fire":
 		gun_offset.fire()
+	elif action == "Switch_Gun":
+		switch_gun()
 
 func _input(event):
 	if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
