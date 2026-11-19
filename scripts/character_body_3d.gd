@@ -10,6 +10,7 @@ var model
 @onready var jump_shape = $JumpShape
 @onready var jump_recovery_cast = $JumpRecoveryCast
 @onready var floor_cast_center = $FloorCastCenter
+@onready var ceiling_cast = $CeilingCast
 
 @onready var sfx_foot = $SFXFoot
 @onready var sfx_land = $SFXLand
@@ -127,9 +128,12 @@ func stick_to_ground(delta):
 		else:
 			y_move = ((1.0 - largest_fraction) * -jump_recovery_cast.target_position.y)
 		
+		if ceiling_cast.is_colliding():
+			y_move = min(y_move, ceiling_cast.get_closest_collision_safe_fraction() * ceiling_cast.target_position.length())
+		
 		translate_object_local(Vector3.UP * y_move)
 		trigger_clamber(max(1.0 - (largest_fraction + foot_cast_ratio), abs(velocity.y * 0.05)))
-		if camera != null: # TODO: detach this better
+		if camera != null:
 			camera.global_position.y -= y_move
 		
 		if walk_shape.disabled:

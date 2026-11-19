@@ -32,9 +32,6 @@ func add_gun_exceptions(gun):
 func _process(delta: float) -> void:
 	_update_mouselook()
 	
-	# hard checks to avoid moving way too far
-	#position.y = clamp(position.y, start_position.y-0.5, start_position.y+0.25)
-	
 	if position.y < start_position.y:
 		position = position.move_toward(start_position, (start_position - position).length_squared() * spring_strength * delta)
 	else:
