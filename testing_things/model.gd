@@ -28,8 +28,6 @@ var gun = null
 func _ready() -> void:
 	colliders.bullet_hit.connect(got_shot)
 	gun = get_node_or_null("NPCGun")
-	if gun != null:
-		gun.add_exceptions(colliders.get_all_colliders())
 
 func disable_model_footsteps():
 	foot_stepper_l.queue_free()

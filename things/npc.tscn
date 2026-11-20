@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://dishrhhaajd40"]
+[gd_scene load_steps=6 format=3 uid="uid://dishrhhaajd40"]
 
 [ext_resource type="Script" uid="uid://crpkedkbqs1gj" path="res://npc.gd" id="1_6ijss"]
 [ext_resource type="PackedScene" uid="uid://cy0oslvwdm5gw" path="res://things/character_body.tscn" id="2_w2nqr"]
 [ext_resource type="PackedScene" uid="uid://cef5fuabt340s" path="res://models/guy.fbx" id="3_w2nqr"]
-[ext_resource type="PackedScene" uid="uid://cwi71j5bb3y2p" path="res://things/npc_gun.tscn" id="5_de4kw"]
+[ext_resource type="Script" uid="uid://dukhh5t0fi4ui" path="res://npc_gun.gd" id="4_6ijss"]
+[ext_resource type="PackedScene" uid="uid://dxaohoises07" path="res://things/machine_pistol.tscn" id="5_w2nqr"]
 
 [node name="NPC" type="Node3D"]
 script = ExtResource("1_6ijss")
@@ -14,9 +15,22 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 [node name="Model" parent="CharacterBody3D" instance=ExtResource("3_w2nqr")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, -1, 0)
 
-[node name="NPCGun" parent="CharacterBody3D/Model" instance=ExtResource("5_de4kw")]
+[node name="NPCGun" type="BoneAttachment3D" parent="CharacterBody3D/Model"]
 transform = Transform3D(2.6402884e-05, -0.99999976, 8.5879736e-05, -0.29936096, -8.990414e-05, -0.95413935, 0.9541392, -6.8464436e-07, -0.2993611, -0.74028265, 1.4594679, -0.025481857)
+bone_name = "mixamorig_RightHand"
 bone_idx = 65
+use_external_skeleton = true
+external_skeleton = NodePath("../Armature/Skeleton3D")
+script = ExtResource("4_6ijss")
+
+[node name="PalmOffset" type="Node3D" parent="CharacterBody3D/Model/NPCGun"]
+transform = Transform3D(-0.48014757, 0.8771884, -3.8007827e-05, -2.1734845e-06, -4.451889e-05, -0.9999994, -0.87718904, -0.48014724, 2.3282126e-05, 0.0509122, 0.11467856, 0.018247724)
+
+[node name="MachinePistol" parent="CharacterBody3D/Model/NPCGun/PalmOffset" instance=ExtResource("5_w2nqr")]
+transform = Transform3D(0.9999999, -3.7252903e-08, -1.6257218e-11, 4.4703484e-08, 0.9999999, 7.275958e-12, -1.1368684e-13, 7.275958e-12, 1.0000007, 0, 0, 0)
+
+[node name="Offset" parent="CharacterBody3D/Model/NPCGun/PalmOffset/MachinePistol" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1.0000002, 0, 0, 0, 1.0000001, 0, 0, 0)
 
 [node name="TargetVisibilityChecker" type="RayCast3D" parent="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
@@ -25,3 +39,7 @@ collision_mask = 3
 
 [node name="BarksSFX" type="AudioStreamPlayer3D" parent="CharacterBody3D"]
 bus = &"Voices"
+
+[editable path="CharacterBody3D/Model/NPCGun/PalmOffset/MachinePistol"]
+[editable path="CharacterBody3D/Model/NPCGun/PalmOffset/MachinePistol/Offset/GunFinal/gun/LaserCast/laser"]
+[editable path="CharacterBody3D/Model/NPCGun/PalmOffset/MachinePistol/Offset/GunFinal/gun/mac10"]

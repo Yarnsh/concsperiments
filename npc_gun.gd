@@ -1,33 +1,31 @@
 extends BoneAttachment3D
 
 @onready var character = $"../.."
+const target_name = "mixamorig_RightHand"
 
-@onready var vfx = $gun/Flash/AnimationPlayer
-@onready var sfx = $gun/SFX
-@onready var hit_ray = $gun/HitRay
+@onready var gun = null
 
 @export var spread = 0.08
 
 func _ready() -> void:
-	# TODO: pick the bone ID based on the expected bone name, as our skeleton might have a different bone order
+	bone_name = target_name
+	
 	character.input.action_pressed.connect(action_pressed)
-	hit_ray.source = character
+	gun = get_child(0).get_child(0)
+	gun.enable_npc_mode(character)
+	call_deferred("add_exceptions")
 
-func add_exceptions(exc):
-	for e in exc:
-		hit_ray.add_exception(e)
+func add_exceptions():
+	gun.add_exceptions(character.model.colliders.get_all_colliders())
 
 func action_pressed(action):
 	if action == "Fire":
 		fire()
 
 func fire():
-	vfx.play("flash")
-	sfx.play()
-	
-	hit_ray.rotation = Vector3.ZERO
+	gun.shooter.rotation = Vector3.ZERO
 	if character.aim_target != null:
-		hit_ray.look_at(character.aim_target)
-	hit_ray.rotate(hit_ray.basis.z.normalized(), randf() * 2*PI)
-	hit_ray.rotate(hit_ray.basis.x.normalized(), randf() * spread)
-	hit_ray.fire()
+		gun.shooter.look_at(character.aim_target)
+	gun.shooter.rotate(gun.shooter.basis.z.normalized(), randf() * 2*PI)
+	gun.shooter.rotate(gun.shooter.basis.x.normalized(), randf() * spread)
+	gun.fire()
