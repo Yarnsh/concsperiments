@@ -23,7 +23,9 @@ func set_interactable(i):
 	if interactable == i:
 		return
 	if interactable != null:
-		interactable.deleting.connect(interactable_deleted)
+		interactable.deleting.disconnect(interactable_deleted)
+	if i != null:
+		i.deleting.connect(interactable_deleted)
 	interactable = i
 
 func interactable_deleted():

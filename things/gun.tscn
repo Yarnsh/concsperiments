@@ -1,7 +1,8 @@
-[gd_scene load_steps=21 format=3 uid="uid://cr1yc6tbdsaqh"]
+[gd_scene load_steps=22 format=3 uid="uid://cr1yc6tbdsaqh"]
 
 [ext_resource type="Script" uid="uid://bexex0b4g7wrc" path="res://scripts/gun_offset.gd" id="1_811bv"]
 [ext_resource type="AudioStream" uid="uid://b6yfnisxhgpjf" path="res://sfx/gunshot.wav" id="2_pboan"]
+[ext_resource type="Script" uid="uid://dgleps8nnajih" path="res://things/raise_offset.gd" id="3_pboan"]
 [ext_resource type="Script" uid="uid://b3ynq4xq1au8l" path="res://scripts/walk_offset_animator.gd" id="3_sm2i5"]
 [ext_resource type="Script" uid="uid://b21gevtdjav0v" path="res://scripts/clamber_offset.gd" id="4_1lfja"]
 [ext_resource type="Script" uid="uid://bttc6rxnnu1vd" path="res://scripts/strafe_offset.gd" id="5_sj70f"]
@@ -153,6 +154,10 @@ bus = &"Guns"
 
 [node name="Offset" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.082, -0.2582976, -0.4973148)
+
+[node name="RaiseOffset" type="Node3D" parent="Offset"]
+transform = Transform3D(0.26196444, -0.78232557, 0.56510293, 0.32902786, 0.62286973, 0.7097704, -0.907257, 0, 0.42057663, -0.2538867, -0.33804366, 0.13801044)
+script = ExtResource("3_pboan")
 
 [node name="WalkOffset" type="Node3D" parent="Offset"]
 script = ExtResource("3_sm2i5")

@@ -1,0 +1,36 @@
+[gd_scene load_steps=7 format=3 uid="uid://b2uh1yr4v1pop"]
+
+[ext_resource type="Script" uid="uid://bkhd0xpmv32s2" path="res://gun_pickup.gd" id="1_5qb4r"]
+[ext_resource type="PackedScene" uid="uid://dxaohoises07" path="res://things/machine_pistol.tscn" id="2_go2yh"]
+[ext_resource type="PackedScene" uid="uid://clubxioeue6np" path="res://models/mac10.blend" id="3_ekqef"]
+[ext_resource type="Script" uid="uid://kt0sxho0huou" path="res://interactable.gd" id="4_51ag0"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ealrb"]
+size = Vector3(0.07421875, 0.09106445, 0.3262329)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jsnrv"]
+size = Vector3(0.03515625, 0.32922363, 0.0627594)
+
+[node name="MachinePistolPickup" type="RigidBody3D"]
+collision_layer = 0
+script = ExtResource("1_5qb4r")
+player_prefab = ExtResource("2_go2yh")
+
+[node name="mac10" parent="." instance=ExtResource("3_ekqef")]
+transform = Transform3D(0.04, 0, 0, 0, 0.04, 0, 0, 0, 0.04, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.037963867, 0.063568115)
+shape = SubResource("BoxShape3D_ealrb")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.08111572, 0.0033798218)
+shape = SubResource("BoxShape3D_jsnrv")
+
+[node name="Interactor" type="Node3D" parent="." node_paths=PackedStringArray("to_interact", "mesh")]
+script = ExtResource("4_51ag0")
+to_interact = NodePath("..")
+mesh = NodePath("../mac10/Cube_001")
+text = "Machine Pistol"
+
+[editable path="mac10"]

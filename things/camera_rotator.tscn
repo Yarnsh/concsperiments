@@ -5,10 +5,9 @@
 [ext_resource type="Script" uid="uid://chuqtraxo75du" path="res://things/interact_hud.gd" id="4_04hjy"]
 [ext_resource type="Texture2D" uid="uid://61tha5d2x5oq" path="res://house_meter_ref.png" id="5_qhbp1"]
 
-[node name="CameraRotator" type="Node3D" node_paths=PackedStringArray("gun_offset", "secondary_gun")]
+[node name="CameraRotator" type="Node3D" node_paths=PackedStringArray("gun_offset")]
 script = ExtResource("1_lligi")
 gun_offset = NodePath("Gun")
-secondary_gun = NodePath("")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 cull_mask = 524287

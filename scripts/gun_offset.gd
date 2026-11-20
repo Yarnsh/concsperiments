@@ -1,9 +1,13 @@
 extends Node3D
 
+@export var pickup_prefab_path : StringName
+var pickup_prefab = null
+
 @onready var character = $"../.."
 @onready var offsets_parent = $Offset
 var offsets = []
 
+@onready var raise_offset = $Offset/RaiseOffset
 @onready var clamber_offset = $Offset/ClamberOffset
 @onready var recoil_offset = $Offset/RecoilOffsetLate
 @onready var gun_final = $Offset/GunFinal
@@ -26,6 +30,7 @@ var gun_heat = 0.0
 var shot_time = 0
 
 func _ready() -> void:
+	pickup_prefab = load(pickup_prefab_path)
 	shooter.source = character
 	for c in offsets_parent.get_children():
 		if "Offset" in c.name:
@@ -40,6 +45,9 @@ func set_camera_movement(cam_move):
 
 func trigger_clamber(clamb_amount):
 	clamber_offset.trigger_clamber(clamb_amount)
+
+func trigger_raise():
+	raise_offset.start_raise()
 
 func _process(delta: float) -> void:
 	var t = Vector3.ZERO

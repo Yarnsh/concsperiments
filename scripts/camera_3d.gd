@@ -72,16 +72,36 @@ func _update_interact():
 	interact_hud.set_interactable(closest)
 
 func pickup_gun(prefab):
-	# TODO: drop other gun if it exists
+	drop_secondary()
+	
 	var g = prefab.instantiate()
 	add_child(g)
 	secondary_gun = g
 	primary_gun.hide()
 	secondary_gun.show()
 	gun_offset = secondary_gun
+	gun_offset.add_exceptions(body.model.colliders.get_all_colliders())
+	secondary_gun.trigger_raise()
 	return true
 
+func drop_secondary():
+	if secondary_gun != null:
+		var drop = secondary_gun.pickup_prefab.instantiate()
+		get_owner().add_child(drop)
+		drop.global_transform = body.global_transform
+		drop.linear_velocity = global_basis.z * -3.0
+		secondary_gun.hide()
+		secondary_gun.queue_free()
+
 func switch_gun():
+	# not sure if I want gun switching, for now its just a secondary drop
+	if secondary_gun != null:
+		drop_secondary()
+		gun_offset = primary_gun
+		primary_gun.show()
+		primary_gun.trigger_raise()
+	
+	return # old switching code
 	if gun_offset == primary_gun and secondary_gun != null:
 		primary_gun.hide()
 		secondary_gun.show()
