@@ -2,6 +2,7 @@ extends Node
 
 var nav = null
 var actors = []
+var interactables = []
 
 var player_body = null
 

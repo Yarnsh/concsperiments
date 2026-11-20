@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://dbux6t1psgurc"]
+[gd_scene load_steps=6 format=3 uid="uid://dbux6t1psgurc"]
 
 [ext_resource type="Script" uid="uid://d1oldice8j1qh" path="res://scripts/camera_3d.gd" id="1_lligi"]
 [ext_resource type="PackedScene" uid="uid://cr1yc6tbdsaqh" path="res://things/gun.tscn" id="2_avu2d"]
 [ext_resource type="PackedScene" uid="uid://dxaohoises07" path="res://things/machine_pistol.tscn" id="3_p8x25"]
+[ext_resource type="Script" uid="uid://chuqtraxo75du" path="res://things/interact_hud.gd" id="4_04hjy"]
+[ext_resource type="Texture2D" uid="uid://61tha5d2x5oq" path="res://house_meter_ref.png" id="5_qhbp1"]
 
 [node name="CameraRotator" type="Node3D" node_paths=PackedStringArray("gun_offset", "secondary_gun")]
 script = ExtResource("1_lligi")
@@ -16,3 +18,30 @@ cull_mask = 524287
 
 [node name="MachinePistol" parent="." instance=ExtResource("3_p8x25")]
 visible = false
+
+[node name="Interact" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("4_04hjy")
+
+[node name="InteractOutline" type="NinePatchRect" parent="Interact"]
+texture_filter = 1
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("5_qhbp1")
+draw_center = false
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
+[node name="Label" type="Label" parent="Interact"]
+texture_filter = 1
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 12
+text = "Test"

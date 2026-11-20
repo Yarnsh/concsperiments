@@ -2,6 +2,7 @@ extends Node3D
 
 @onready var body = $".."
 @onready var primary_gun = $Gun
+@onready var interact_hud = $Interact
 
 @export var gun_offset : Node
 @export var secondary_gun : Node
@@ -31,6 +32,7 @@ func add_gun_exceptions(gun):
 
 func _process(delta: float) -> void:
 	_update_mouselook()
+	_update_interact()
 	
 	if position.y < start_position.y:
 		position = position.move_toward(start_position, (start_position - position).length_squared() * spring_strength * delta)
@@ -57,6 +59,16 @@ func _update_mouselook():
 	rotate_y(deg_to_rad(-yaw))
 	rotate_object_local(Vector3(1,0,0), deg_to_rad(-pitch))
 
+func _update_interact():
+	var closest = null
+	var dist = 2.0
+	for i in Globals.interactables:
+		var d = global_position.distance_to(i.global_position)
+		if d < dist:
+			closest = i
+			dist = d
+	interact_hud.interactable = closest
+
 func switch_gun():
 	if gun_offset == primary_gun and secondary_gun != null:
 		primary_gun.hide()
@@ -72,6 +84,8 @@ func input_pressed(action):
 		gun_offset.fire()
 	elif action == "Switch_Gun":
 		switch_gun()
+	elif action == "Interact":
+		interact_hud.interact(body)
 
 func _input(event):
 	if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
