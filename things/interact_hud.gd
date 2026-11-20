@@ -19,6 +19,17 @@ func interact(body):
 	if interactable != null and visible:
 		interactable.interact(body)
 
+func set_interactable(i):
+	if interactable == i:
+		return
+	if interactable != null:
+		interactable.deleting.connect(interactable_deleted)
+	interactable = i
+
+func interactable_deleted():
+	interactable.deleting.disconnect(interactable_deleted)
+	interactable = null
+
 func _process(delta: float) -> void:
 	if interactable != null:
 		modulate = interactable.color

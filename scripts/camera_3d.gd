@@ -62,12 +62,24 @@ func _update_mouselook():
 func _update_interact():
 	var closest = null
 	var dist = 2.0
+	var dot = 0.0
 	for i in Globals.interactables:
 		var d = global_position.distance_to(i.global_position)
-		if d < dist:
+		var do = (i.global_position - global_position).normalized().dot(-global_basis.z)
+		if d < dist and do > dot:
 			closest = i
-			dist = d
-	interact_hud.interactable = closest
+			dot = do
+	interact_hud.set_interactable(closest)
+
+func pickup_gun(prefab):
+	# TODO: drop other gun if it exists
+	var g = prefab.instantiate()
+	add_child(g)
+	secondary_gun = g
+	primary_gun.hide()
+	secondary_gun.show()
+	gun_offset = secondary_gun
+	return true
 
 func switch_gun():
 	if gun_offset == primary_gun and secondary_gun != null:

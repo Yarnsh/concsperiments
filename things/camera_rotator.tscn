@@ -1,23 +1,19 @@
-[gd_scene load_steps=6 format=3 uid="uid://dbux6t1psgurc"]
+[gd_scene load_steps=5 format=3 uid="uid://dbux6t1psgurc"]
 
 [ext_resource type="Script" uid="uid://d1oldice8j1qh" path="res://scripts/camera_3d.gd" id="1_lligi"]
 [ext_resource type="PackedScene" uid="uid://cr1yc6tbdsaqh" path="res://things/gun.tscn" id="2_avu2d"]
-[ext_resource type="PackedScene" uid="uid://dxaohoises07" path="res://things/machine_pistol.tscn" id="3_p8x25"]
 [ext_resource type="Script" uid="uid://chuqtraxo75du" path="res://things/interact_hud.gd" id="4_04hjy"]
 [ext_resource type="Texture2D" uid="uid://61tha5d2x5oq" path="res://house_meter_ref.png" id="5_qhbp1"]
 
 [node name="CameraRotator" type="Node3D" node_paths=PackedStringArray("gun_offset", "secondary_gun")]
 script = ExtResource("1_lligi")
 gun_offset = NodePath("Gun")
-secondary_gun = NodePath("MachinePistol")
+secondary_gun = NodePath("")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 cull_mask = 524287
 
 [node name="Gun" parent="." instance=ExtResource("2_avu2d")]
-
-[node name="MachinePistol" parent="." instance=ExtResource("3_p8x25")]
-visible = false
 
 [node name="Interact" type="Control" parent="."]
 layout_mode = 3
