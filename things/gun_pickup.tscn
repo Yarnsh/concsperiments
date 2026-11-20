@@ -1,0 +1,51 @@
+[gd_scene load_steps=7 format=3 uid="uid://drhuth7uuqoyf"]
+
+[ext_resource type="Script" uid="uid://bkhd0xpmv32s2" path="res://gun_pickup.gd" id="1_64sej"]
+[ext_resource type="PackedScene" uid="uid://cr1yc6tbdsaqh" path="res://things/gun.tscn" id="2_64sej"]
+[ext_resource type="PackedScene" uid="uid://cqdvsku2px540" path="res://SnW39-2.blend" id="3_j11so"]
+[ext_resource type="Script" uid="uid://kt0sxho0huou" path="res://interactable.gd" id="4_od2hg"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_krwg7"]
+size = Vector3(0.04711914, 0.06451416, 0.2658844)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_od2hg"]
+size = Vector3(0.04296875, 0.18045044, 0.08313751)
+
+[node name="GunPickup" type="RigidBody3D"]
+collision_layer = 0
+script = ExtResource("1_64sej")
+player_prefab = ExtResource("2_64sej")
+
+[node name="SnW39-2" parent="." instance=ExtResource("3_j11so")]
+transform = Transform3D(-0.040000014, 0, -3.496911e-09, 0, 0.040000014, 0, 3.4969123e-09, 0, -0.04, 0.0075593106, 0.016800448, 0.0064050555)
+
+[node name="Cube" parent="SnW39-2" index="0"]
+layers = 3
+
+[node name="Plane" parent="SnW39-2" index="1"]
+visible = false
+
+[node name="Plane_001" parent="SnW39-2" index="2"]
+visible = false
+
+[node name="Plane_002" parent="SnW39-2" index="3"]
+visible = false
+
+[node name="Plane_003" parent="SnW39-2" index="4"]
+visible = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.047210693, 0.074668884)
+shape = SubResource("BoxShape3D_krwg7")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.9585616, -0.28488544, 0, 0.28488544, 0.9585616, 0, -0.050420415, -0.01977325)
+shape = SubResource("BoxShape3D_od2hg")
+
+[node name="Interactor" type="Node3D" parent="." node_paths=PackedStringArray("to_interact", "mesh")]
+script = ExtResource("4_od2hg")
+to_interact = NodePath("..")
+mesh = NodePath("../SnW39-2/Cube")
+text = "Gun"
+
+[editable path="SnW39-2"]

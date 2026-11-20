@@ -145,6 +145,7 @@ size = Vector2(0.05, 0.025)
 
 [node name="Gun" type="Node3D"]
 script = ExtResource("1_811bv")
+pickup_prefab_path = &"res://things/gun_pickup.tscn"
 shot_delay = 50
 
 [node name="ShotSFX" type="AudioStreamPlayer" parent="."]
