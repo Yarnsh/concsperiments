@@ -29,9 +29,6 @@ transform = Transform3D(-0.48014757, 0.8771884, -3.8007827e-05, -2.1734845e-06, 
 [node name="MachinePistol" parent="CharacterBody3D/Model/NPCGun/PalmOffset" instance=ExtResource("5_w2nqr")]
 transform = Transform3D(0.9999999, -3.7252903e-08, -1.6257218e-11, 4.4703484e-08, 0.9999999, 7.275958e-12, -1.1368684e-13, 7.275958e-12, 1.0000007, 0, 0, 0)
 
-[node name="Offset" parent="CharacterBody3D/Model/NPCGun/PalmOffset/MachinePistol" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1.0000002, 0, 0, 0, 1.0000001, 0, 0, 0)
-
 [node name="TargetVisibilityChecker" type="RayCast3D" parent="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
 enabled = false
@@ -39,7 +36,3 @@ collision_mask = 3
 
 [node name="BarksSFX" type="AudioStreamPlayer3D" parent="CharacterBody3D"]
 bus = &"Voices"
-
-[editable path="CharacterBody3D/Model/NPCGun/PalmOffset/MachinePistol"]
-[editable path="CharacterBody3D/Model/NPCGun/PalmOffset/MachinePistol/Offset/GunFinal/gun/LaserCast/laser"]
-[editable path="CharacterBody3D/Model/NPCGun/PalmOffset/MachinePistol/Offset/GunFinal/gun/mac10"]

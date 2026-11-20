@@ -41,6 +41,8 @@ func got_shot(source):
 func die():
 	anim.stop_upper_body()
 	anim.play_lower_body(anims["death"])
+	if gun != null:
+		gun.drop_gun()
 
 func _process(delta: float) -> void:
 	if !character.dead:

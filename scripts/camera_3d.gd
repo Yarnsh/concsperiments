@@ -92,6 +92,7 @@ func drop_secondary():
 		drop.linear_velocity = global_basis.z * -3.0
 		secondary_gun.hide()
 		secondary_gun.queue_free()
+		secondary_gun = null
 
 func switch_gun():
 	# not sure if I want gun switching, for now its just a secondary drop
