@@ -149,10 +149,13 @@ pickup_prefab_path = &"res://things/machine_pistol_pickup.tscn"
 auto = true
 shot_delay = 40
 
-[node name="ShotSFX" type="AudioStreamPlayer" parent="."]
+[node name="ShotSFX" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("2_lt0ud")
 volume_db = -5.725
+unit_size = 20.0
 bus = &"Guns"
+attenuation_filter_cutoff_hz = 20500.0
+attenuation_filter_db = 0.0
 
 [node name="Offset" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.082, -0.2582976, -0.4973148)

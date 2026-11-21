@@ -148,9 +148,10 @@ script = ExtResource("1_811bv")
 pickup_prefab_path = &"res://things/gun_pickup.tscn"
 shot_delay = 50
 
-[node name="ShotSFX" type="AudioStreamPlayer" parent="."]
+[node name="ShotSFX" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("2_pboan")
 volume_db = -5.725
+unit_size = 20.0
 bus = &"Guns"
 
 [node name="Offset" type="Node3D" parent="."]

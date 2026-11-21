@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://drhuth7uuqoyf"]
+[gd_scene load_steps=8 format=3 uid="uid://drhuth7uuqoyf"]
 
 [ext_resource type="Script" uid="uid://bkhd0xpmv32s2" path="res://gun_pickup.gd" id="1_64sej"]
 [ext_resource type="PackedScene" uid="uid://cr1yc6tbdsaqh" path="res://things/gun.tscn" id="2_64sej"]
 [ext_resource type="PackedScene" uid="uid://cqdvsku2px540" path="res://SnW39-2.blend" id="3_j11so"]
 [ext_resource type="Script" uid="uid://kt0sxho0huou" path="res://interactable.gd" id="4_od2hg"]
+[ext_resource type="AudioStream" uid="uid://br0ns2xi4wox3" path="res://sfx/wood_footstep.wav" id="5_j11so"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_krwg7"]
 size = Vector3(0.04711914, 0.06451416, 0.2658844)
@@ -13,6 +14,8 @@ size = Vector3(0.04296875, 0.18045044, 0.08313751)
 
 [node name="GunPickup" type="RigidBody3D"]
 collision_layer = 0
+contact_monitor = true
+max_contacts_reported = 1
 script = ExtResource("1_64sej")
 player_prefab = ExtResource("2_64sej")
 
@@ -47,5 +50,10 @@ script = ExtResource("4_od2hg")
 to_interact = NodePath("..")
 mesh = NodePath("../SnW39-2/Cube")
 text = "Gun"
+
+[node name="CollisionSFX" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("5_j11so")
+volume_db = -5.0
+bus = &"SFX"
 
 [editable path="SnW39-2"]

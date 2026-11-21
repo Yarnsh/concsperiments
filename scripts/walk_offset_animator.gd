@@ -2,7 +2,7 @@ extends Node3D
 
 @onready var character = $"../../../.."
 @onready var anim = $AnimationPlayer
-@onready var sfx = $"../../../../SFXFoot" # We need this to control footsteps on the player side
+@onready var sfx = null # We need this to control footsteps on the player side
 var transform_amplitude = 0.0
 var rotation_amplitude = 0.0
 var target_amp = 0.0
@@ -11,6 +11,9 @@ var target_speed = 1.0
 var was_walking = false
 var walk_stop_time = -1
 const AFTER_WALK_TIME = 500
+
+func _ready() -> void:
+	sfx = get_node_or_null("../../../../SFXFoot")
 
 func foot_step():
 	sfx.play()
