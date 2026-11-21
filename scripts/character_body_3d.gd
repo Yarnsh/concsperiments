@@ -1,6 +1,7 @@
 extends CharacterBody3D
 
 signal damage_taken(source)
+signal noise_heard(source)
 
 var camera
 var gun
@@ -64,6 +65,9 @@ func _ready() -> void:
 		model.hit_by_bullet.connect(got_shot)
 	
 	Globals.actors.append(self)
+
+func noise_alert(source):
+	noise_heard.emit(source)
 
 func got_shot(source):
 	if health > 0:

@@ -1,6 +1,7 @@
 extends Node3D
 
 signal damage_taken(source)
+signal noise_heard(source)
 signal plan_done
 
 @onready var body = $CharacterBody3D
@@ -37,6 +38,7 @@ var plan_time = -1
 func _ready() -> void:
 	body.team = team
 	body.damage_taken.connect(_damage_taken)
+	body.noise_heard.connect(_noise_heard)
 
 func stop():
 	move_input = Vector2.ZERO
@@ -213,6 +215,8 @@ func _seperation_input():
 func _damage_taken(source):
 	if source != null and !source.dead:
 		damage_taken.emit(source)
+func _noise_heard(source):
+	noise_heard.emit(source)
 
 func play_bark(stream):
 	if stream != null:
@@ -239,8 +243,9 @@ func _physics_process(delta: float) -> void:
 	target_visibility_change_age += 1
 	
 	if !body.dead:
-		if attack_target != null and attack_target.dead:
+		if (attack_target != null and attack_target.dead) or attack_target == null:
 			attack_target = null
+			body.aim_target = null
 		
 		if attack_target != null:
 			body.aim_target = attack_target.global_position

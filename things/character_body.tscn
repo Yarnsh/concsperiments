@@ -16,7 +16,7 @@ height = 0.01
 radius = 0.29
 
 [node name="CharacterBody3D" type="CharacterBody3D"]
-collision_layer = 2
+collision_layer = 10
 floor_stop_on_slope = false
 floor_max_angle = 0.0
 floor_snap_length = 0.0

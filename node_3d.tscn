@@ -130,7 +130,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.0703964, 0, -15.807217)
 
 [node name="MachinePistolPickup" parent="." instance=ExtResource("17_tuemg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.830883, 0.8246455, -59.983334)
-contact_monitor = true
-max_contacts_reported = 1
 
 [editable path="PatrolPath"]

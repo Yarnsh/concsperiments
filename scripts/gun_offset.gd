@@ -15,6 +15,7 @@ var offsets = []
 @onready var muzzle_flash_anim = $Offset/GunFinal/gun/Flash/AnimationPlayer
 @onready var heat_haze_effect = $Offset/GunFinal/gun/HeatHaze
 @onready var shot_sfx = $ShotSFX
+@onready var fire_noise = $FireNoise
 
 @onready var shooter = $Offset/GunFinal/gun/HitRay
 
@@ -92,6 +93,10 @@ func _process(delta: float) -> void:
 	heat_haze_effect.gun_heat = gun_heat
 	gun_heat = move_toward(gun_heat, 0.0, 0.05 * delta)
 
+func emit_noise():
+	for b in fire_noise.get_overlapping_bodies():
+		b.noise_alert(character)
+
 func fire_held():
 	if auto:
 		fire()
@@ -103,4 +108,5 @@ func fire():
 		shot_sfx.play()
 		recoil_offset.shot_fired()
 		gun_heat += 0.05
+		emit_noise()
 		shooter.fire()

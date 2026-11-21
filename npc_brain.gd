@@ -12,12 +12,15 @@ var barks = {
 	"enemy_chase": load("res://sfx/voices/chase.wav"),
 	"pain": load("res://sfx/voices/ah.wav"),
 	"friendly_fire": load("res://sfx/voices/friendly_fire.wav"),
+	"search": load("res://sfx/voices/what_was_that.wav"),
+	"follow_noise": load("res://sfx/voices/follow_noise.wav"),
 }
 
 var state = "CALM"
 
 func _ready() -> void:
 	npc.damage_taken.connect(damage_reaction)
+	npc.noise_heard.connect(noise_reaction)
 	npc.plan_done.connect(plan_done)
 	if path != null:
 		path.done.connect(path_ready)
@@ -42,6 +45,23 @@ func damage_reaction(source):
 			state = "AGGRESSIVE"
 			npc.play_bark(barks.get("pain"))
 
+func noise_reaction(source):
+	if source == npc.body:
+		return
+	if state == "CALM":
+		state = "SEARCHING"
+		npc.play_bark(barks.get("search"))
+		npc.speed_input = 0
+	elif state == "SEARCHING":
+		if source != null and source.team != npc.team:
+			if !hold_ground:
+				npc.speed_input = 1
+				npc.set_path(source.global_position)
+				npc.set_target_plan(npc.follow_path, 30)
+				npc.play_bark(barks.get("follow_noise"))
+			else:
+				npc.body.look_target = source.global_position #TODO: make a proper "look over here" method
+
 func plan_done():
 	if npc.current_plan == npc.follow_path and path != null:
 		path_idx += path_dir
@@ -60,6 +80,9 @@ func plan_done():
 		npc.speed_input = 0
 
 func _physics_process(delta: float) -> void:
+	if !npc.body.dead:
+		print("STATE: ",state,", target: ", npc.attack_target)
+	
 	if npc.current_plan == npc.fire_at_target:
 		if !npc.target_visibility_check and npc.target_visibility_change_age > 60:
 			if !hold_ground:
@@ -67,6 +90,7 @@ func _physics_process(delta: float) -> void:
 				npc.play_bark(barks.get("enemy_chase"))
 			else:
 				npc.set_target_plan(npc.stop, 60)
+				npc.attack_target = null
 				npc.play_bark(barks.get("enemy_lost"))
 				state = "SEARCHING"
 	elif npc.current_plan == npc.pursue_target:
@@ -75,6 +99,7 @@ func _physics_process(delta: float) -> void:
 		elif !npc.target_visibility_check and npc.target_visibility_change_age > 300:
 			state = "SEARCHING"
 			npc.play_bark(barks.get("enemy_lost"))
+			npc.attack_target = null
 			if !hold_ground:
 				npc.set_target_plan(npc.move_to_random, 0)
 			else:

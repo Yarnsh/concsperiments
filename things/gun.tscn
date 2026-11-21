@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://cr1yc6tbdsaqh"]
+[gd_scene load_steps=23 format=3 uid="uid://cr1yc6tbdsaqh"]
 
 [ext_resource type="Script" uid="uid://bexex0b4g7wrc" path="res://scripts/gun_offset.gd" id="1_811bv"]
 [ext_resource type="AudioStream" uid="uid://b6yfnisxhgpjf" path="res://sfx/gunshot.wav" id="2_pboan"]
@@ -143,6 +143,9 @@ shader = ExtResource("13_dnyaa")
 material = SubResource("ShaderMaterial_imku0")
 size = Vector2(0.05, 0.025)
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_pboan"]
+radius = 20.0
+
 [node name="Gun" type="Node3D"]
 script = ExtResource("1_811bv")
 pickup_prefab_path = &"res://things/gun_pickup.tscn"
@@ -241,6 +244,14 @@ spot_angle = 20.0
 
 [node name="Muzzle" type="Node3D" parent="Offset/GunFinal"]
 transform = Transform3D(0.9848077, -0.17364818, 0, 0.17364818, 0.9848077, 0, 0, 0, 1, 0.00041399896, 0.06099859, -0.19699997)
+
+[node name="FireNoise" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 8
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FireNoise"]
+shape = SubResource("SphereShape3D_pboan")
 
 [editable path="Offset/GunFinal/gun/SnW39-2"]
 [editable path="Offset/GunFinal/gun/LaserCast/laser"]
