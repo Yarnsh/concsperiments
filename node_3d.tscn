@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://xmfmc3f2t2tq"]
+[gd_scene load_steps=25 format=3 uid="uid://xmfmc3f2t2tq"]
 
 [ext_resource type="PackedScene" uid="uid://tx5oa36f5n0k" path="res://conc.blend" id="1_noarx"]
 [ext_resource type="Script" uid="uid://c3ylqjlw424qr" path="res://scripts/main.gd" id="1_r3fl7"]
@@ -15,6 +15,9 @@
 [ext_resource type="PackedScene" uid="uid://bsohmxrsqtm6n" path="res://things/patrol_path.tscn" id="15_tcnuu"]
 [ext_resource type="PackedScene" uid="uid://bi6g63ayemybb" path="res://things/path_point.tscn" id="16_tuemg"]
 [ext_resource type="PackedScene" uid="uid://b2uh1yr4v1pop" path="res://things/machine_pistol_pickup.tscn" id="17_tuemg"]
+[ext_resource type="PackedScene" uid="uid://dos3ufqvnvu03" path="res://things/gun_silenced_pickup.tscn" id="18_jsnrv"]
+[ext_resource type="PackedScene" uid="uid://x4hd2nuv125s" path="res://things/machine_pistol_silenced_pickup.tscn" id="19_lggff"]
+[ext_resource type="PackedScene" uid="uid://drhuth7uuqoyf" path="res://things/gun_pickup.tscn" id="20_s0gvp"]
 [ext_resource type="PackedScene" uid="uid://cr77ly1axphf8" path="res://testing_things/soldier.fbx" id="24_5t8nk"]
 [ext_resource type="Script" uid="uid://diwn8c5hhtqa0" path="res://testing_things/model.gd" id="25_5t8nk"]
 
@@ -130,5 +133,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.0703964, 0, -15.807217)
 
 [node name="MachinePistolPickup" parent="." instance=ExtResource("17_tuemg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.830883, 0.8246455, -59.983334)
+
+[node name="GunPickup" parent="." instance=ExtResource("18_jsnrv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.36655, 0.64786804, -61.066563)
+
+[node name="MachinePistolPickup2" parent="." instance=ExtResource("19_lggff")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.319683, 0.7570579, -59.24218)
+
+[node name="GunPickup2" parent="." instance=ExtResource("20_s0gvp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.669454, 0.6656589, -59.559097)
 
 [editable path="PatrolPath"]

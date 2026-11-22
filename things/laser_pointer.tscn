@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://frv1425gf255"]
+
+[ext_resource type="Script" uid="uid://3yudokjb4c68" path="res://scripts/laser_cast.gd" id="1_qve63"]
+[ext_resource type="PackedScene" uid="uid://cfu8qxb86xyo8" path="res://laser.blend" id="2_q8jc1"]
+
+[node name="LaserCast" type="RayCast3D"]
+transform = Transform3D(1, -1.4901161e-08, 0, 1.4901161e-08, 1, 0, 0, 0, 1, 0, 0, 0)
+target_position = Vector3(0, 0, -100)
+collision_mask = 5
+hit_back_faces = false
+script = ExtResource("1_qve63")
+
+[node name="laser" parent="." instance=ExtResource("2_q8jc1")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+
+[node name="Cube" parent="laser" index="0"]
+layers = 2
+
+[editable path="laser"]

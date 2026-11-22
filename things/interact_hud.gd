@@ -37,19 +37,20 @@ func _process(delta: float) -> void:
 		modulate = interactable.color
 		label.text = interactable.text
 		
-		var aabb = interactable.mesh.get_aabb()
+		var aabb = interactable.aabb
+		print(aabb)
 		
-		if get_viewport().get_camera_3d().is_position_behind(interactable.mesh.to_global(aabb.position)):
+		if get_viewport().get_camera_3d().is_position_behind(interactable.model.to_global(aabb.position)):
 			hide()
 			return
-		var p0 = get_viewport().get_camera_3d().unproject_position(interactable.mesh.to_global(aabb.position))
+		var p0 = get_viewport().get_camera_3d().unproject_position(interactable.model.to_global(aabb.position))
 		var r = Rect2(p0, Vector2.ZERO)
 		
 		for mp in point_mult:
-			if get_viewport().get_camera_3d().is_position_behind(interactable.mesh.to_global(aabb.position + (aabb.size * mp))):
+			if get_viewport().get_camera_3d().is_position_behind(interactable.model.to_global(aabb.position + (aabb.size * mp))):
 				hide()
 				return
-			p0 = get_viewport().get_camera_3d().unproject_position(interactable.mesh.to_global(aabb.position + (aabb.size * mp)))
+			p0 = get_viewport().get_camera_3d().unproject_position(interactable.model.to_global(aabb.position + (aabb.size * mp)))
 			r = r.expand(p0)
 		
 		outline.position = r.position

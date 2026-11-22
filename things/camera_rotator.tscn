@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://dbux6t1psgurc"]
 
 [ext_resource type="Script" uid="uid://d1oldice8j1qh" path="res://scripts/camera_3d.gd" id="1_lligi"]
-[ext_resource type="PackedScene" uid="uid://cr1yc6tbdsaqh" path="res://things/gun.tscn" id="2_avu2d"]
+[ext_resource type="PackedScene" uid="uid://ccwe7w8wx04s0" path="res://things/gun_silenced.tscn" id="2_xptlt"]
 [ext_resource type="Script" uid="uid://chuqtraxo75du" path="res://things/interact_hud.gd" id="4_04hjy"]
 [ext_resource type="Texture2D" uid="uid://61tha5d2x5oq" path="res://house_meter_ref.png" id="5_qhbp1"]
 
@@ -12,7 +12,7 @@ gun_offset = NodePath("Gun")
 [node name="Camera3D" type="Camera3D" parent="."]
 cull_mask = 524287
 
-[node name="Gun" parent="." instance=ExtResource("2_avu2d")]
+[node name="Gun" parent="." instance=ExtResource("2_xptlt")]
 
 [node name="Interact" type="Control" parent="."]
 layout_mode = 3

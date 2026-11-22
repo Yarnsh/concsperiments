@@ -80,9 +80,6 @@ func plan_done():
 		npc.speed_input = 0
 
 func _physics_process(delta: float) -> void:
-	if !npc.body.dead:
-		print("STATE: ",state,", target: ", npc.attack_target)
-	
 	if npc.current_plan == npc.fire_at_target:
 		if !npc.target_visibility_check and npc.target_visibility_change_age > 60:
 			if !hold_ground:

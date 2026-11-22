@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://dxaohoises07"]
+[gd_scene load_steps=21 format=3 uid="uid://dxaohoises07"]
 
 [ext_resource type="Script" uid="uid://bexex0b4g7wrc" path="res://scripts/gun_offset.gd" id="1_utqba"]
 [ext_resource type="AudioStream" uid="uid://b6yfnisxhgpjf" path="res://sfx/gunshot.wav" id="2_lt0ud"]
@@ -8,8 +8,6 @@
 [ext_resource type="Script" uid="uid://bttc6rxnnu1vd" path="res://scripts/strafe_offset.gd" id="5_weprg"]
 [ext_resource type="Script" uid="uid://qt463s8n1ukf" path="res://scripts/slide_offset.gd" id="6_7hjqb"]
 [ext_resource type="Script" uid="uid://dhn7eoa7vvs82" path="res://scripts/recoil_offset.gd" id="7_l4qk3"]
-[ext_resource type="Script" uid="uid://3yudokjb4c68" path="res://scripts/laser_cast.gd" id="9_3mdtc"]
-[ext_resource type="PackedScene" uid="uid://cfu8qxb86xyo8" path="res://laser.blend" id="10_8refc"]
 [ext_resource type="PackedScene" uid="uid://bjxk1lo2hkrj8" path="res://vfx/muzzleflash.tscn" id="11_jaf2o"]
 [ext_resource type="PackedScene" uid="uid://dwywjxx8aamo6" path="res://things/hit_ray.tscn" id="12_l3a5n"]
 [ext_resource type="Shader" uid="uid://dpe8xr3hvnpfr" path="res://heat_haze.gdshader" id="13_ae2ot"]
@@ -197,19 +195,6 @@ spread_rotations = Array[Vector3]([Vector3(0.02, 0.02, 0), Vector3(0.03, 0.04, 0
 [node name="gun" type="Node3D" parent="Offset/GunFinal"]
 transform = Transform3D(0.9848077, -0.17364818, 0, 0.17364818, 0.9848077, 0, 0, 0, 1, 0, 0, 0)
 
-[node name="LaserCast" type="RayCast3D" parent="Offset/GunFinal/gun"]
-transform = Transform3D(1, -1.4901161e-08, 0, 1.4901161e-08, 1, 0, 0, 0, 1, 0.0106139295, 0.06019459, -0.19669133)
-target_position = Vector3(0, 0, -100)
-collision_mask = 5
-hit_back_faces = false
-script = ExtResource("9_3mdtc")
-
-[node name="laser" parent="Offset/GunFinal/gun/LaserCast" instance=ExtResource("10_8refc")]
-transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
-
-[node name="Cube" parent="Offset/GunFinal/gun/LaserCast/laser" index="0"]
-layers = 2
-
 [node name="Flash" parent="Offset/GunFinal/gun" instance=ExtResource("11_jaf2o")]
 transform = Transform3D(1.0000002, -7.450579e-08, 0, 7.450579e-08, 1.0000002, 0, 0, 0, 1, 0.0052814633, 0.05226788, -0.35315222)
 
@@ -223,17 +208,14 @@ process_material = SubResource("ParticleProcessMaterial_imku0")
 draw_pass_1 = SubResource("QuadMesh_3v7ru")
 script = ExtResource("14_7xlje")
 
-[node name="SpotLight3D" type="SpotLight3D" parent="Offset/GunFinal/gun"]
-transform = Transform3D(1.0000001, -4.4703484e-08, 0, 2.9802322e-08, 1.0000001, 0, 0, 0, 1, -0.0043109395, -0.024448544, -0.18298721)
-layers = 1023
-spot_range = 50.0
-spot_angle = 20.0
-
 [node name="mac10" parent="Offset/GunFinal/gun" instance=ExtResource("15_lt0ud")]
 transform = Transform3D(-0.040000014, -1.8626451e-09, -3.4969119e-09, -1.8626451e-09, 0.040000014, 0, 3.496911e-09, 0, -0.04, 0.010490052, 0.022406265, 0.046875626)
 
 [node name="Cube_001" parent="Offset/GunFinal/gun/mac10" index="0"]
 layers = 3
+
+[node name="Cylinder" parent="Offset/GunFinal/gun/mac10" index="1"]
+visible = false
 
 [node name="Muzzle" type="Node3D" parent="Offset/GunFinal"]
 transform = Transform3D(0.9848077, -0.17364818, 0, 0.17364818, 0.9848077, 0, 0, 0, 1, 0.00041399896, 0.06099859, -0.19699997)
@@ -246,5 +228,4 @@ monitorable = false
 [node name="CollisionShape3D" type="CollisionShape3D" parent="FireNoise"]
 shape = SubResource("SphereShape3D_lt0ud")
 
-[editable path="Offset/GunFinal/gun/LaserCast/laser"]
 [editable path="Offset/GunFinal/gun/mac10"]

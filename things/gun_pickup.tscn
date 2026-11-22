@@ -14,13 +14,14 @@ size = Vector3(0.04296875, 0.18045044, 0.08313751)
 
 [node name="GunPickup" type="RigidBody3D"]
 collision_layer = 0
+continuous_cd = true
 contact_monitor = true
 max_contacts_reported = 1
 script = ExtResource("1_64sej")
 player_prefab = ExtResource("2_64sej")
 
 [node name="SnW39-2" parent="." instance=ExtResource("3_j11so")]
-transform = Transform3D(-0.040000014, 0, -3.496911e-09, 0, 0.040000014, 0, 3.4969123e-09, 0, -0.04, 0.0075593106, 0.016800448, 0.0064050555)
+transform = Transform3D(0.040000014, 0, 0, 0, 0.040000014, 0, 0, 0, 0.04, 0.0075593106, 0.016800448, 0.0064050555)
 
 [node name="Cube" parent="SnW39-2" index="0"]
 layers = 3
@@ -37,6 +38,9 @@ visible = false
 [node name="Plane_003" parent="SnW39-2" index="4"]
 visible = false
 
+[node name="Cylinder" parent="SnW39-2" index="5"]
+visible = false
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.047210693, 0.074668884)
 shape = SubResource("BoxShape3D_krwg7")
@@ -45,10 +49,10 @@ shape = SubResource("BoxShape3D_krwg7")
 transform = Transform3D(1, 0, 0, 0, 0.9585616, -0.28488544, 0, 0.28488544, 0.9585616, 0, -0.050420415, -0.01977325)
 shape = SubResource("BoxShape3D_od2hg")
 
-[node name="Interactor" type="Node3D" parent="." node_paths=PackedStringArray("to_interact", "mesh")]
+[node name="Interactor" type="Node3D" parent="." node_paths=PackedStringArray("to_interact", "meshs")]
 script = ExtResource("4_od2hg")
 to_interact = NodePath("..")
-mesh = NodePath("../SnW39-2/Cube")
+meshs = [NodePath("../SnW39-2/Cube")]
 text = "Gun"
 
 [node name="CollisionSFX" type="AudioStreamPlayer3D" parent="."]
