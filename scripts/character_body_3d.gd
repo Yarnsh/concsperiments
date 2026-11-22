@@ -4,7 +4,6 @@ signal damage_taken(source)
 signal noise_heard(source)
 
 var camera
-var gun
 var model
 
 @onready var walk_shape = $WalkShape
@@ -55,7 +54,6 @@ var walk_intersect_query = PhysicsShapeQueryParameters3D.new()
 
 func _ready() -> void:
 	camera = get_node_or_null("CameraRotator")
-	gun = get_node_or_null("CameraRotator/Gun")
 	model = get_node_or_null("Model")
 	
 	foot_cast_ratio = FOOT_HEIGHT / (-jump_recovery_cast.target_position.y)
@@ -114,8 +112,8 @@ func will_walk_shape_collide():
 	return result.size() > 0
 
 func trigger_clamber(clamb):
-	if gun != null: # TODO: detach this better
-		gun.trigger_clamber(clamb)
+	if camera != null and camera.gun_offset != null:
+		camera.gun_offset.trigger_clamber(clamb)
 	if clamb > clamber_strength:
 		clamber_strength = clamb
 

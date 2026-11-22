@@ -38,7 +38,6 @@ func _process(delta: float) -> void:
 		label.text = interactable.text
 		
 		var aabb = interactable.aabb
-		print(aabb)
 		
 		if get_viewport().get_camera_3d().is_position_behind(interactable.model.to_global(aabb.position)):
 			hide()
