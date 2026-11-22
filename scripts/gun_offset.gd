@@ -104,9 +104,9 @@ func fire_held():
 func fire():
 	if Time.get_ticks_msec() > shot_time + shot_delay:
 		shot_time = Time.get_ticks_msec()
+		shooter.fire()
 		muzzle_flash_anim.play("flash")
 		shot_sfx.play()
 		recoil_offset.shot_fired()
 		gun_heat += 0.05
 		emit_noise()
-		shooter.fire()

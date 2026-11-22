@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://doc68j761v1tg"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s0j7t"]
+shading_mode = 0
+albedo_color = Color(1, 0.984, 0.76, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_5tcbn"]
+material = SubResource("StandardMaterial3D_s0j7t")
+size = Vector3(0.02, 0.02, 3)
+
+[node name="TracerEmitter" type="CPUParticles3D"]
+emitting = false
+amount = 1
+lifetime = 0.09999999999999999
+one_shot = true
+mesh = SubResource("BoxMesh_5tcbn")
+direction = Vector3(0, 0, -1)
+spread = 0.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 200.0
+initial_velocity_max = 200.0

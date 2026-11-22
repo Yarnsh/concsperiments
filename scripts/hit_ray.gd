@@ -1,10 +1,17 @@
 extends RayCast3D
 
 var source = null
+var tracers = null
+
+func _ready() -> void:
+	tracers = get_node_or_null("Tracers")
 
 func fire():
 	force_raycast_update()
+	var dist = -1
 	if is_colliding():
+		dist = (get_collision_point().distance_to(global_position))
+		
 		var hit = get_collider().hit_vfx.instantiate()
 		get_tree().root.add_child(hit)
 		hit.global_position = get_collision_point()
@@ -28,3 +35,6 @@ func fire():
 				decal.look_at(get_collision_point() + get_collision_normal())
 			
 		get_collider().hit_by_bullet(source)
+	
+	if tracers != null:
+		tracers.emit(dist)

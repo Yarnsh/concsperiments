@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://crrk5jp16qkv8"]
+
+[ext_resource type="Script" uid="uid://thfus65dkcyn" path="res://things/tracers.gd" id="1_5tcbn"]
+[ext_resource type="PackedScene" uid="uid://doc68j761v1tg" path="res://things/tracer_emitter.tscn" id="2_hix24"]
+
+[node name="Tracers" type="Node3D"]
+script = ExtResource("1_5tcbn")
+
+[node name="TracerEmitter" parent="." instance=ExtResource("2_hix24")]
+
+[node name="TracerEmitter2" parent="." instance=ExtResource("2_hix24")]
+
+[node name="TracerEmitter3" parent="." instance=ExtResource("2_hix24")]
+
+[node name="TracerEmitter4" parent="." instance=ExtResource("2_hix24")]
+
+[node name="TracerEmitter5" parent="." instance=ExtResource("2_hix24")]
+
+[node name="TracerEmitter6" parent="." instance=ExtResource("2_hix24")]
+
+[node name="TracerEmitter7" parent="." instance=ExtResource("2_hix24")]
+
+[node name="TracerEmitter8" parent="." instance=ExtResource("2_hix24")]

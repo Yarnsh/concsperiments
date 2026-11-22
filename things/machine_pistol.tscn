@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://dxaohoises07"]
+[gd_scene load_steps=22 format=3 uid="uid://dxaohoises07"]
 
 [ext_resource type="Script" uid="uid://bexex0b4g7wrc" path="res://scripts/gun_offset.gd" id="1_utqba"]
 [ext_resource type="AudioStream" uid="uid://b6yfnisxhgpjf" path="res://sfx/gunshot.wav" id="2_lt0ud"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://qt463s8n1ukf" path="res://scripts/slide_offset.gd" id="6_7hjqb"]
 [ext_resource type="Script" uid="uid://dhn7eoa7vvs82" path="res://scripts/recoil_offset.gd" id="7_l4qk3"]
 [ext_resource type="PackedScene" uid="uid://bjxk1lo2hkrj8" path="res://vfx/muzzleflash.tscn" id="11_jaf2o"]
+[ext_resource type="PackedScene" uid="uid://crrk5jp16qkv8" path="res://things/tracers.tscn" id="11_utqba"]
 [ext_resource type="PackedScene" uid="uid://dwywjxx8aamo6" path="res://things/hit_ray.tscn" id="12_l3a5n"]
 [ext_resource type="Shader" uid="uid://dpe8xr3hvnpfr" path="res://heat_haze.gdshader" id="13_ae2ot"]
 [ext_resource type="Script" uid="uid://cpl3x6ultkgc1" path="res://scripts/gun_heat_haze.gd" id="14_7xlje"]
@@ -201,6 +202,8 @@ transform = Transform3D(1.0000002, -7.450579e-08, 0, 7.450579e-08, 1.0000002, 0,
 [node name="HitRay" parent="Offset/GunFinal/gun" instance=ExtResource("12_l3a5n")]
 transform = Transform3D(1, -1.4901161e-08, 0, 1.4901161e-08, 1, 0, 0, 0, 1, 0.0106139295, 0.06019459, -0.19669133)
 
+[node name="Tracers" parent="Offset/GunFinal/gun/HitRay" instance=ExtResource("11_utqba")]
+
 [node name="HeatHaze" type="GPUParticles3D" parent="Offset/GunFinal/gun"]
 transform = Transform3D(1, -1.4901161e-08, 0, 1.4901161e-08, 1, 0, 0, 0, 1, 0.0106139295, 0.06019459, -0.19669133)
 cast_shadow = 0
@@ -210,9 +213,6 @@ script = ExtResource("14_7xlje")
 
 [node name="mac10" parent="Offset/GunFinal/gun" instance=ExtResource("15_lt0ud")]
 transform = Transform3D(-0.040000014, -1.8626451e-09, -3.4969119e-09, -1.8626451e-09, 0.040000014, 0, 3.496911e-09, 0, -0.04, 0.010490052, 0.022406265, 0.046875626)
-
-[node name="Cube_001" parent="Offset/GunFinal/gun/mac10" index="0"]
-layers = 3
 
 [node name="Cylinder" parent="Offset/GunFinal/gun/mac10" index="1"]
 visible = false

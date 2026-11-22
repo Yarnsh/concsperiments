@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://ccwe7w8wx04s0"]
+[gd_scene load_steps=22 format=3 uid="uid://ccwe7w8wx04s0"]
 
 [ext_resource type="Script" uid="uid://bexex0b4g7wrc" path="res://scripts/gun_offset.gd" id="1_t4pvo"]
 [ext_resource type="AudioStream" uid="uid://dwxbd77s712hh" path="res://sfx/gunshot_silenced.wav" id="2_t4pvo"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://qt463s8n1ukf" path="res://scripts/slide_offset.gd" id="7_3xect"]
 [ext_resource type="Script" uid="uid://dhn7eoa7vvs82" path="res://scripts/recoil_offset.gd" id="8_u1oeq"]
 [ext_resource type="PackedScene" uid="uid://cqdvsku2px540" path="res://SnW39-2.blend" id="9_cosm0"]
+[ext_resource type="PackedScene" uid="uid://crrk5jp16qkv8" path="res://things/tracers.tscn" id="11_4uum1"]
 [ext_resource type="PackedScene" uid="uid://dwywjxx8aamo6" path="res://things/hit_ray.tscn" id="13_5osy8"]
 [ext_resource type="Shader" uid="uid://dpe8xr3hvnpfr" path="res://heat_haze.gdshader" id="14_todtx"]
 [ext_resource type="PackedScene" uid="uid://drwqjfcjnres2" path="res://vfx/muzzle_pop_silenced.tscn" id="15_t4pvo"]
@@ -213,6 +214,8 @@ layers = 3
 
 [node name="HitRay" parent="Offset/GunFinal/gun" instance=ExtResource("13_5osy8")]
 transform = Transform3D(1.0000001, -2.9802322e-08, 0, 2.9802322e-08, 1.0000001, 0, 0, 0, 1, 0.0106139295, 0.06019461, -0.36452997)
+
+[node name="Tracers" parent="Offset/GunFinal/gun/HitRay" instance=ExtResource("11_4uum1")]
 
 [node name="HeatHaze" type="GPUParticles3D" parent="Offset/GunFinal/gun"]
 transform = Transform3D(1.0000001, -2.9802322e-08, 0, 2.9802322e-08, 1.0000001, 0, 0, 0, 1, 0.0106139295, 0.06019461, -0.36452997)
