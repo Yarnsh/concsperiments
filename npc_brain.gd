@@ -33,12 +33,14 @@ func path_ready():
 func damage_reaction(source):
 	if source in Globals.actors:
 		if source.team == npc.team:
+			npc.gun_ready = false
 			npc.attack_target = null
 			npc.set_target_plan(npc.move_to_random, 5, 60)
 			state = "PANIC"
 			npc.speed_input = 2
 			npc.play_bark(barks.get("friendly_fire"))
 		else:
+			npc.gun_ready = true
 			npc.attack_target = source
 			npc.set_target_plan(npc.fire_at_target, 30)
 			npc.speed_input = 1
@@ -49,6 +51,7 @@ func noise_reaction(source):
 	if source == npc.body:
 		return
 	if state == "CALM":
+		npc.gun_ready = true
 		state = "SEARCHING"
 		npc.play_bark(barks.get("search"))
 		npc.speed_input = 0
@@ -76,6 +79,7 @@ func plan_done():
 		if path != null:
 			npc.set_path(path.points[path_idx])
 	if state == "PANIC":
+		npc.gun_ready = true
 		state = "SEARCHING"
 		npc.speed_input = 0
 
@@ -95,6 +99,7 @@ func _physics_process(delta: float) -> void:
 			npc.set_target_plan(npc.fire_at_target, 20)
 		elif !npc.target_visibility_check and npc.target_visibility_change_age > 300:
 			state = "SEARCHING"
+			npc.gun_ready = true
 			npc.play_bark(barks.get("enemy_lost"))
 			npc.attack_target = null
 			if !hold_ground:
@@ -106,6 +111,7 @@ func _physics_process(delta: float) -> void:
 		if target != null:
 			npc.play_bark(barks.get("enemy_found"))
 			state = "AGGRESIVE"
+			npc.gun_ready = true
 			npc.attack_target = target
 			npc.set_plan_immediately(npc.stop)
 			npc.set_target_plan(npc.fire_at_target, 60)

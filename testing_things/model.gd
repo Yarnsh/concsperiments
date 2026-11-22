@@ -53,7 +53,7 @@ func _process(delta: float) -> void:
 			global_rotation.y = rotate_toward(global_rotation.y, character.aim_angle + PI, delta * 5.0)
 		#global_rotation.y = character.look_angle + PI
 		
-		if character.aim_target != null:
+		if character.aim_target != null or character.gun_ready:
 			anim.play_upper_body(anims["aim"], 0.3)
 			
 			#lat.y = global_position.y

@@ -38,6 +38,9 @@ visible = false
 [node name="Plane_003" parent="SnW39-2" index="4"]
 visible = false
 
+[node name="Cylinder" parent="SnW39-2" index="5"]
+layers = 3
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.047210693, 0.160326)
 shape = SubResource("BoxShape3D_av280")

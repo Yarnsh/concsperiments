@@ -208,9 +208,6 @@ script = ExtResource("12_uct4h")
 [node name="mac10" parent="Offset/GunFinal/gun" instance=ExtResource("13_aoivc")]
 transform = Transform3D(-0.040000014, -1.8626451e-09, -3.4969119e-09, -1.8626451e-09, 0.040000014, 0, 3.496911e-09, 0, -0.04, 0.010490052, 0.022406265, 0.046875626)
 
-[node name="Cube_001" parent="Offset/GunFinal/gun/mac10" index="0"]
-layers = 3
-
 [node name="Flash" parent="Offset/GunFinal/gun" instance=ExtResource("13_htqqr")]
 transform = Transform3D(0.3000001, -1.8626451e-08, 0, 1.8626451e-08, 0.3000001, 0, 0, 0, 0.4, 0.010787141, 0.061176926, -0.42317688)
 

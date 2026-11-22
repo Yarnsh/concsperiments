@@ -31,6 +31,7 @@ var MAX_FLOOR_ANGLE = 0.3
 var input = Globals.Inputs.new()
 var look_target = Vector3.ZERO
 var aim_target = null
+var gun_ready = false
 var dead = false
 @export var health = 3
 var team = null

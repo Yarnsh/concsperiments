@@ -208,6 +208,9 @@ visible = false
 [node name="Plane_003" parent="Offset/GunFinal/gun/SnW39-2" index="4"]
 visible = false
 
+[node name="Cylinder" parent="Offset/GunFinal/gun/SnW39-2" index="5"]
+layers = 3
+
 [node name="HitRay" parent="Offset/GunFinal/gun" instance=ExtResource("13_5osy8")]
 transform = Transform3D(1.0000001, -2.9802322e-08, 0, 2.9802322e-08, 1.0000001, 0, 0, 0, 1, 0.0106139295, 0.06019461, -0.36452997)
 

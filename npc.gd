@@ -35,6 +35,8 @@ var target_plan = null
 var plan_delay = 0
 var plan_time = -1
 
+var gun_ready = false
+
 func _ready() -> void:
 	body.team = team
 	body.damage_taken.connect(_damage_taken)
@@ -243,6 +245,7 @@ func _physics_process(delta: float) -> void:
 	target_visibility_change_age += 1
 	
 	if !body.dead:
+		body.gun_ready = gun_ready
 		if (attack_target != null and attack_target.dead) or attack_target == null:
 			attack_target = null
 			body.aim_target = null
