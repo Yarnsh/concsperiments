@@ -19,6 +19,10 @@ var offsets = []
 
 @onready var shooter = $Offset/GunFinal/gun/HitRay
 
+@onready var muzzle_offset = $Offset/GunFinal/gun
+@onready var muzzle_offset_p = $Offset/GunFinal
+@onready var muzzle = $Offset/GunFinal/Muzzle
+
 var last_cam_move = Vector2.ZERO
 var cam_move_offset = Vector2.ZERO
 var cam_move_sensitivity = 3.0

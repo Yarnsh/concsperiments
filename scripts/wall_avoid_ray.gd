@@ -1,17 +1,15 @@
 extends RayCast3D
 
-@onready var gun_target = $"../CameraRotator/Gun/Offset/GunFinal/Muzzle"
-@onready var gun_target_p = $"../CameraRotator/Gun/Offset/GunFinal"
-@onready var gun = $"../CameraRotator/Gun/Offset/GunFinal/gun"
+@onready var body = $".."
 
 func _process(delta: float) -> void:
 	call_deferred("gun_wall_avoid")
 
 func gun_wall_avoid():
-	target_position = to_local(gun_target.global_position)
+	target_position = to_local(body.camera.gun_offset.muzzle.global_position)
 	force_raycast_update()
 	
 	if is_colliding():
-		gun.global_position = get_collision_point() + (-gun_target.global_position + gun_target_p.global_position)
+		body.camera.gun_offset.muzzle_offset.global_position = get_collision_point() + (-body.camera.gun_offset.muzzle.global_position + body.camera.gun_offset.muzzle_offset_p.global_position)
 	else:
-		gun.position = Vector3.ZERO
+		body.camera.gun_offset.muzzle_offset.position = Vector3.ZERO
