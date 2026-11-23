@@ -2,12 +2,14 @@
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c8b3h"]
 shading_mode = 0
-albedo_color = Color(0.66, 0.66, 0.5544, 1)
+albedo_color = Color(1, 1, 0.75, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_mwln1"]
 material = SubResource("StandardMaterial3D_c8b3h")
 radius = 0.15
 height = 0.3
+radial_segments = 16
+rings = 8
 
 [sub_resource type="Animation" id="Animation_cdqbm"]
 length = 0.001
@@ -48,7 +50,7 @@ _data = {
 }
 
 [node name="Flash" type="MeshInstance3D"]
-transform = Transform3D(0.3, -1.7881387e-08, 0, 1.7881387e-08, 0.3, 0, 0, 0, 0.4, 0, 0, 0)
+transform = Transform3D(0.04, -2.3841848e-09, 0, 2.3841848e-09, 0.04, 0, 0, 0, 3, 0, 0, 0)
 visible = false
 layers = 2
 cast_shadow = 0

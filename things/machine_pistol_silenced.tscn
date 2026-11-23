@@ -212,7 +212,7 @@ script = ExtResource("12_uct4h")
 transform = Transform3D(-0.040000014, -1.8626451e-09, -3.4969119e-09, -1.8626451e-09, 0.040000014, 0, 3.496911e-09, 0, -0.04, 0.010490052, 0.022406265, 0.046875626)
 
 [node name="Flash" parent="Offset/GunFinal/gun" instance=ExtResource("13_htqqr")]
-transform = Transform3D(0.3000001, -1.8626451e-08, 0, 1.8626451e-08, 0.3000001, 0, 0, 0, 0.4, 0.010787141, 0.061176926, -0.42317688)
+transform = Transform3D(0.040000007, -3.7252903e-09, 0, 3.7252903e-09, 0.040000007, 0, 0, 0, 3, 0.010787133, 0.06117697, -0.84263134)
 
 [node name="Muzzle" type="Node3D" parent="Offset/GunFinal"]
 transform = Transform3D(0.9848077, -0.17364818, 0, 0.17364818, 0.9848077, 0, 0, 0, 1, 0.00041399896, 0.06099859, -0.37470466)

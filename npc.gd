@@ -110,7 +110,7 @@ func follow_path():
 		
 		if len(path) <= path_i:
 			path = null
-			plan_done.emit()
+			plan_done.emit(current_plan)
 			return
 		
 		body.look_target = path[path_i]

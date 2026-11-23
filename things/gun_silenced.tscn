@@ -225,7 +225,7 @@ draw_pass_1 = SubResource("QuadMesh_3v7ru")
 script = ExtResource("15_u6ape")
 
 [node name="Flash" parent="Offset/GunFinal/gun" instance=ExtResource("15_t4pvo")]
-transform = Transform3D(0.30000016, -1.8626451e-08, 0, 1.8626451e-08, 0.30000016, 0, 0, 0, 0.4, 0.010142684, 0.057522133, -0.4221697)
+transform = Transform3D(0.040000007, -3.259629e-09, 0, 3.259629e-09, 0.040000007, 0, 0, 0, 3, 0.0101426765, 0.057522148, -0.8174807)
 
 [node name="Muzzle" type="Node3D" parent="Offset/GunFinal"]
 transform = Transform3D(0.9848077, -0.17364818, 0, 0.17364818, 0.9848077, 0, 0, 0, 1, 0.00041399896, 0.06099859, -0.36549544)

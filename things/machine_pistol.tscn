@@ -197,7 +197,7 @@ spread_rotations = Array[Vector3]([Vector3(0.02, 0.02, 0), Vector3(0.03, 0.04, 0
 transform = Transform3D(0.9848077, -0.17364818, 0, 0.17364818, 0.9848077, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="Flash" parent="Offset/GunFinal/gun" instance=ExtResource("11_jaf2o")]
-transform = Transform3D(1.0000002, -7.450579e-08, 0, 7.450579e-08, 1.0000002, 0, 0, 0, 1, 0.0052814633, 0.05226788, -0.35315222)
+transform = Transform3D(1.0000004, -1.0430813e-07, 0, 1.0430813e-07, 1.0000004, 0, 0, 0, 3, 0.0071011446, 0.06258778, -0.6528498)
 
 [node name="HitRay" parent="Offset/GunFinal/gun" instance=ExtResource("12_l3a5n")]
 transform = Transform3D(1, -1.4901161e-08, 0, 1.4901161e-08, 1, 0, 0, 0, 1, 0.0106139295, 0.06019459, -0.19669133)

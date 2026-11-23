@@ -91,8 +91,6 @@ func plan_done(plan):
 		if path != null:
 			npc.set_path(path.points[path_idx])
 	match state:
-		CALM:
-			npc.set_plan_immediately(npc.stop)
 		PANIC:
 			npc.gun_ready = true
 			state = SEARCHING

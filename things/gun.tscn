@@ -214,7 +214,7 @@ visible = false
 visible = false
 
 [node name="Flash" parent="Offset/GunFinal/gun" instance=ExtResource("11_405f2")]
-transform = Transform3D(1.0000002, -7.450579e-08, 0, 7.450579e-08, 1.0000002, 0, 0, 0, 1, 0.0052814633, 0.05226788, -0.35315222)
+transform = Transform3D(1.0000001, -7.4505806e-08, 0, 7.4505806e-08, 1.0000001, 0, 0, 0, 3, 0.0052814707, 0.052267894, -0.64107966)
 
 [node name="HitRay" parent="Offset/GunFinal/gun" instance=ExtResource("12_gpjir")]
 transform = Transform3D(1, -1.4901161e-08, 0, 1.4901161e-08, 1, 0, 0, 0, 1, 0.0106139295, 0.06019459, -0.19669133)
