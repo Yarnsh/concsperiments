@@ -90,6 +90,7 @@ visible = false
 
 [node name="NPC" parent="." instance=ExtResource("13_imku0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0028133, -1.1920929e-07, -61.43479)
+TRIGGER_DELAY = 0
 
 [node name="Brain" type="Node" parent="NPC" node_paths=PackedStringArray("path")]
 script = ExtResource("14_tcnuu")
@@ -97,6 +98,7 @@ path = NodePath("../../PatrolPath")
 
 [node name="NPC3" parent="." instance=ExtResource("13_imku0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0028133, -1.1920929e-07, -48.76865)
+TRIGGER_DELAY = 0
 
 [node name="Brain" type="Node" parent="NPC3" node_paths=PackedStringArray("path")]
 script = ExtResource("14_tcnuu")
@@ -104,6 +106,7 @@ path = NodePath("../../PatrolPath")
 
 [node name="NPC2" parent="." instance=ExtResource("13_imku0")]
 transform = Transform3D(-0.99997324, 0, -0.0073128603, 0, 1, 0, 0.0073128603, 0, -0.99997324, 10.372618, 3.4154758, -47.594788)
+TRIGGER_DELAY = 0
 
 [node name="Brain" type="Node" parent="NPC2"]
 script = ExtResource("14_tcnuu")

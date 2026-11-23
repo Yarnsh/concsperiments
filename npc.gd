@@ -2,7 +2,7 @@ extends Node3D
 
 signal damage_taken(source)
 signal noise_heard(source)
-signal plan_done
+signal plan_done(plan)
 
 @onready var body = $CharacterBody3D
 @onready var model = $CharacterBody3D/Model
@@ -49,7 +49,8 @@ func set_target_plan(plan, delay, time = -1):
 	if target_plan != plan:
 		target_plan = plan
 		plan_delay = delay
-		plan_time = time
+	plan_time = time
+	print("SCHEDULED PLAN: ", plan, ", ", delay, ", ", time)
 func set_plan_immediately(plan, time = -1):
 	target_plan = plan
 	current_plan = plan
@@ -263,8 +264,9 @@ func _physics_process(delta: float) -> void:
 			plan_delay -= 1
 			plan_time -= 1
 			if plan_time == 0:
-				plan_done.emit()
+				var completed = current_plan
 				set_plan_immediately(stop)
+				plan_done.emit(completed)
 		
 		if current_plan != null:
 			current_plan.call()
