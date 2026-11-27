@@ -1,7 +1,7 @@
 extends CharacterBody3D
 
 signal damage_taken(source)
-signal noise_heard(source)
+signal noise_heard(info)
 
 var camera
 var model
@@ -65,8 +65,8 @@ func _ready() -> void:
 	
 	Globals.actors.append(self)
 
-func noise_alert(source):
-	noise_heard.emit(source)
+func noise_alert(info):
+	noise_heard.emit(info)
 
 func got_shot(source):
 	if health > 0:

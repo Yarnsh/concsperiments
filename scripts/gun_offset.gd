@@ -99,7 +99,7 @@ func _process(delta: float) -> void:
 
 func emit_noise():
 	for b in fire_noise.get_overlapping_bodies():
-		b.noise_alert(character)
+		b.noise_alert({"source": character})
 
 func fire_held():
 	if auto:

@@ -1,7 +1,7 @@
 extends Node3D
 
 signal damage_taken(source)
-signal noise_heard(source)
+signal noise_heard(info)
 signal plan_done(plan)
 
 @onready var body = $CharacterBody3D
@@ -218,8 +218,8 @@ func _seperation_input():
 func _damage_taken(source):
 	if source != null and !source.dead:
 		damage_taken.emit(source)
-func _noise_heard(source):
-	noise_heard.emit(source)
+func _noise_heard(info):
+	noise_heard.emit(info)
 
 func play_bark(stream):
 	if stream != null:

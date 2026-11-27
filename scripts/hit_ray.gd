@@ -3,7 +3,12 @@ extends RayCast3D
 var source = null
 var tracers = null
 
+var bullet_impact_noise_params = PhysicsShapeQueryParameters3D.new()
+
 func _ready() -> void:
+	bullet_impact_noise_params.collision_mask = 0b00000000_00000000_00000000_00001000
+	bullet_impact_noise_params.shape = SphereShape3D.new()
+	bullet_impact_noise_params.shape.radius = 5.0
 	tracers = get_node_or_null("Tracers")
 
 func fire():
@@ -35,6 +40,12 @@ func fire():
 				decal.look_at(get_collision_point() + get_collision_normal())
 			
 		get_collider().hit_by_bullet(source)
+		
+		#  bullet impact noise
+		bullet_impact_noise_params.transform.origin = get_collision_point()
+		var noise_results = get_world_3d().get_direct_space_state().intersect_shape(bullet_impact_noise_params)
+		for n in noise_results:
+			n["collider"].noise_alert({"source": source, "type": "bullet_impact"})
 	
 	if tracers != null:
 		tracers.emit(dist)

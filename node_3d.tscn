@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://xmfmc3f2t2tq"]
+[gd_scene load_steps=29 format=3 uid="uid://xmfmc3f2t2tq"]
 
 [ext_resource type="PackedScene" uid="uid://tx5oa36f5n0k" path="res://conc.blend" id="1_noarx"]
 [ext_resource type="Script" uid="uid://c3ylqjlw424qr" path="res://scripts/main.gd" id="1_r3fl7"]
@@ -12,9 +12,13 @@
 [ext_resource type="PackedScene" uid="uid://cj4guyu5o73gm" path="res://house.blend" id="14_3v7ru"]
 [ext_resource type="Script" uid="uid://bar383x8ed1bu" path="res://npc_brain.gd" id="14_tcnuu"]
 [ext_resource type="Texture2D" uid="uid://c1sy7p5vt4kw4" path="res://dramatic-sunset-2089-30k-hdri-panoramas_7932_max-x1920.jpg" id="14_wlxy5"]
+[ext_resource type="Script" uid="uid://biume8gogx78n" path="res://brain_calm.gd" id="15_lggff"]
 [ext_resource type="PackedScene" uid="uid://bsohmxrsqtm6n" path="res://things/patrol_path.tscn" id="15_tcnuu"]
+[ext_resource type="Script" uid="uid://coet808mg3mfu" path="res://brain_searching.gd" id="16_dhlwf"]
 [ext_resource type="PackedScene" uid="uid://bi6g63ayemybb" path="res://things/path_point.tscn" id="16_tuemg"]
+[ext_resource type="Script" uid="uid://dlec6kr5gj4rp" path="res://brain_aggressive.gd" id="17_5t8nk"]
 [ext_resource type="PackedScene" uid="uid://b2uh1yr4v1pop" path="res://things/machine_pistol_pickup.tscn" id="17_tuemg"]
+[ext_resource type="Script" uid="uid://bvfhfy1qqbq6b" path="res://brain_panic.gd" id="18_j3e5s"]
 [ext_resource type="PackedScene" uid="uid://dos3ufqvnvu03" path="res://things/gun_silenced_pickup.tscn" id="18_jsnrv"]
 [ext_resource type="PackedScene" uid="uid://x4hd2nuv125s" path="res://things/machine_pistol_silenced_pickup.tscn" id="19_lggff"]
 [ext_resource type="PackedScene" uid="uid://drhuth7uuqoyf" path="res://things/gun_pickup.tscn" id="20_s0gvp"]
@@ -92,25 +96,73 @@ visible = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0028133, -1.1920929e-07, -61.43479)
 TRIGGER_DELAY = 0
 
-[node name="Brain" type="Node" parent="NPC" node_paths=PackedStringArray("path")]
+[node name="Brain" type="Node" parent="NPC" node_paths=PackedStringArray("calm_brain", "searching_brain", "aggressive_brain", "panic_brain", "path")]
 script = ExtResource("14_tcnuu")
+calm_brain = NodePath("BrainCalm")
+searching_brain = NodePath("BrainSearching")
+aggressive_brain = NodePath("BrainAggressive")
+panic_brain = NodePath("BrainPanic")
 path = NodePath("../../PatrolPath")
+
+[node name="BrainCalm" type="Node" parent="NPC/Brain"]
+script = ExtResource("15_lggff")
+
+[node name="BrainSearching" type="Node" parent="NPC/Brain"]
+script = ExtResource("16_dhlwf")
+
+[node name="BrainAggressive" type="Node" parent="NPC/Brain"]
+script = ExtResource("17_5t8nk")
+
+[node name="BrainPanic" type="Node" parent="NPC/Brain"]
+script = ExtResource("18_j3e5s")
 
 [node name="NPC3" parent="." instance=ExtResource("13_imku0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0028133, -1.1920929e-07, -48.76865)
 TRIGGER_DELAY = 0
 
-[node name="Brain" type="Node" parent="NPC3" node_paths=PackedStringArray("path")]
+[node name="Brain" type="Node" parent="NPC3" node_paths=PackedStringArray("calm_brain", "searching_brain", "aggressive_brain", "panic_brain", "path")]
 script = ExtResource("14_tcnuu")
+calm_brain = NodePath("BrainCalm")
+searching_brain = NodePath("BrainSearching")
+aggressive_brain = NodePath("BrainAggressive")
+panic_brain = NodePath("BrainPanic")
 path = NodePath("../../PatrolPath")
+
+[node name="BrainCalm" type="Node" parent="NPC3/Brain"]
+script = ExtResource("15_lggff")
+
+[node name="BrainSearching" type="Node" parent="NPC3/Brain"]
+script = ExtResource("16_dhlwf")
+
+[node name="BrainAggressive" type="Node" parent="NPC3/Brain"]
+script = ExtResource("17_5t8nk")
+
+[node name="BrainPanic" type="Node" parent="NPC3/Brain"]
+script = ExtResource("18_j3e5s")
 
 [node name="NPC2" parent="." instance=ExtResource("13_imku0")]
 transform = Transform3D(-0.99997324, 0, -0.0073128603, 0, 1, 0, 0.0073128603, 0, -0.99997324, 10.372618, 3.4154758, -47.594788)
 TRIGGER_DELAY = 0
 
-[node name="Brain" type="Node" parent="NPC2"]
+[node name="Brain" type="Node" parent="NPC2" node_paths=PackedStringArray("calm_brain", "searching_brain", "aggressive_brain", "panic_brain")]
 script = ExtResource("14_tcnuu")
+calm_brain = NodePath("BrainCalm")
+searching_brain = NodePath("BrainSearching")
+aggressive_brain = NodePath("BrainAggressive")
+panic_brain = NodePath("BrainPanic")
 hold_ground = true
+
+[node name="BrainCalm" type="Node" parent="NPC2/Brain"]
+script = ExtResource("15_lggff")
+
+[node name="BrainSearching" type="Node" parent="NPC2/Brain"]
+script = ExtResource("16_dhlwf")
+
+[node name="BrainAggressive" type="Node" parent="NPC2/Brain"]
+script = ExtResource("17_5t8nk")
+
+[node name="BrainPanic" type="Node" parent="NPC2/Brain"]
+script = ExtResource("18_j3e5s")
 
 [node name="PatrolPath" parent="." instance=ExtResource("15_tcnuu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -53.718548)
