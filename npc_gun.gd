@@ -18,7 +18,7 @@ func _ready() -> void:
 		call_deferred("add_exceptions")
 
 func add_exceptions():
-	gun.add_exceptions(character.model.ragdoll.get_all_colliders())
+	gun.add_exceptions(character.model.colliders.get_all_colliders())
 
 func pickup_gun(prefab):
 	var g = prefab.instantiate()

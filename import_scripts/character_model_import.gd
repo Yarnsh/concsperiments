@@ -4,6 +4,11 @@ extends EditorScenePostImport
 func _post_import(scene):
 	scene.set_script(load("res://testing_things/model.gd"))
 	
+	var colliders_prefab = load("res://things/character_colliders.tscn")
+	var colliders = colliders_prefab.instantiate()
+	scene.add_child(colliders)
+	colliders.set_owner(scene)
+	
 	var animation_player = scene.find_child("AnimationPlayer")
 	if animation_player != null:
 		animation_player.queue_free()
@@ -14,6 +19,13 @@ func _post_import(scene):
 	var ragdoller = ragdoller_pre.instantiate()
 	skeleton.add_child(ragdoller)
 	ragdoller.set_owner(scene)
+	
+	for b in colliders.get_children():
+		var bid = skeleton.find_bone(b.bone_name)
+		if bid >= 0:
+			b.bone_idx = bid
+		else:
+			b.queue_free()
 	
 	for c in skeleton.get_children():
 		if c is MeshInstance3D:

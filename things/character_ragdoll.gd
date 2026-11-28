@@ -11,6 +11,8 @@ func _ready() -> void:
 func ragdoll():
 	dolling = true
 	influence = 0.2
+	for c in get_children():
+		c.collision_layer = 0b00000000_00000000_00000000_00000100
 	physical_bones_start_simulation()
 
 func hit_by_bullet(source):

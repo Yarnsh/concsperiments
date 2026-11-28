@@ -28,7 +28,7 @@ func _ready() -> void:
 		call_deferred("add_gun_exceptions", secondary_gun)
 
 func add_gun_exceptions(gun):
-	gun.add_exceptions(body.model.ragdoll.get_all_colliders())
+	gun.add_exceptions(body.model.colliders.get_all_colliders())
 
 func _process(delta: float) -> void:
 	_update_mouselook()
@@ -80,7 +80,7 @@ func pickup_gun(prefab):
 	primary_gun.hide()
 	secondary_gun.show()
 	gun_offset = secondary_gun
-	gun_offset.add_exceptions(body.model.ragdoll.get_all_colliders())
+	gun_offset.add_exceptions(body.model.colliders.get_all_colliders())
 	secondary_gun.trigger_raise()
 	return true
 
