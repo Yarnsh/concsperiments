@@ -22,6 +22,7 @@ var anims = {
 @onready var foot_sfx = $"../SFXFoot"
 @onready var foot_stepper_l = $Armature/Skeleton3D/FootStepperL
 @onready var foot_stepper_r = $Armature/Skeleton3D/FootStepperR
+@onready var ragdoll = $Armature/Skeleton3D/Ragdoller
 var gun = null
 
 # Called when the node enters the scene tree for the first time.
@@ -43,6 +44,8 @@ func die():
 	anim.play_lower_body(anims["death"])
 	if gun != null:
 		gun.drop_gun()
+	if ragdoll != null:
+		ragdoll.physical_bones_start_simulation()
 
 func _process(delta: float) -> void:
 	if !character.dead:

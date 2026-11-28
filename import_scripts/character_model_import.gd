@@ -15,6 +15,11 @@ func _post_import(scene):
 	
 	var skeleton = scene.find_child("Skeleton3D")
 	
+	var ragdoller_pre = load("res://things/character_ragdoll.tscn")
+	var ragdoller = ragdoller_pre.instantiate()
+	skeleton.add_child(ragdoller)
+	ragdoller.set_owner(scene)
+	
 	for b in colliders.get_children():
 		var bid = skeleton.find_bone(b.bone_name)
 		if bid >= 0:

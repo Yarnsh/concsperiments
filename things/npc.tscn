@@ -16,7 +16,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, -1, 0)
 
 [node name="NPCGun" type="BoneAttachment3D" parent="CharacterBody3D/Model"]
-transform = Transform3D(2.6047479e-05, -1.0000002, 8.500146e-05, -0.29937217, -8.885616e-05, -0.95413613, 0.9541364, -7.4913373e-07, -0.29937217, -0.740283, 1.4594693, -0.025481604)
+transform = Transform3D(2.6402884e-05, -0.99999976, 8.5879736e-05, -0.29936096, -8.990414e-05, -0.95413935, 0.9541392, -6.8464436e-07, -0.2993611, -0.74028265, 1.4594679, -0.025481857)
 bone_name = "mixamorig_RightHand"
 bone_idx = 65
 use_external_skeleton = true
