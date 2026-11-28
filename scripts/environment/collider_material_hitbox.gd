@@ -1,0 +1,60 @@
+extends RigidBody3D
+
+signal bullet_hit(info)
+
+@export var material_name = "unknown"
+
+@onready var bone_attachment = $".."
+var skeleton : Skeleton3D
+var body_collider = false
+
+var floor_angle = 0.0
+var landing_friction = 0.0
+var bullet_hole = null
+var hit_vfx = null
+var footstep_sfx = null
+var slide_sfx = null
+
+func _ready() -> void:
+	if bone_attachment is BoneAttachment3D:
+		body_collider = true
+		skeleton = bone_attachment.get_skeleton()
+	var ml = get_parent().name.rsplit("_", true, 1)
+	if ml.size() > 1:
+		material_name = ml[1]
+	
+	var def = ColliderMaterialDefinitions.defs.get(material_name, {})
+	if "floor_angle" in def:
+		floor_angle = def["floor_angle"]
+	else:
+		floor_angle = ColliderMaterialDefinitions.defaults["floor_angle"]
+	if "landing_friction" in def:
+		landing_friction = def["landing_friction"]
+	else:
+		landing_friction = ColliderMaterialDefinitions.defaults["landing_friction"]
+	if "bullet_hole" in def:
+		if def["bullet_hole"] != null:
+			bullet_hole = load(def["bullet_hole"])
+	else:
+		pass # the default bullet hole is nothing
+	if "hit_vfx" in def:
+		hit_vfx = load(def["hit_vfx"])
+	else:
+		hit_vfx = load(ColliderMaterialDefinitions.defaults["hit_vfx"])
+	if "footstep_sfx" in def:
+		footstep_sfx = load(def["footstep_sfx"])
+	else:
+		footstep_sfx = load(ColliderMaterialDefinitions.defaults["footstep_sfx"])
+	if "slide_sfx" in def:
+		slide_sfx = load(def["slide_sfx"])
+	else:
+		slide_sfx = load(ColliderMaterialDefinitions.defaults["slide_sfx"])
+
+func hit_by_bullet(source):
+	bullet_hit.emit(source)
+	
+	if body_collider:
+		bump_bone()
+
+func bump_bone():
+	skeleton.bump_bone(bone_attachment.bone_idx, 0.6)

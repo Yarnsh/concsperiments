@@ -1,6 +1,6 @@
 extends Node3D
 
-signal hit_by_bullet(source)
+signal hit_by_bullet(info)
 
 var anims = {
 	"death": "pistol_guy/Armature|death",
@@ -37,8 +37,8 @@ func disable_model_footsteps():
 func footstep():
 	foot_sfx.play()
 
-func got_shot(source):
-	hit_by_bullet.emit(source)
+func got_shot(info):
+	hit_by_bullet.emit(info)
 
 func die():
 	anim.stop_upper_body()

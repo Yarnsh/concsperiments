@@ -1,6 +1,6 @@
 extends Node
 
-signal bullet_hit(source)
+signal bullet_hit(info)
 
 @export var material_name = "unknown"
 
@@ -43,5 +43,5 @@ func _ready() -> void:
 	else:
 		slide_sfx = load(ColliderMaterialDefinitions.defaults["slide_sfx"])
 
-func hit_by_bullet(source):
-	bullet_hit.emit(source)
+func hit_by_bullet(info):
+	bullet_hit.emit(info)

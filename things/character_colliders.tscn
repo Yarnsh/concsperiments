@@ -1,7 +1,7 @@
 [gd_scene load_steps=20 format=3 uid="uid://dtf5dplkeylf3"]
 
 [ext_resource type="Script" uid="uid://dimbr2dlvwx53" path="res://scripts/character_colliders.gd" id="1_4y5wl"]
-[ext_resource type="Script" uid="uid://bcc6t1ho4iw47" path="res://scripts/environment/collider_material.gd" id="1_wojs2"]
+[ext_resource type="Script" uid="uid://4lxjy02yhifg" path="res://scripts/environment/collider_material_hitbox.gd" id="2_4y5wl"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2yde8"]
 size = Vector3(0.38342285, 0.30688477, 0.26971436)
@@ -67,7 +67,7 @@ external_skeleton = NodePath("../../Armature/Skeleton3D")
 [node name="RigidBody3D" type="RigidBody3D" parent="Hips"]
 collision_layer = 4
 collision_mask = 0
-script = ExtResource("1_wojs2")
+script = ExtResource("2_4y5wl")
 material_name = "person"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hips/RigidBody3D"]
@@ -85,7 +85,7 @@ external_skeleton = NodePath("../../Armature/Skeleton3D")
 [node name="RigidBody3D" type="RigidBody3D" parent="Spine"]
 collision_layer = 4
 collision_mask = 0
-script = ExtResource("1_wojs2")
+script = ExtResource("2_4y5wl")
 material_name = "person"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Spine/RigidBody3D"]
@@ -103,7 +103,7 @@ external_skeleton = NodePath("../../Armature/Skeleton3D")
 [node name="RigidBody3D" type="RigidBody3D" parent="Spine1"]
 collision_layer = 4
 collision_mask = 0
-script = ExtResource("1_wojs2")
+script = ExtResource("2_4y5wl")
 material_name = "person"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Spine1/RigidBody3D"]
@@ -121,7 +121,7 @@ external_skeleton = NodePath("../../Armature/Skeleton3D")
 [node name="RigidBody3D" type="RigidBody3D" parent="Spine2"]
 collision_layer = 4
 collision_mask = 0
-script = ExtResource("1_wojs2")
+script = ExtResource("2_4y5wl")
 material_name = "person"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Spine2/RigidBody3D"]
@@ -139,7 +139,7 @@ external_skeleton = NodePath("../../Armature/Skeleton3D")
 [node name="RigidBody3D" type="RigidBody3D" parent="Head"]
 collision_layer = 4
 collision_mask = 0
-script = ExtResource("1_wojs2")
+script = ExtResource("2_4y5wl")
 material_name = "person"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Head/RigidBody3D"]
@@ -157,7 +157,7 @@ external_skeleton = NodePath("../../Armature/Skeleton3D")
 [node name="RigidBody3D" type="RigidBody3D" parent="LeftArm"]
 collision_layer = 4
 collision_mask = 0
-script = ExtResource("1_wojs2")
+script = ExtResource("2_4y5wl")
 material_name = "person"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="LeftArm/RigidBody3D"]
@@ -175,7 +175,7 @@ external_skeleton = NodePath("../../Armature/Skeleton3D")
 [node name="RigidBody3D" type="RigidBody3D" parent="LeftForeArm"]
 collision_layer = 4
 collision_mask = 0
-script = ExtResource("1_wojs2")
+script = ExtResource("2_4y5wl")
 material_name = "person"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="LeftForeArm/RigidBody3D"]
@@ -193,7 +193,7 @@ external_skeleton = NodePath("../../Armature/Skeleton3D")
 [node name="RigidBody3D" type="RigidBody3D" parent="LeftHand"]
 collision_layer = 4
 collision_mask = 0
-script = ExtResource("1_wojs2")
+script = ExtResource("2_4y5wl")
 material_name = "person"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="LeftHand/RigidBody3D"]
@@ -211,7 +211,7 @@ external_skeleton = NodePath("../../Armature/Skeleton3D")
 [node name="RigidBody3D" type="RigidBody3D" parent="RightArm"]
 collision_layer = 4
 collision_mask = 0
-script = ExtResource("1_wojs2")
+script = ExtResource("2_4y5wl")
 material_name = "person"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RightArm/RigidBody3D"]
@@ -229,7 +229,7 @@ external_skeleton = NodePath("../../Armature/Skeleton3D")
 [node name="RigidBody3D" type="RigidBody3D" parent="RightForeArm"]
 collision_layer = 4
 collision_mask = 0
-script = ExtResource("1_wojs2")
+script = ExtResource("2_4y5wl")
 material_name = "person"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RightForeArm/RigidBody3D"]
@@ -247,7 +247,7 @@ external_skeleton = NodePath("../../Armature/Skeleton3D")
 [node name="RigidBody3D" type="RigidBody3D" parent="RightHand"]
 collision_layer = 4
 collision_mask = 0
-script = ExtResource("1_wojs2")
+script = ExtResource("2_4y5wl")
 material_name = "person"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RightHand/RigidBody3D"]
@@ -265,7 +265,7 @@ external_skeleton = NodePath("../../Armature/Skeleton3D")
 [node name="RigidBody3D" type="RigidBody3D" parent="LeftLeg"]
 collision_layer = 4
 collision_mask = 0
-script = ExtResource("1_wojs2")
+script = ExtResource("2_4y5wl")
 material_name = "person"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="LeftLeg/RigidBody3D"]
@@ -283,7 +283,7 @@ external_skeleton = NodePath("../../Armature/Skeleton3D")
 [node name="RigidBody3D" type="RigidBody3D" parent="LeftLowerLeg"]
 collision_layer = 4
 collision_mask = 0
-script = ExtResource("1_wojs2")
+script = ExtResource("2_4y5wl")
 material_name = "person"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="LeftLowerLeg/RigidBody3D"]
@@ -301,7 +301,7 @@ external_skeleton = NodePath("../../Armature/Skeleton3D")
 [node name="RigidBody3D" type="RigidBody3D" parent="LeftFoot"]
 collision_layer = 4
 collision_mask = 0
-script = ExtResource("1_wojs2")
+script = ExtResource("2_4y5wl")
 material_name = "person"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="LeftFoot/RigidBody3D"]
@@ -319,7 +319,7 @@ external_skeleton = NodePath("../../Armature/Skeleton3D")
 [node name="RigidBody3D" type="RigidBody3D" parent="RightLeg"]
 collision_layer = 4
 collision_mask = 0
-script = ExtResource("1_wojs2")
+script = ExtResource("2_4y5wl")
 material_name = "person"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RightLeg/RigidBody3D"]
@@ -337,7 +337,7 @@ external_skeleton = NodePath("../../Armature/Skeleton3D")
 [node name="RigidBody3D" type="RigidBody3D" parent="RightLowerLeg"]
 collision_layer = 4
 collision_mask = 0
-script = ExtResource("1_wojs2")
+script = ExtResource("2_4y5wl")
 material_name = "person"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RightLowerLeg/RigidBody3D"]
@@ -355,7 +355,7 @@ external_skeleton = NodePath("../../Armature/Skeleton3D")
 [node name="RigidBody3D" type="RigidBody3D" parent="RightFoot"]
 collision_layer = 4
 collision_mask = 0
-script = ExtResource("1_wojs2")
+script = ExtResource("2_4y5wl")
 material_name = "person"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RightFoot/RigidBody3D"]

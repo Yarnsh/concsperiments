@@ -38,8 +38,14 @@ func fire():
 				decal.rotation_degrees.x = -90.0
 			else:
 				decal.look_at(get_collision_point() + get_collision_normal())
-			
-		get_collider().hit_by_bullet(source)
+		
+		var hit_info = {
+			"source": source,
+			"point": get_collision_point(),
+			"normal": get_collision_normal(),
+			"direction": (get_collision_point() - global_position).normalized(),
+		}
+		get_collider().hit_by_bullet(hit_info)
 		
 		#  bullet impact noise
 		bullet_impact_noise_params.transform.origin = get_collision_point()

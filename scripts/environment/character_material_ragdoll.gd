@@ -4,10 +4,6 @@ signal bullet_hit(source)
 
 @export var material_name = "unknown"
 
-var skeleton : Skeleton3D
-var bone_idx = -1
-var body_collider = false
-
 var floor_angle = 0.0
 var landing_friction = 0.0
 var bullet_hole = null
@@ -16,12 +12,8 @@ var footstep_sfx = null
 var slide_sfx = null
 
 func _ready() -> void:
-	skeleton = get_node_or_null("../..")
-	if skeleton is Skeleton3D:
-		body_collider = true
-		bone_idx = skeleton.find_bone(bone_name)
 	var ml = get_parent().name.rsplit("_", true, 1)
-	if ml.size() > 1:
+	if material_name == "unknown" and ml.size() > 1:
 		material_name = ml[1]
 	
 	var def = ColliderMaterialDefinitions.defs.get(material_name, {})
@@ -51,11 +43,9 @@ func _ready() -> void:
 	else:
 		slide_sfx = load(ColliderMaterialDefinitions.defaults["slide_sfx"])
 
-func hit_by_bullet(source):
-	bullet_hit.emit(source)
+func hit_by_bullet(info):
+	bullet_hit.emit(info)
 	
-	if body_collider:
-		bump_bone()
-
-func bump_bone():
-	skeleton.bump_bone(bone_idx, 0.6)
+	print(info.get("direction", Vector3.ZERO), ", ", info.get("point", Vector3.ZERO) - global_position)
+	
+	apply_impulse(info.get("direction", Vector3.ZERO) * 30.0, info.get("point", Vector3.ZERO) - global_position)

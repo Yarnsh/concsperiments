@@ -11,8 +11,8 @@ func _ready() -> void:
 		var rb = c.get_child(0)
 		rb.bullet_hit.connect(hit_by_bullet)
 
-func hit_by_bullet(source):
-	bullet_hit.emit(source)
+func hit_by_bullet(info):
+	bullet_hit.emit(info)
 
 func get_all_colliders():
 	var result = []

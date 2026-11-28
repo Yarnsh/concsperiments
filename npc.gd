@@ -215,9 +215,10 @@ func _seperation_input():
 				inp -= v.normalized() * (1.0 - v.length())
 	return inp.rotated(-body.look_angle)
 
-func _damage_taken(source):
+func _damage_taken(info):
+	var source = info.get("source")
 	if source != null and !source.dead:
-		damage_taken.emit(source)
+		damage_taken.emit(info)
 func _noise_heard(info):
 	noise_heard.emit(info)
 

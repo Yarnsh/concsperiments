@@ -46,16 +46,16 @@ func _ready() -> void:
 func path_ready():
 	npc.set_path(path.points[0])
 
-func damage_reaction(source):
+func damage_reaction(info):
 	match state:
 		CALM:
-			calm_brain.damage_reaction(source)
+			calm_brain.damage_reaction(info)
 		SEARCHING:
-			searching_brain.damage_reaction(source)
+			searching_brain.damage_reaction(info)
 		AGGRESSIVE:
-			aggressive_brain.damage_reaction(source)
+			aggressive_brain.damage_reaction(info)
 		PANIC:
-			panic_brain.damage_reaction(source)
+			panic_brain.damage_reaction(info)
 
 func noise_reaction(info):
 	var source = info.get("source")

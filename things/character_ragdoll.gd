@@ -1,6 +1,6 @@
 extends PhysicalBoneSimulator3D
 
-signal bullet_hit(source)
+signal bullet_hit(info)
 
 var dolling = false
 
@@ -15,8 +15,8 @@ func ragdoll():
 		c.collision_layer = 0b00000000_00000000_00000000_00000100
 	physical_bones_start_simulation()
 
-func hit_by_bullet(source):
-	bullet_hit.emit(source)
+func hit_by_bullet(info):
+	bullet_hit.emit(info)
 
 func get_all_colliders():
 	var result = []
