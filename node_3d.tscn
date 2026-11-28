@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://xmfmc3f2t2tq"]
+[gd_scene load_steps=28 format=3 uid="uid://xmfmc3f2t2tq"]
 
 [ext_resource type="PackedScene" uid="uid://tx5oa36f5n0k" path="res://conc.blend" id="1_noarx"]
 [ext_resource type="Script" uid="uid://c3ylqjlw424qr" path="res://scripts/main.gd" id="1_r3fl7"]
@@ -23,7 +23,6 @@
 [ext_resource type="PackedScene" uid="uid://x4hd2nuv125s" path="res://things/machine_pistol_silenced_pickup.tscn" id="19_lggff"]
 [ext_resource type="PackedScene" uid="uid://drhuth7uuqoyf" path="res://things/gun_pickup.tscn" id="20_s0gvp"]
 [ext_resource type="PackedScene" uid="uid://cr77ly1axphf8" path="res://testing_things/soldier.fbx" id="24_5t8nk"]
-[ext_resource type="Script" uid="uid://diwn8c5hhtqa0" path="res://testing_things/model.gd" id="25_5t8nk"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_i0g27"]
 panorama = ExtResource("14_wlxy5")
@@ -71,7 +70,6 @@ transform = Transform3D(0.5043765, -0.68118066, -0.53065723, 0.6548605, 0.702321
 
 [node name="Model" parent="Player/CharacterBody3D" instance=ExtResource("24_5t8nk")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, -1, 0)
-script = ExtResource("25_5t8nk")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_jsnrv")
@@ -197,5 +195,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.319683, 0.7570579, -59.242
 
 [node name="GunPickup2" parent="." instance=ExtResource("20_s0gvp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.669454, 0.6656589, -59.559097)
+
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.14746414, 0.9890674, 0, -0.9890674, 0.14746414, 0, 24.666546, 0)
+layers = 3
 
 [editable path="PatrolPath"]

@@ -1,10 +1,26 @@
 extends PhysicalBoneSimulator3D
 
+signal bullet_hit(source)
 
-# Called when the node enters the scene tree for the first time.
+var dolling = false
+
 func _ready() -> void:
-	pass
+	for c in get_children():
+		c.bullet_hit.connect(hit_by_bullet)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+func ragdoll():
+	dolling = true
+	influence = 0.2
+	physical_bones_start_simulation()
+
+func hit_by_bullet(source):
+	bullet_hit.emit(source)
+
+func get_all_colliders():
+	var result = []
+	for c in get_children():
+		result.append(c)
+	return result
+
 func _process(delta: float) -> void:
-	pass
+	influence = move_toward(influence, 1.0, delta)

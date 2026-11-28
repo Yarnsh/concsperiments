@@ -16,7 +16,7 @@ var anims = {
 }
 
 @onready var character = $".."
-@onready var colliders = $Colliders
+#@onready var colliders = $Colliders
 @onready var anim = $Armature/Skeleton3D/Animators
 @onready var aim_ik = $Armature/Skeleton3D/AimIK
 @onready var foot_sfx = $"../SFXFoot"
@@ -27,7 +27,7 @@ var gun = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	colliders.bullet_hit.connect(got_shot)
+	ragdoll.bullet_hit.connect(got_shot)
 	gun = get_node_or_null("NPCGun")
 
 func disable_model_footsteps():
@@ -45,7 +45,7 @@ func die():
 	if gun != null:
 		gun.drop_gun()
 	if ragdoll != null:
-		ragdoll.physical_bones_start_simulation()
+		ragdoll.ragdoll()
 
 func _process(delta: float) -> void:
 	if !character.dead:
